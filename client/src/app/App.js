@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import './App.css';
+import Login from ''
 
 function App() {
   const [ user, setUser ] = useState(null);
@@ -16,10 +17,15 @@ function App() {
     })
     }, [])
 
+  function onChangeUser(data) {
+    setUser(data);
+  }
+
   return (
     <div className="App">
       <Routes>
-        <Route path='login' element={<Login />} />
+        <Route path='login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
+        <Route path='create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
       </Routes>
     </div>
   );
