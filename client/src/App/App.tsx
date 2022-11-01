@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import './App.css';
+import style from './App.module.css';
 import Login from '../Components/Login/Login';
 import CreateAccount from '../Components/CreateAccount/CreateAccount';
 import Home from '../Components/Home/Home';
@@ -24,7 +24,7 @@ export default function App() {
   }
 
   return (
-    <div className="App">
+    <div className={style.app}>
       <Routes>
         <Route path='/' element={<Home user={user} onChangeUser={onChangeUser}/>}/>
         <Route path='login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
