@@ -3,8 +3,12 @@ import { ChangeEvent, useState } from 'react';
 import style from '../Login/Login.module.css';
 
 interface Props {
-  user: object | null,
-  onChangeUser: Function
+  user: {admin: boolean,
+    default_location: null | string,
+    id: number,
+    password_digest: string
+    username: string } | null,
+  onChangeUser: Function,
 }
 
 export default function CreateAccount({ user, onChangeUser }: Props) {

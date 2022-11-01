@@ -1,0 +1,10 @@
+.header {
+  height: 50px;
+  display: flex;
+  gap: 20px;
+}
+
+.userArea {
+  margin-left: auto;
+  margin-right: 25px;
+}

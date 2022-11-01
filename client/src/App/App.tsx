@@ -4,9 +4,19 @@ import style from './App.module.css';
 import Login from '../Components/Login/Login';
 import CreateAccount from '../Components/CreateAccount/CreateAccount';
 import Home from '../Components/Home/Home';
+import Header from '../Components/Header/Header';
+
+
+interface Iuser {
+  admin: boolean,
+  default_location: null | string,
+  id: number,
+  password_digest: string
+  username: string 
+}
 
 export default function App() {
-  const [ user, setUser ] = useState<object|null>(null);
+  const [ user, setUser ] = useState<Iuser | null>(null);
 
 
   useEffect(() => {
@@ -20,7 +30,7 @@ export default function App() {
     })
     }, [])
 
-  function onChangeUser(data: object|null) {
+  function onChangeUser(data: Iuser | null) {
     setUser(data);
   }
 
@@ -29,9 +39,11 @@ export default function App() {
   return (
     <div className={style.app}>
       <Routes>
-        <Route path='/' element={<Home user={user} onChangeUser={onChangeUser} />}/>
-        <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
-        <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
+        <Route element={<Header user={user} onChangeUser={onChangeUser}/>} >
+          <Route path='/' element={<Home user={user} onChangeUser={onChangeUser} />}/>
+          <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
+          <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
+        </Route>
       </Routes>
     </div>
   );
