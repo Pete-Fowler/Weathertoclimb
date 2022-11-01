@@ -14,7 +14,7 @@ export default function App() {
       if(r.ok) {
         r.json().then(data => setUser(data));
       } else {
-        r.json().then(err => alert(err.errors));
+        r.json().then(err => console.log(err.errors));
       }
     })
     }, [])
