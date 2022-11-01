@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
 import style from '../Login/Login.module.css';
 
 interface Props {
@@ -8,14 +8,38 @@ interface Props {
 }
 
 export default function CreateAccount({ user, onChangeUser }: Props) {
-  const [ formData, setFormData ] = useState({username: '', password: '', passwordConfirmation: ''})
+  const [ formData, setFormData ] = useState({username: '', password: '', password_confirmation: ''})
 
-  function handleChange(e) {
+  const navigate = useNavigate();
+
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {  
     setFormData({...formData, [e.target.id]: e.target.value})
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    
+    fetch(`/users`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({...formData})
+    })
+    .then(r => {
+      if(r.ok) {
+        r.json()
+        .then(data => {
+          console.log(data);
+          navigate(`/`);
+        });
+      } else {
+        r.json().then(err => {
+          console.log(err);
+          alert(err);
+        })
+      }
+    })
 
   }
 
@@ -25,8 +49,8 @@ export default function CreateAccount({ user, onChangeUser }: Props) {
       <input id='username' onChange={handleChange}></input>
       <label htmlFor='password'>Password:</label>
       <input id='password' onChange={handleChange}></input>
-      <label htmlFor='passwordConfirmation'>Password confirmation:</label>
-      <input id='passwordConfirmation' onChange={handleChange}></input>
+      <label htmlFor='password_confirmation'>Password confirmation:</label>
+      <input id='password_confirmation' onChange={handleChange}></input>
       <button type='submit'>Create account</button>
       <div>Already have an account? <Link to='/login'>Log in instead</Link></div>
     </form>
