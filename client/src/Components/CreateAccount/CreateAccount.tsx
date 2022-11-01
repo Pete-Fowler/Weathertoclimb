@@ -1,5 +1,5 @@
 
-export default function CreateAccount() {
+export default function CreateAccount({ user, onChangeUser }) {
 
   return <div>
     <form>

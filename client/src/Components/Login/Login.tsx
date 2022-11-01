@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({ user, onChangeUser }) {
 
   return <div>
     <form>
