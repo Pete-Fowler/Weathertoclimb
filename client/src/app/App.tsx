@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Login from '../Components/Login/Login';
 import CreateAccount from '../Components/CreateAccount/CreateAccount';
+import Home from '../Components/Home/Home';
 
 function App() {
   const [ user, setUser ] = useState<object|null>(null);
