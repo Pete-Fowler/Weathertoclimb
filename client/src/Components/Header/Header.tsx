@@ -16,8 +16,8 @@ export default function Header({ user, onChangeUser }: Props) {
 
   }
 
-  return <div className="header">
-    <Link to='/' className={style.icon}>Home</Link>
+  return <div className={style.header}>
+    <Link to='/' className={style.links}>Home</Link>
     <div className={style.userArea}>
       {user 
       ? <><div>{user.username}</div> 
