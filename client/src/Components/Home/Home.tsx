@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function Home({ user, onChangeUser }) {
-  const [ modals, setModals ] = useState<object>({login: false, createAccount: false});
+interface Props {
+  user: object | null,
+  onChangeUser: Function,
+
+}
+
+export default function Home({ user, onChangeUser }: Props) {
 
   return <div>
-
-    <button>Login</button>
-    
+    Home
+    <Link to='/login'>Login</Link>
   </div>
 }
