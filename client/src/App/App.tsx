@@ -5,7 +5,7 @@ import Login from '../Components/Login/Login';
 import CreateAccount from '../Components/CreateAccount/CreateAccount';
 import Home from '../Components/Home/Home';
 
-function App() {
+export default function App() {
   const [ user, setUser ] = useState<object|null>(null);
 
   useEffect(() => {
@@ -33,5 +33,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
