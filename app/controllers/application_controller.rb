@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
   end
 
   def render_invalid(exception)
-    render json: { exception.record.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
   end
 
   def render_not_found(exception)
