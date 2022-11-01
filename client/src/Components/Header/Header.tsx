@@ -13,7 +13,18 @@ interface Props {
 export default function Header({ user, onChangeUser }: Props) {
 
   function handleLogout() {
-
+    fetch(`/logout`, {
+    method: "DELETE"})
+    .then(r => {
+      if(r.ok) {
+        r.json().then(data => {
+          console.log(data);
+          onChangeUser(null);
+        }) 
+      } else {
+        r.json().then(err => console.log(err.errors));
+      }
+    })
   }
 
   return <div className={style.header}>
