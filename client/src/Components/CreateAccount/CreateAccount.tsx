@@ -31,6 +31,7 @@ export default function CreateAccount({ user, onChangeUser }: Props) {
         r.json()
         .then(data => {
           console.log(data);
+          onChangeUser(data);
           navigate(`/`);
         });
       } else {
@@ -46,11 +47,11 @@ export default function CreateAccount({ user, onChangeUser }: Props) {
   return <div className={style.login}>
     <form className={style.loginForm} onSubmit={handleSubmit}>
       <label htmlFor='username'>Username:</label>
-      <input id='username' onChange={handleChange}></input>
+      <input id='username' onChange={handleChange} value={formData.username}></input>
       <label htmlFor='password'>Password:</label>
-      <input id='password' onChange={handleChange}></input>
+      <input id='password' onChange={handleChange} value={formData.password}></input>
       <label htmlFor='password_confirmation'>Password confirmation:</label>
-      <input id='password_confirmation' onChange={handleChange}></input>
+      <input id='password_confirmation' onChange={handleChange} value={formData.password_confirmation}></input>
       <button type='submit'>Create account</button>
       <div>Already have an account? <Link to='/login'>Log in instead</Link></div>
     </form>
