@@ -1,0 +1,22 @@
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: relative;
+  z-index: 10;
+}
+
+.loginForm {
+  width: 350px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  padding: 25px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+label { display: inline-block; }
+
+button { margin: 10px 0;}
