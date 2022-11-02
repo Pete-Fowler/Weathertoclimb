@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function Login({ user, onChangeUser }: Props) {
-  const [ formData, setFormData ] = useState({username: '', password: ''})
+  const [ formData, setFormData ] = useState({username: '', password: ''});
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setFormData({...formData, [e.target.id]: e.target.value});

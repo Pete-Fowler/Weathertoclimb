@@ -5,6 +5,7 @@ import Login from '../Components/Login/Login';
 import CreateAccount from '../Components/CreateAccount/CreateAccount';
 import Home from '../Components/Home/Home';
 import Header from '../Components/Header/Header';
+import Footer from '../Components/Footer/Footer';
 
 
 interface Iuser {
@@ -34,17 +35,17 @@ export default function App() {
     setUser(data);
   }
 
-
-
   return (
     <div className={style.app}>
-      <Routes>
-        <Route element={<Header user={user} onChangeUser={onChangeUser}/>} >
-          <Route path='/' element={<Home user={user} onChangeUser={onChangeUser} />}/>
-          <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
-          <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
-        </Route>
-      </Routes>
+      <Header user={user} onChangeUser={onChangeUser}/>
+      <div className={style.content}>
+        <Routes>
+            <Route path='/' element={<Home user={user} onChangeUser={onChangeUser} />}/>
+            <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
+            <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
+        </Routes>
+      </div>
+      <Footer />
     </div>
   );
 }
