@@ -64,7 +64,12 @@ Location.create!({
   url: "https://api.weather.gov/gridpoints/BOU/40,57/forecast"
 })
 
-
+Location.create!({
+  name: "Shelf Road",
+  state: "Colorado",
+  coordinates: "38.631422,-105.227919",
+  url: "https://api.weather.gov/gridpoints/PUB/74,82/forecast"
+})
 
 
 
