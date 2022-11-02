@@ -1,6 +1,7 @@
 import style from './Home.module.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Weather from '../Weather/Weather';
 
 interface Props {
   user: {admin: boolean,
@@ -15,6 +16,6 @@ export default function Home({ user, onChangeUser }: Props) {
 
   return <div className={style.home}>
     Home
-    <Link to='/login'>Login</Link>
+    <Weather />
   </div>
 }
