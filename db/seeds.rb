@@ -1,8 +1,29 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+# First fetch endpoint
+# https://api.weather.gov/points/39.6542,-105.1881
+# 
+# Forecast
+# https://api.weather.gov/gridpoints/BOU/55,57/forecast
+# 
+# Hourly
+# https://api.weather.gov/gridpoints/BOU/55,57/forecast/hourly
 
+Location.create!({
+  name: "Morrison",
+  state: "Colorado",
+  coordinates: "39.654161,-105.188090",
+  url: "https://api.weather.gov/gridpoints/BOU/55,57/forecast"
+})
+
+Location.create!({
+  name: "Clear Creek Canyon",
+  state: "Colorado",
+  coordinates: "39.741328,-105.326352",
+  url: "https://api.weather.gov/gridpoints/BOU/50,61/forecast"
+})
+
+Location.create!({
+  name: "North Table Mountain",
+  state: "Colorado",
+  coordinates: "39.771145,-105.206126",
+  url: "https://api.weather.gov/gridpoints/BOU/55,63/forecast"
+})
