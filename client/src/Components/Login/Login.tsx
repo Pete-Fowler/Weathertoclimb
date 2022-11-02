@@ -44,9 +44,9 @@ export default function Login({ user, onChangeUser }: Props) {
   return <div className={style.login}>
     <form className={style.loginForm} onSubmit={handleSubmit}>
       <label htmlFor='username'>Username:</label>
-      <input id='username' onChange={handleChange} value={formData.username}></input>
+      <input type='text' id='username' onChange={handleChange} value={formData.username}></input>
       <label htmlFor='password'>Password:</label> 
-      <input id='password' onChange={handleChange} value={formData.password}></input>
+      <input type='password' id='password' onChange={handleChange} value={formData.password}></input>
       <button type='submit'>Login</button>
       {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
       <Link to='/create-account'>Create an account</Link>

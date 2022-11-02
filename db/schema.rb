@@ -25,6 +25,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_200600) do
     t.string "name"
     t.string "state"
     t.string "coordinates"
+    t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
