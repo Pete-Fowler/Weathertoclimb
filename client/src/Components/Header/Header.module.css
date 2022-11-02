@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  gap: 20px;
+  background-color: gray;
+}
+
+.links {
+  margin-left: 25px;
+}
+
+.userArea {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 25px;
+}
+
+button {
+  font-size: 1rem;
+  color: purple;
+  border: none;
+  background: none;
+  margin: 0;
+  padding: 0;
+  text-decoration: underline;
+}
+
+button:hover {
+  cursor: pointer;
+}

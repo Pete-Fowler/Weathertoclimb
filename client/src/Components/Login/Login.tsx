@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { ChangeEvent, useState } from 'react';
 import style from './Login.module.css';
 
@@ -8,7 +8,10 @@ interface Props {
 }
 
 export default function Login({ user, onChangeUser }: Props) {
-  const [ formData, setFormData ] = useState({username: '', password: ''})
+  const [ formData, setFormData ] = useState({username: '', password: ''});
+  const [ errors, setErrors ] = useState([]);
+
+  const navigate = useNavigate();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setFormData({...formData, [e.target.id]: e.target.value});
@@ -27,8 +30,12 @@ export default function Login({ user, onChangeUser }: Props) {
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
-          console.log(data);
           onChangeUser(data);
+          navigate('/');
+        })
+      } else {
+        r.json().then(err => {
+          setErrors(err.errors);
         })
       }
     })
@@ -41,6 +48,7 @@ export default function Login({ user, onChangeUser }: Props) {
       <label htmlFor='password'>Password:</label> 
       <input id='password' onChange={handleChange} value={formData.password}></input>
       <button type='submit'>Login</button>
+      {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
       <Link to='/create-account'>Create an account</Link>
     </form>
   </div>
