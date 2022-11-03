@@ -40,10 +40,24 @@ export default function Weather() {
   console.log('weather:', weather)
 
   return <div className={style.weatherSection}>
-    {/* {weather.map(location => 
+    {weather.map(location => 
       <div key={location.name} className={style.weatherCard} >
-        {location.}
+        <div className={style.name}>{location.name}</div>
+        <div className={style.periods}>
+          {location.weather.properties.periods
+          .filter(period => !period.name.toLowerCase().includes('night'))
+          .map(period => {
+            return <div key={period.number} className={style.period}>
+              <div className={style.periodName}>{period.name}</div>
+              <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
+              <div className={style.shortForecast}>{period.shortForecast}</div>
+              <div className={style.temp}>{period.temperature} F</div>
+              <div className={style.windSpeed}>{period.windSpeed}</div>
+            </div>
+            }
+          )}
+        </div>
       </div>
-    )} */}
+    )}
   </div>
 }
