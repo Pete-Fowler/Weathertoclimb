@@ -1,7 +1,20 @@
 .weatherCard {
   display: flex;
+  gap: 10px;
+
+}
+
+.name {
+/* position: absolute; */
 }
 
 .periods {
   display: flex;
+  gap: 10px;
+  font-size: .8rem;
+  width: 100px;
+}
+
+.periodName {
+  font-size: 1rem;
 }
