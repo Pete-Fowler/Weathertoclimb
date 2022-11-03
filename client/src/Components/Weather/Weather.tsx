@@ -44,15 +44,15 @@ export default function Weather() {
         <div className={style.name}>{location.name}</div>
         <div className={style.periods}>
           {location.weather.properties.periods
-          .filter(period => !period.name.toLowerCase().includes('night'))
-          .map((period, index )=> {
-            return <div key={period.number} className={style.period}>
+          .map((period, index, array )=> 
+            !period.name.toLowerCase().includes('night') ? 
+            <div key={period.number} className={style.period}>
               <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
               <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
-              <div className={style.temp}>{period.temperature} F</div>
+              <div className={style.temp}>{period.temperature} F / {index < array.length - 1 ? array[index + 1].temperature : ''} F</div>
               <div className={style.windSpeed}>{period.windSpeed}</div>
             </div>
-            }
+            : ''
           )}
         </div>
       </div>
