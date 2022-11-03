@@ -12,7 +12,6 @@ export default function Weather() {
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
-          console.log('data', data);
           setLocations(data.slice(0, 3));
         });
       } else {
@@ -46,9 +45,9 @@ export default function Weather() {
         <div className={style.periods}>
           {location.weather.properties.periods
           .filter(period => !period.name.toLowerCase().includes('night'))
-          .map(period => {
+          .map((period, index )=> {
             return <div key={period.number} className={style.period}>
-              <div className={style.periodName}>{period.name}</div>
+              <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
               <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
               <div className={style.temp}>{period.temperature} F</div>
               <div className={style.windSpeed}>{period.windSpeed}</div>
