@@ -12,8 +12,8 @@ export default function Weather() {
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
-          console.log(data);
-          setLocations([...data[0]]);
+          console.log('data', data);
+          setLocations(data);
         });
       } else {
         r.json().then(err => alert(err.errors));
@@ -22,21 +22,21 @@ export default function Weather() {
   }, [])
 
   // Fetch forecasts for each location
-  useEffect(() => {
-    locations.forEach(location => {
-      fetch(`${location.forecast_url}`)
-      .then(r => {
-        if(r.ok) {
-          r.json().then(data => {
-            setWeather(weather => ({...weather, [location.name]: data}));
-            console.log(weather);
-          });
-        } else {
-          r.json().then(err => alert(err.errors));
-        }
-      })
-    });
-  }, [locations])  
+  // useEffect(() => {
+  //   locations.forEach(location => {
+  //     fetch(`${location.forecast_url}`)
+  //     .then(r => {
+  //       if(r.ok) {
+  //         r.json().then(data => {
+  //           setWeather(weather => ({...weather, [location.name]: data}));
+  //           console.log(weather);
+  //         });
+  //       } else {
+  //         r.json().then(err => alert(err.errors));
+  //       }
+  //     })
+  //   });
+  // }, [locations])  
 
   return <div className={style.weatherSection}>
     {locations.map(location => 

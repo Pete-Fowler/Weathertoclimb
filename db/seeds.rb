@@ -7,6 +7,7 @@
 # Hourly
 # https://api.weather.gov/gridpoints/BOU/55,57/forecast/hourly
 
+puts 'seeding...'
 
 Location.create!({
   name: "Boulder Canyon",
@@ -71,5 +72,5 @@ Location.create!({
   forecast_url: "https://api.weather.gov/gridpoints/PUB/74,82/forecast"
 })
 
-
+puts 'done seeding!'
 
