@@ -50,7 +50,6 @@ export default function Weather() {
             return <div key={period.number} className={style.period}>
               <div className={style.periodName}>{period.name}</div>
               <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
-              <div className={style.shortForecast}>{period.shortForecast}</div>
               <div className={style.temp}>{period.temperature} F</div>
               <div className={style.windSpeed}>{period.windSpeed}</div>
             </div>

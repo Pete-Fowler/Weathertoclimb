@@ -15,7 +15,7 @@ interface Props {
 export default function Home({ user, onChangeUser }: Props) {
 
   return <div className={style.home}>
-    Home
+    
     <Weather />
   </div>
 }

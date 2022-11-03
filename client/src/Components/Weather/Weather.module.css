@@ -1,11 +1,10 @@
 .weatherCard {
-  display: flex;
-  gap: 10px;
-
+  /* display: flex;
+  flex-direction: column;
+  gap: 10px; */
 }
 
 .name {
-/* position: absolute; */
 }
 
 .periods {
@@ -17,4 +16,12 @@
 
 .periodName {
   font-size: 1rem;
+}
+
+.iconForecastBox {display: flex;}
+
+.icon {
+  border-radius: 5px;
+  width: 86px;
+  height: 86px;
 }
