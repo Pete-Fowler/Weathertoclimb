@@ -28,7 +28,7 @@ export default function Weather() {
       .then(r => {
         if(r.ok) {
           r.json().then(data => {
-            setWeather(weather => ([...weather, {[location.name]: data}]));
+            setWeather(weather => ([...weather, {name: location.name, weather: data}]));
           });
         } else {
           r.json().then(err => console.log(err.errors));
