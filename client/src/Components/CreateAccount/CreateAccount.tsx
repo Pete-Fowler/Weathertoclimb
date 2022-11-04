@@ -13,6 +13,7 @@ interface Props {
 
 export default function CreateAccount({ user, onChangeUser }: Props) {
   const [ formData, setFormData ] = useState({username: '', password: '', password_confirmation: ''})
+  const [ errors, setErrors ] = useState([]);
 
   const navigate = useNavigate();
 
@@ -34,14 +35,12 @@ export default function CreateAccount({ user, onChangeUser }: Props) {
       if(r.ok) {
         r.json()
         .then(data => {
-          console.log(data);
           onChangeUser(data);
           navigate(`/`);
         });
       } else {
         r.json().then(err => {
-          console.log(err);
-          alert(err);
+          setErrors(err.errors);
         })
       }
     })
@@ -51,11 +50,12 @@ export default function CreateAccount({ user, onChangeUser }: Props) {
   return <div className={style.login}>
     <form className={style.loginForm} onSubmit={handleSubmit}>
       <label htmlFor='username'>Username:</label>
-      <input id='username' onChange={handleChange} value={formData.username}></input>
+      <input type='text' id='username' onChange={handleChange} value={formData.username}></input>
       <label htmlFor='password'>Password:</label>
-      <input id='password' onChange={handleChange} value={formData.password}></input>
+      <input type='password' id='password' onChange={handleChange} value={formData.password}></input>
       <label htmlFor='password_confirmation'>Password confirmation:</label>
-      <input id='password_confirmation' onChange={handleChange} value={formData.password_confirmation}></input>
+      <input type='password' id='password_confirmation' onChange={handleChange} value={formData.password_confirmation}></input>
+      {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
       <button type='submit'>Create account</button>
       <div>Already have an account? <Link to='/login'>Log in instead</Link></div>
     </form>
