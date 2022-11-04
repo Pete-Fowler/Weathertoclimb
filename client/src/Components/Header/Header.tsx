@@ -66,7 +66,7 @@ export default function Header({ user, onChangeUser }: Props) {
       {isShown 
         ? <div className={style.dropdown}>
             {locations.map(location => 
-              <Link to={`/details/${searchTerm}`} key={location.name}>{location.name}</Link>
+              <Link to={`/details/${location.name}`} key={location.name} className='link'>{location.name}</Link>
             )}
         </div>
         : ''}

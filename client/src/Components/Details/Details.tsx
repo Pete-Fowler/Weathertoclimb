@@ -5,8 +5,7 @@ export default function Details() {
 
   const { location } = useParams();
 
-  fetch(``)
   return <div className={style.details}>
-    
+
   </div>
 }

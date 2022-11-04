@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -13,10 +17,10 @@ body {
   font-weight: 700;
   color: #308FAD;
   text-decoration: none;
-  transition: .6s;
 }
 
 .link:hover {
+  transition: .6s;
   text-decoration: underline;
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
   -webkit-text-fill-color: transparent;
