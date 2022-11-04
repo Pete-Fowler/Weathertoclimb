@@ -31,9 +31,9 @@
 
 .input {
   color: #308FAD;
-  width: 300px;
+  width: 100%;
   height: 30px;
-  min-width: 100px;
+  min-width: 125px;
   padding-inline: 20px;
   border: 1px solid #308FAD;
   border-radius: 3px;

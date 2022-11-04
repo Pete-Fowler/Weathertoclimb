@@ -7,6 +7,7 @@ import Home from '../Components/Home/Home';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
 import Locations from '../Components/Locations/Locations';
+import Details from '../Components/Details/Details';
 
 interface Iuser {
   admin: boolean,
@@ -44,7 +45,7 @@ export default function App() {
             <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/locations/:term' element={<Locations />} />
-            <Route path='/details/:location' element={} />
+            <Route path='/details/:location' element={<Details />} />
         </Routes>
       </div>
       <Footer />
