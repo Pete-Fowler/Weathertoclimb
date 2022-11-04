@@ -44,6 +44,7 @@ export default function App() {
             <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/locations/:term' element={<Locations />} />
+            <Route path='/details/:location' element={} />
         </Routes>
       </div>
       <Footer />

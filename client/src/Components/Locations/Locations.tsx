@@ -1,6 +1,6 @@
 import style from './Locations.module.css';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 export default function Locations() {
   const [ locations, setLocations ] = useState<any[]>([]);
@@ -19,7 +19,7 @@ console.log(locations);
 
   return <div>
     {locations.map(location => 
-      <div>{location.name}</div>
+      <Link key={location.name} to={`/details/${location.name}`}>{location.name}</Link>
     )}
   </div>
 

@@ -39,7 +39,8 @@ export default function Header({ user, onChangeUser }: Props) {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    navigate(`/locations/${searchTerm}`);
+    navigate(`/locations/${searchTerm}`)
+    setSearchTerm('');
   }
 
   return <div className={style.header}>
