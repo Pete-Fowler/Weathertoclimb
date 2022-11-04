@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_31_200600) do
     t.string "state"
     t.string "coordinates"
     t.string "forecast_url"
+    t.boolean "popular", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
