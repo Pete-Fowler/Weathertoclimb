@@ -17,10 +17,14 @@ export default function Locations() {
   }, [term])
 console.log(locations);
 
-  return <div>
-    {locations.map(location => 
-      <Link key={location.name} to={`/details/${location.name}`}>{location.name}</Link>
-    )}
+  return <div className={style.locations}>
+    {locations 
+      ? locations.map(location => 
+        <Link key={location.name} className={`link ${style.location}`} to={`/details/${location.name}`}>{location.name}
+        </Link>
+      ) 
+      : 'No results ... '
+    }
   </div>
 
 }

@@ -1,0 +1,10 @@
+.locations {
+  padding: 50px;
+  min-height: calc(100vh - 100px);
+  font-size: 24px;
+}
+
+.location {
+  font-size: 24px;
+}
+
