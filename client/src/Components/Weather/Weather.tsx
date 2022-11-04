@@ -2,6 +2,21 @@ import style from './Weather.module.css';
 import { useState, useEffect } from 'react';
 
 export default function Weather() {
+  interface Iperiod {
+    number: number,
+    name: string,
+    startTime: string,
+    endTime: string,
+    isDaytime: boolean,
+    temperature: number,
+    temperatureUnit: "F",
+    temperatureTrend: string,
+    windSpeed: string,
+    windDirection: string,
+    icon: string,
+    shortForecast: string,
+    detailedForecast: string
+  }
 
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
@@ -44,7 +59,7 @@ export default function Weather() {
         <div className={style.name}>{location.name}</div>
         <div className={style.periods}>
           {location.weather.properties.periods
-          .map((period, index, array )=> 
+          .map((period: Iperiod, index: number, array: Iperiod[] )=> 
             !period.name.toLowerCase().includes('night') ? 
             <div key={period.number} className={style.period}>
               <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>

@@ -1,33 +1,46 @@
 .header {
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 100px;
   gap: 20px;
-  background-color: gray;
+  color: #308FAD;
+  background-color: white;
+}
+
+.icon {
+  flex-shrink: 0;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 38px;
+  display: flex;
+  flex-direction: column;
+  width: 210px;
+  margin-left: 50px;
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .links {
-  margin-left: 25px;
-}
-
-.userArea {
   display: flex;
   gap: 20px;
   align-items: center;
   margin-left: auto;
-  margin-right: 25px;
+  margin-right: 50px;
 }
 
-button {
-  font-size: 1rem;
-  color: purple;
-  border: none;
-  background: none;
-  margin: 0;
-  padding: 0;
-  text-decoration: underline;
+.input {
+  color: #308FAD;
+  width: 300px;
+  height: 30px;
+  min-width: 100px;
+  padding-inline: 20px;
+  border: 1px solid #308FAD;
+  border-radius: 3px;
+  outline: none;
+  margin-left: 50px;
 }
 
-button:hover {
-  cursor: pointer;
+.input::placeholder {
+  color: #308FAD;
 }

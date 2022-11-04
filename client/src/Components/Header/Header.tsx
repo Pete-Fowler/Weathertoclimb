@@ -1,16 +1,22 @@
 import style from './Header.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
 
 interface Props {
-  user: {admin: boolean,
+  user: {
+    admin: boolean,
     default_location: null | string,
     id: number,
     password_digest: string
-    username: string } | null,
+    username: string 
+  } | null,
   onChangeUser: Function,
 }
 
 export default function Header({ user, onChangeUser }: Props) {
+  const [ searchTerm, setSearchTerm ] = useState<string>('')
+
+  const navigate = useNavigate(); 
 
   function handleLogout() {
     fetch(`/logout`, {
@@ -27,13 +33,29 @@ export default function Header({ user, onChangeUser }: Props) {
     })
   }
 
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setSearchTerm(e.target.value);
+  }
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    navigate(`/locations/${searchTerm}`)
+    setSearchTerm('');
+  }
+
   return <div className={style.header}>
-    <Link to='/' className={style.links}>Home</Link>
-    <div className={style.userArea}>
+    <Link to='/' className={`link ${style.icon}`}>
+      Weather ☁️ to climb
+    </Link>
+    <form onSubmit={handleSubmit}>
+      <input className={style.input} type='text' placeholder='SEARCH CLIMBING AREAS' value={searchTerm} onChange={handleChange}></input>
+    </form>
+    <div className={style.links}>
+      <Link className='link' to='/'>BROWSE AREAS</Link>
       {user 
-      ? <><div>{user.username}</div> 
-        <button onClick={handleLogout}>Log out</button></>
-      : <Link to='/login'>Log in</Link>}
+      ? <><div className={style.username}>{user.username}</div> 
+        <button className='link' onClick={handleLogout}>LOG OUT</button></>
+      : <Link className={`link`} to='/login'>LOG IN</Link>}
     </div>
   </div>
 }

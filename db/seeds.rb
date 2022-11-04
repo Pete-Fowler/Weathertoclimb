@@ -13,7 +13,7 @@ Location.create!({
   name: "Boulder Canyon",
   state: "Colorado",
   coordinates: "39.990531,-105.422562",
-  forecast_url: "https://api.weather.gov/gridpoints/BOU/48,73/forecast"
+  forecast_url: "https://api.weather.gov/gridpoints/BOU/48,73/forecast",
 })
 
 Location.create!({
@@ -28,13 +28,14 @@ Location.create!({
   state: "Colorado",
   coordinates: "39.741328,-105.326352",
   forecast_url: "https://api.weather.gov/gridpoints/BOU/50,61/forecast"
-})
+  })
 
 Location.create!({
   name: "Eldorado Springs",
   state: "Colorado",
   coordinates: "39.932075,-105.288556",
-  forecast_url: "https://api.weather.gov/gridpoints/BOU/52,70/forecast"
+  forecast_url: "https://api.weather.gov/gridpoints/BOU/52,70/forecast",
+  popular: true
 })
 
 Location.create!({
@@ -66,10 +67,19 @@ Location.create!({
 })
 
 Location.create!({
+  name: "Rifle",
+  state: "Colorado",
+  coordinates: "39.709849,-107.692765",
+  forecast_url: "https://api.weather.gov/gridpoints/GJT/127,127/forecast",
+  popular: true
+})
+
+Location.create!({
   name: "Shelf Road",
   state: "Colorado",
   coordinates: "38.631422,-105.227919",
-  forecast_url: "https://api.weather.gov/gridpoints/PUB/74,82/forecast"
+  forecast_url: "https://api.weather.gov/gridpoints/PUB/74,82/forecast",
+  popular: true
 })
 
 puts 'done seeding!'

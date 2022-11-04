@@ -5,6 +5,7 @@ class CreateLocations < ActiveRecord::Migration[7.0]
       t.string :state
       t.string :coordinates
       t.string :forecast_url
+      t.boolean :popular, default: false
       t.timestamps
     end
   end
