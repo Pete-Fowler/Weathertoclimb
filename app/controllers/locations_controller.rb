@@ -4,8 +4,8 @@ class LocationsController < ApplicationController
 
   def index 
     if params[:q]
-      locations = Location.where("name like ?", "%#{params[:q]}%") ||
-      Location.where("state like ?", "%#{params[:q]}%")
+      locations = Location.where("name ILIKE ?", "%#{params[:q]}%") ||
+      Location.where("state ILIKE ?", "%#{params[:q]}%")
     else
     locations = Location.all
     end

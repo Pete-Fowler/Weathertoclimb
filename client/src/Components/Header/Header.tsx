@@ -1,5 +1,5 @@
 import style from './Header.module.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 
 interface Props {
@@ -15,6 +15,8 @@ interface Props {
 
 export default function Header({ user, onChangeUser }: Props) {
   const [ searchTerm, setSearchTerm ] = useState<string>('')
+
+  const navigate = useNavigate(); 
 
   function handleLogout() {
     fetch(`/logout`, {
@@ -36,7 +38,8 @@ export default function Header({ user, onChangeUser }: Props) {
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-
+    e.preventDefault();
+    navigate(`/locations/${searchTerm}`);
   }
 
   return <div className={style.header}>
