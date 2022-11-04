@@ -29,6 +29,12 @@
   margin-right: 50px;
 }
 
+
+.inputBox {
+  display: relative;
+  margin-left: 25px;
+}
+
 .input {
   color: #308FAD;
   width: 100%;
@@ -38,9 +44,21 @@
   border: 1px solid #308FAD;
   border-radius: 3px;
   outline: none;
-  margin-left: 50px;
 }
 
 .input::placeholder {
   color: #308FAD;
+}
+
+.dropdown {
+  width: 100%;
+  min-width: 125px;
+  position: absolute;
+  z-index: 10;
+  background: white;
+  border-radius: 3px;
+}
+
+.hidden {
+  display: none;
 }
