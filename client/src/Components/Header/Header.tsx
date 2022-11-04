@@ -40,10 +40,10 @@ export default function Header({ user, onChangeUser }: Props) {
       Weather ☁️ to climb
     </Link>
     <form>
-      <input type='text' placeholder='search climbing areas' value={searchTerm} onChange={handleChange}></input>
+      <input className={style.input} type='text' placeholder='SEARCH CLIMBING AREAS' value={searchTerm} onChange={handleChange}></input>
     </form>
     <div className={style.links}>
-      <Link to='/'>BROWSE AREAS</Link>
+      <Link className='link' to='/'>BROWSE AREAS</Link>
       {user 
       ? <><div className={style.username}>{user.username}</div> 
         <button className='link' onClick={handleLogout}>LOG OUT</button></>

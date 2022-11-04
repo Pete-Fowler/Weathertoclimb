@@ -13,5 +13,13 @@ body {
   font-weight: 700;
   color: #308FAD;
   text-decoration: none;
+  transition: .6s;
+}
+
+.link:hover {
+  text-decoration: underline;
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
