@@ -18,6 +18,8 @@ export default function Home({ user, onChangeUser }: Props) {
     <div className={style.hero}>
       <div className={style.heroText}>Compare climbing area weather forecasts side by side</div>
     </div>
+    <div>Popular Areas</div>
+    <div></div>
     {/* <Weather /> */}
   </div>
 }

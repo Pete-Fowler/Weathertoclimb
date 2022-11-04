@@ -35,11 +35,15 @@ export default function Header({ user, onChangeUser }: Props) {
     setSearchTerm(e.target.value);
   }
 
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+
+  }
+
   return <div className={style.header}>
     <Link to='/' className={`link ${style.icon}`}>
       Weather ☁️ to climb
     </Link>
-    <form>
+    <form onSubmit={handleSubmit}>
       <input className={style.input} type='text' placeholder='SEARCH CLIMBING AREAS' value={searchTerm} onChange={handleChange}></input>
     </form>
     <div className={style.links}>
