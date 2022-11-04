@@ -1,14 +1,35 @@
 .header {
   display: flex;
   align-items: center;
-  height: 50px;
+  height: 100px;
   gap: 20px;
-  background-color: gray;
+  color: #308FAD;
+  background-color: white;
 }
 
-.links {
+.icon {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 175px;
   margin-left: 25px;
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
+
+.iconLineOne{ 
+  position: relative;
+  top: 25px;
+}
+
+.iconLineOne{ 
+  position: relative;
+  bottom: 25px;
+}
+
 
 .userArea {
   display: flex;

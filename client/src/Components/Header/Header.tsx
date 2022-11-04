@@ -28,12 +28,14 @@ export default function Header({ user, onChangeUser }: Props) {
   }
 
   return <div className={style.header}>
-    <Link to='/' className={style.links}>Home</Link>
+    <Link to='/' className={`link ${style.icon}`}>
+      Weather to climb
+    </Link>
     <div className={style.userArea}>
       {user 
-      ? <><div>{user.username}</div> 
-        <button onClick={handleLogout}>Log out</button></>
-      : <Link to='/login'>Log in</Link>}
+      ? <><div className={style.username}>{user.username}</div> 
+        <button className='link' onClick={handleLogout}>LOG OUT</button></>
+      : <Link className={`link`} to='/login'>LOG IN</Link>}
     </div>
   </div>
 }
