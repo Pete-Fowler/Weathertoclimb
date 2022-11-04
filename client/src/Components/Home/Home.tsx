@@ -15,7 +15,9 @@ interface Props {
 export default function Home({ user, onChangeUser }: Props) {
 
   return <div className={style.home}>
-    
-    <Weather />
+    <div className={style.hero}>
+      Compare climbing area weather forecasts side by side
+    </div>
+    {/* <Weather /> */}
   </div>
 }

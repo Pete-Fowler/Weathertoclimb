@@ -1,5 +1,12 @@
 .home {
   width: 100vw;
   margin: 0;
-  padding: 10px 25px;
+  padding: 0px 0px;
+}
+
+.hero {
+  font-size: 1.5rem;
+  color: white;
+  height: calc(100vh - 50px);
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
 }
