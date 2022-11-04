@@ -16,7 +16,7 @@ export default function Home({ user, onChangeUser }: Props) {
 
   return <div className={style.home}>
     <div className={style.hero}>
-      Compare climbing area weather forecasts side by side
+      <div className={style.heroText}>Compare climbing area weather forecasts side by side</div>
     </div>
     {/* <Weather /> */}
   </div>

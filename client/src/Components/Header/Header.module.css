@@ -10,10 +10,10 @@
 .icon {
   font-size: 40px;
   font-weight: 900;
-  line-height: 40px;
+  line-height: 38px;
   display: flex;
   flex-direction: column;
-  width: 175px;
+  width: 210px;
   margin-left: 25px;
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
   -webkit-text-fill-color: transparent;

@@ -29,7 +29,7 @@ export default function Header({ user, onChangeUser }: Props) {
 
   return <div className={style.header}>
     <Link to='/' className={`link ${style.icon}`}>
-      Weather to climb
+      Weather ☁️ to climb
     </Link>
     <div className={style.userArea}>
       {user 
