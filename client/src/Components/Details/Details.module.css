@@ -1,0 +1,17 @@
+.details {
+  padding: 10px 50px;
+}
+
+.hourly {
+  display: flex;
+  gap: 10px;
+  overflow-x: scroll;
+}
+
+.hour {
+  font-size: .8rem;
+}
+
+img {
+  border-radius: 5px;
+}

@@ -1,6 +1,7 @@
 import style from './Details.module.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { format } from 'date-fns';
 
 export default function Details() {
   interface Iperiod {
@@ -34,7 +35,7 @@ export default function Details() {
 
   const { id } = useParams();
 
-  // Set location name from params
+  // Set location name from params id
   useEffect(() => {
     fetch(`/locations/${id}`)
     .then(r => {
@@ -54,7 +55,7 @@ export default function Details() {
         if(r.ok) {
           r.json().then(data => {
             setDaily(data);
-            setLoaded({...loaded, daily: true})
+            setLoaded(loaded => ({...loaded, daily: true}))
           });
         } else {
           r.json().then(err => console.log(err));
@@ -66,7 +67,7 @@ export default function Details() {
         if(r.ok) {
           r.json().then(data => {
             setHourly(data);
-            setLoaded({...loaded, hourly: true})
+            setLoaded(loaded => ({...loaded, hourly: true}))
           });
         } else {
           r.json().then(err => console.log(err));
@@ -75,12 +76,11 @@ export default function Details() {
    }
   }, [location])
 
-  console.log(hourly, daily)
   return <div className={style.details}>
     <div className={style.hourly}>
       {loaded.hourly ? hourly.properties.periods.slice(0, 72).map((hour: Iperiod) => 
         <div key={hour.number}>
-          <div>{hour.startTime}</div>
+          <div>{format(new Date(hour.startTime), 'h aa')}</div>
           <img src={hour.icon} alt={hour.shortForecast}></img>
           <div>{hour.temperature} F</div>
           <div>{hour.windSpeed}</div>
