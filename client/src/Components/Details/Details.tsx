@@ -18,10 +18,19 @@ export default function Details() {
     shortForecast: string,
     detailedForecast: string
   }
+
+  interface Iloaded {
+    hourly: boolean,
+    daily: boolean
+  }
  
-  const [ location, setLocation ] = useState<any>([]);
+  const [ location, setLocation ] = useState<any>(null);
   const [ hourly, setHourly ] = useState<any>([]);
   const [ daily, setDaily ] = useState<any>([]);
+  const [ loaded, setLoaded ] = useState<Iloaded>({
+    hourly: false, 
+    daily: false
+  })
 
   const { id } = useParams();
 
@@ -39,39 +48,48 @@ export default function Details() {
 
   // Fetch forecasts
   useEffect(() => {
-    fetch(`${location.forecast_url}`)
-    .then(r => {
-      if(r.ok) {
-        r.json().then(data => setDaily(data));
-      } else {
-        r.json().then(err => console.log(err));
-      }
-    })
+    if(location) {
+      fetch(`${location.forecast_url}`)
+      .then(r => {
+        if(r.ok) {
+          r.json().then(data => {
+            setDaily(data);
+            setLoaded({...loaded, daily: true})
+          });
+        } else {
+          r.json().then(err => console.log(err));
+        }
+      })
 
-    fetch(`${location.forecast_url}/hourly`)
-    .then(r => {
-      if(r.ok) {
-        r.json().then(data => setHourly(data));
-      } else {
-        r.json().then(err => console.log(err));
-      }
-    })
+      fetch(`${location.forecast_url}/hourly`)
+      .then(r => {
+        if(r.ok) {
+          r.json().then(data => {
+            setHourly(data);
+            setLoaded({...loaded, hourly: true})
+          });
+        } else {
+          r.json().then(err => console.log(err));
+        }
+      })
+   }
   }, [location])
 
   console.log(hourly, daily)
   return <div className={style.details}>
     <div className={style.hourly}>
-      {hourly.properties.periods.slice(0, 72).map((hour: Iperiod) => 
+      {loaded.hourly ? hourly.properties.periods.slice(0, 72).map((hour: Iperiod) => 
         <div key={hour.number}>
           <div>{hour.startTime}</div>
           <img src={hour.icon} alt={hour.shortForecast}></img>
           <div>{hour.temperature} F</div>
           <div>{hour.windSpeed}</div>
           <div>{hour.shortForecast}</div>
-        </div>)}
+        </div>)
+        : ''}
     </div>
     <div className={style.daily}>
-      {daily.properties.periods.map((period: Iperiod, index: number,  array: Iperiod[]) => 
+      {loaded.daily ? daily.properties.periods.map((period: Iperiod, index: number,  array: Iperiod[]) => 
         !period.name.toLowerCase().includes('night') ? 
         <div key={period.number} className={style.period}>
           <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
@@ -80,7 +98,8 @@ export default function Details() {
           <div className={style.windSpeed}>{period.windSpeed}</div>
         </div>
         : ''
-      )}
+      ) 
+      : ''}
     </div>
   </div>
 }
