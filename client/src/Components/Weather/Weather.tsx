@@ -51,8 +51,6 @@ export default function Weather() {
     });
   }, [locations])
 
-  console.log('weather:', weather)
-
   return <div className={style.weatherSection}>
     {weather.map(location => 
       <div key={location.name} className={style.weatherCard} >
