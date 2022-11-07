@@ -8,10 +8,16 @@ import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
 import Details from '../Components/Details/Details';
 
+interface Ifavorite {
+  id: number,
+  user_id: number,
+  location_id: number,
+}
+
 interface Iuser {
   admin: boolean,
   default_location: null | string,
-  favorites: [{}],
+  favorites: Ifavorite[] | [],
   id: number,
   password_digest: string
   username: string 

@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 interface Props {
   user: {admin: boolean,
     default_location: null | string,
-    favorites: [{}],
+    favorites: Ifavorite[] | [],
     id: number,
     password_digest: string
     username: string } | null,
@@ -16,7 +16,7 @@ interface Props {
 interface Iuser {
   admin: boolean,
   default_location: null | string,
-  favorites: number[],
+  favorites: Ifavorite[] | [],
   id: number,
   password_digest: string
   username: string 
@@ -27,6 +27,7 @@ interface Ifavorite {
   user_id: number,
   location_id: number,
 }
+
 interface Iperiod {
   number: number,
   name: string,
@@ -76,7 +77,7 @@ export default function Details({ user, onChangeUser }: Props) {
 
   // Set saved status
   useEffect(() => {
-    if(user && location && !!user.favorites.find((obj: any) => obj.location_id === location.id)) {
+    if(user && location && !!user.favorites.find((obj: Ifavorite) => obj.location_id === location.id)) {
       setSaved(true);
     } else {
       setSaved(false);
@@ -115,9 +116,15 @@ export default function Details({ user, onChangeUser }: Props) {
   function handleSaveBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
 
     // const favoriteID = ;
-    const method = saved === false ? 'POST' : 'DELETE';
-
-    fetch(`/favorites`, {
+    const method = saved ? 'DELETE' : 'POST';
+    
+    let favID;
+    if(saved) {
+      const fav = user?.favorites.find((obj: Ifavorite) => obj.location_id === location.id);
+      favID = saved && fav ? `/${fav.id}`: '';
+    }
+    
+    fetch(`/favorites${favID}`, {
       method: method,
       headers: {
         "Content-Type": "application/json"
