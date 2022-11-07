@@ -1,5 +1,6 @@
 import style from './Favorites.module.css';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Ifavorite {
   id: number,
@@ -63,7 +64,7 @@ export default function Weather({ user, onChangeUser }: Props) {
       .then(r => {
         if(r.ok) {
           r.json().then(data => {
-            setWeather(weather => ([...weather, {name: location.name, weather: data}]));
+            setWeather(weather => ([...weather, {name: location.name, id: location.id, weather: data}]));
           });
         } else {
           r.json().then(err => console.log(err.errors));
@@ -71,11 +72,15 @@ export default function Weather({ user, onChangeUser }: Props) {
       })
     });
   }, [locations])
-  
+
+  console.log(weather);
+
   return <div className={style.weatherSection}>
     {weather.map(location => 
       <div key={location.name} className={style.weatherCard} >
-        <div className={style.name}>{location.name}</div>
+        <div className={style.name}>
+          <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
+        </div>
         <div className={style.periods}>
           {location.weather.properties.periods
           .map((period: Iperiod, index: number, array: Iperiod[] )=> 

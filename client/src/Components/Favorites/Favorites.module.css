@@ -20,6 +20,15 @@
   text-decoration: underline;
 }
 
+.link {
+  color: white;
+  transition: .4s;
+}
+
+.link:hover {
+  color:#31397f;
+}
+
 .periods {
   display: flex;
   gap: 10px;
