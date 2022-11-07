@@ -11,6 +11,7 @@ import Details from '../Components/Details/Details';
 interface Iuser {
   admin: boolean,
   default_location: null | string,
+  favorites?: number[],
   id: number,
   password_digest: string
   username: string 
@@ -43,7 +44,7 @@ export default function App() {
             <Route path='/' element={<Home user={user} onChangeUser={onChangeUser} />}/>
             <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
-            <Route path='/locations/:id' element={<Details />} />
+            <Route path='/locations/:id' element={<Details user={user}/>} />
         </Routes>
       </div>
       <Footer />

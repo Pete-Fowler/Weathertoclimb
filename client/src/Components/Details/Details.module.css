@@ -3,8 +3,29 @@
   border-top: 1px solid #2ebdc5;
 }
 
-h1 {
-  /* color: #0681d7; */
+.titleBox {
+  display: flex;
+  align-items: center;
+}
+
+.saveBtn {
+  margin-left: auto;
+  margin-right: 250px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #308FAD;
+  background: white;
+  border: none;
+  text-decoration: none;
+  transition: .6s;
+
+}
+
+.saveBtn:hover {
+  text-decoration: underline;
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .hourly {

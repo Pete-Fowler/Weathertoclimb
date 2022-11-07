@@ -3,7 +3,16 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { format } from 'date-fns';
 
-export default function Details() {
+interface Props {
+  user: {admin: boolean,
+    default_location: null | string,
+    favorites?: number[],
+    id: number,
+    password_digest: string
+    username: string } | null,
+}
+
+export default function Details({ user }: Props) {
   interface Iperiod {
     number: number,
     name: string,
@@ -76,8 +85,15 @@ export default function Details() {
    }
   }, [location])
 
+  let saveBtnText = 'Save area';
+  if(user && user.favorites && user.favorites.includes(location.id)) {
+    saveBtnText = 'Area saved'
+  }
+
   return <div className={style.details}>
-    <h1>{location ? location.name : ''}</h1>
+    <div className={style.titleBox}>
+      <h1>{location ? location.name : ''}</h1><button className={style.saveBtn}>{saveBtnText}</button> 
+    </div>
     <div className={style.hourly}>
       {loaded.hourly 
         ? hourly.properties.periods.slice(0, 72).map((hour: Iperiod, index: number, array: Iperiod) => 
