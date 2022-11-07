@@ -76,7 +76,7 @@ export default function Header({ user, onChangeUser }: Props) {
       {user 
       ? <><div className={style.username}>{user.username}</div> 
         <button className='link' onClick={handleLogout}>LOG OUT</button></>
-      : <Link className={`link`} to='/login'>LOG IN</Link>}
+      : <Link className='link' to='/login'>LOG IN</Link>}
     </div>
   </div>
 }
