@@ -83,12 +83,12 @@ export default function Details() {
         <div key={hour.number} className={style.hour}>
           {index === 0 || format(new Date(hour.startTime), 'h aa') === '12 AM' 
             ? <div className={style.day}>{format(new Date(hour.startTime), 'ccc')}</div>
-            : '' }
+            : <div className={style.day}></div> }
           <div>{format(new Date(hour.startTime), 'h aa')}</div>
           <img src={hour.icon} alt={hour.shortForecast}></img>
           <div>{hour.temperature} F</div>
           <div>{hour.windSpeed}</div>
-          <div>{hour.shortForecast}</div>
+          <div className={style.shortForecast}>{hour.shortForecast}</div>
         </div>)
         : ''}
     </div>

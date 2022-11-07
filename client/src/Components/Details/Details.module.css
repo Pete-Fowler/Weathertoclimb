@@ -3,15 +3,27 @@
 }
 
 .hourly {
+  position: relative;
   display: flex;
   gap: 10px;
   overflow-x: scroll;
+  width: auto;
 }
 
 .hour {
+  font-weight: 500;
   font-size: .8rem;
+}
+
+.day {
+  font-weight: 700;
+  height: 20px;
 }
 
 img {
   border-radius: 5px;
+}
+
+.shortForecast {
+  font-weight: 400;
 }
