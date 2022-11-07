@@ -99,7 +99,7 @@ export default function Details() {
         <div key={period.number} className={style.period}>
           <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
           <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
-          <div className={style.temp}>{period.temperature} F / {index < array.length - 1 ? array[index + 1].temperature : ''} F</div>
+          <div className={style.temp}>{period.temperature}&deg; F / {index < array.length - 1 ? array[index + 1].temperature : ''}&deg; F</div>
           <div className={style.windSpeed}>{period.windSpeed}</div>
           <div className={style.detailedForecast}>{period.detailedForecast}</div>
         </div>
