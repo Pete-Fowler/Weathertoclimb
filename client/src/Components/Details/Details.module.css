@@ -1,13 +1,16 @@
 .details {
   padding: 10px 50px;
+  /* background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e); */
 }
 
 .hourly {
   position: relative;
   display: flex;
   gap: 10px;
+  padding: 10px;
   overflow-x: scroll;
-  width: auto;
+  border: 1px solid #2ebdc5;
+  border-radius: 5px;
 }
 
 .hour {
@@ -16,6 +19,7 @@
 }
 
 .day {
+  text-decoration: underline;
   font-weight: 700;
   height: 20px;
 }
@@ -26,4 +30,34 @@ img {
 
 .shortForecast {
   font-weight: 400;
+}
+
+.daily {
+  margin-top: 25px;
+}
+
+.period {
+  display: flex;
+  gap: 25px;
+  margin: 5px 0 5px 0;
+}
+
+.periodName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  width: 86px;
+}
+
+.icon {
+  width: 86px;
+  height: 86px;
+}
+
+.windSpeed, .temp {
+  width: 86px;
+}
+
+.detailedForecast {
+  font-size: .8rem;
+  width: 200px;
 }

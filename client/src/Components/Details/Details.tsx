@@ -77,6 +77,7 @@ export default function Details() {
   }, [location])
 
   return <div className={style.details}>
+    <h1>{location ? location.name : ''}</h1> 
     <div className={style.hourly}>
       {loaded.hourly 
         ? hourly.properties.periods.slice(0, 72).map((hour: Iperiod, index: number, array: Iperiod) => 
@@ -100,6 +101,7 @@ export default function Details() {
           <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
           <div className={style.temp}>{period.temperature} F / {index < array.length - 1 ? array[index + 1].temperature : ''} F</div>
           <div className={style.windSpeed}>{period.windSpeed}</div>
+          <div className={style.detailedForecast}>{period.detailedForecast}</div>
         </div>
         : ''
       ) 
