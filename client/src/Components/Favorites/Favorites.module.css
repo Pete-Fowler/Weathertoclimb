@@ -1,7 +1,28 @@
+.weatherSection {
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  padding: 25px;
+}
+
 .weatherCard {
-  /* display: flex;
-  flex-direction: column;
-  gap: 10px; */
+  color: white;
+  position: relative;
+  width: 700px;
+  border-radius: 5px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  margin: 20px;
+  box-shadow: 0 0 6px 1px white;
+}
+
+.glass {  
+  /* background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  opacity: .3;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  z-index: 10;
+  border-radius: 5px; */
 }
 
 .periods {

@@ -75,6 +75,7 @@ export default function Weather({ user, onChangeUser }: Props) {
   return <div className={style.weatherSection}>
     {weather.map(location => 
       <div key={location.name} className={style.weatherCard} >
+        <div className={style.glass}></div>
         <div className={style.name}>{location.name}</div>
         <div className={style.periods}>
           {location.weather.properties.periods
