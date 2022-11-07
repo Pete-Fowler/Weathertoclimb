@@ -21,9 +21,9 @@ export default function Weather() {
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
 
-  // Set locations for development in place of props
   useEffect(() => {
-    fetch(`/locations`)
+
+    fetch(`/locations?ids=${ids}`)
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
@@ -62,7 +62,7 @@ export default function Weather() {
             <div key={period.number} className={style.period}>
               <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
               <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
-              <div className={style.temp}>{period.temperature} F / {index < array.length - 1 ? array[index + 1].temperature : ''} F</div>
+              <div className={style.temp}>{period.temperature}&deg; F / {index < array.length - 1 ? array[index + 1].temperature : ''}&deg; F</div>
               <div className={style.windSpeed}>{period.windSpeed}</div>
             </div>
             : ''

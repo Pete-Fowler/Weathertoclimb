@@ -7,10 +7,18 @@ import Home from '../Components/Home/Home';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
 import Details from '../Components/Details/Details';
+import Favorites from '../Components/Favorites/Favorites';
+
+interface Ifavorite {
+  id: number,
+  user_id: number,
+  location_id: number,
+}
 
 interface Iuser {
   admin: boolean,
   default_location: null | string,
+  favorites: Ifavorite[] | [],
   id: number,
   password_digest: string
   username: string 
@@ -18,7 +26,6 @@ interface Iuser {
 
 export default function App() {
   const [ user, setUser ] = useState<Iuser | null>(null);
-
 
   useEffect(() => {
     fetch(`/me`)
@@ -43,7 +50,8 @@ export default function App() {
             <Route path='/' element={<Home user={user} onChangeUser={onChangeUser} />}/>
             <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
-            <Route path='/locations/:id' element={<Details />} />
+            <Route path='/favorites' element={<Favorites user={user} onChangeUser={onChangeUser}/>} />
+            <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
         </Routes>
       </div>
       <Footer />

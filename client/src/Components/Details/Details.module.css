@@ -1,0 +1,91 @@
+.details {
+  padding: 10px 50px;
+  border-top: 1px solid #2ebdc5;
+}
+
+.titleBox {
+  display: flex;
+  align-items: center;
+}
+
+.saveBtn {
+  margin-left: auto;
+  margin-right: 250px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #308FAD;
+  background: white;
+  border: none;
+  text-decoration: none;
+  transition: .6s;
+
+}
+
+.saveBtn:hover {
+  text-decoration: underline;
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hourly {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  overflow-x: scroll;
+  border: 1px solid #2ebdc5;
+  border-radius: 5px;
+}
+
+.hour {
+  font-weight: 500;
+  font-size: .8rem;
+}
+
+.day {
+  text-decoration: underline;
+  font-weight: 700;
+  height: 20px;
+}
+
+img {
+  border-radius: 5px;
+}
+
+.shortForecast {
+  font-weight: 400;
+}
+
+.daily {
+  margin-top: 25px;
+}
+
+.period {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin: 5px 0 5px 0;
+}
+
+.periodName {
+  /* color: #0681d7; */
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.icon {
+  width: 86px;
+  height: 86px;
+  flex-shrink: 0;
+}
+
+.windSpeed, .temp {
+  width: 86px;
+  flex-shrink: 0;
+}
+
+.detailedForecast {
+  width: 350px;
+}
