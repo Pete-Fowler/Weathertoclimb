@@ -78,8 +78,12 @@ export default function Details() {
 
   return <div className={style.details}>
     <div className={style.hourly}>
-      {loaded.hourly ? hourly.properties.periods.slice(0, 72).map((hour: Iperiod) => 
-        <div key={hour.number}>
+      {loaded.hourly 
+        ? hourly.properties.periods.slice(0, 72).map((hour: Iperiod, index: number, array: Iperiod) => 
+        <div key={hour.number} className={style.hour}>
+          {index === 0 || format(new Date(hour.startTime), 'h aa') === '12 AM' 
+            ? <div className={style.day}>{format(new Date(hour.startTime), 'ccc')}</div>
+            : '' }
           <div>{format(new Date(hour.startTime), 'h aa')}</div>
           <img src={hour.icon} alt={hour.shortForecast}></img>
           <div>{hour.temperature} F</div>
