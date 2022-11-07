@@ -156,7 +156,7 @@ export default function Details({ user, onChangeUser }: Props) {
 
   let saveBtnText = saved ? 'Unsave area' : 'Save area';
 
-  console.log(user, !!user?.favorites.find((obj: any) => obj.location_id === location.id));
+  console.log(user);
 
   return <div className={style.details}>
     <div className={style.titleBox}>

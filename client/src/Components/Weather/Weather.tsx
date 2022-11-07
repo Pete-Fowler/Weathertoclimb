@@ -21,9 +21,9 @@ export default function Weather() {
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
 
-  // Set locations for development in place of props
   useEffect(() => {
-    fetch(`/locations`)
+
+    fetch(`/locations?ids=${ids}`)
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
