@@ -45,7 +45,6 @@ export default function Details({ user }: Props) {
 
   const { id } = useParams();
 
-
   // Set location name from params id, set saved
   useEffect(() => {
     fetch(`/locations/${id}`)
