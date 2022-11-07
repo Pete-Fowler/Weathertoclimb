@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
 
-  def create favorites_params
+  def create
     fav = Favorite.create!(favorites_params)
     render json: fav, status: :created
   end
@@ -14,6 +14,6 @@ class FavoritesController < ApplicationController
   private
 
   def favorites_params
-    params.permit(:id, :user_id, :location_id)
+    params.permit(:user_id, :location_id)
   end
 end

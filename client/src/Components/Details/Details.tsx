@@ -99,7 +99,6 @@ export default function Details({ user }: Props) {
   function handleSaveBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
 
     // const favoriteID = ;
-    const body = {user_id: user?.id, location_id: location.id}
 
     if(saved === false) {
       fetch(`/favorites`, {
@@ -107,7 +106,7 @@ export default function Details({ user }: Props) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify({user_id: user?.id, location_id: location.id}),
       })
       .then(r => {
         if(r.ok) {
@@ -122,7 +121,7 @@ export default function Details({ user }: Props) {
   let saveBtnText = saved ? 'Unsave area' : 'Save area';
 
   console.log(user);
-  
+
   return <div className={style.details}>
     <div className={style.titleBox}>
       <h1>{location ? location.name : ''}</h1><button className={style.saveBtn} onClick={handleSaveBtnClick}>{saveBtnText}</button> 
