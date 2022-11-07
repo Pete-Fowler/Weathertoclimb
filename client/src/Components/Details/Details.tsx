@@ -41,10 +41,12 @@ export default function Details({ user }: Props) {
     hourly: false, 
     daily: false
   })
+  const [ saved, setSaved ] = useState<boolean>(false);
 
   const { id } = useParams();
 
-  // Set location name from params id
+
+  // Set location name from params id, set saved
   useEffect(() => {
     fetch(`/locations/${id}`)
     .then(r => {
@@ -54,7 +56,17 @@ export default function Details({ user }: Props) {
         r.json().then(err => console.log(err));
       }
     })
+
   }, [id])
+
+  // Set saved status
+  useEffect(() => {
+    if(user && location && user.favorites?.includes(location.id)) {
+      setSaved(true);
+    } else {
+      setSaved(false);
+    }
+  }, [user, location])
 
   // Fetch forecasts
   useEffect(() => {
@@ -85,14 +97,33 @@ export default function Details({ user }: Props) {
    }
   }, [location])
 
-  let saveBtnText = 'Save area';
-  if(user && user.favorites && user.favorites.includes(location.id)) {
-    saveBtnText = 'Area saved'
+  function handleSaveBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
+
+    const body = {user_id: user?.id, location_id: location.id}
+
+    if(saved === false) {
+      fetch(`/favorites`, {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body),
+      })
+      .then(r => {
+        if(r.ok) {
+          r.json().then(data => setSaved(true));
+        } else {
+          r.json().then(err => console.log(err));
+        }
+      })
+    }
   }
+
+  let saveBtnText = saved ? 'Unsave area' : 'Save area';
 
   return <div className={style.details}>
     <div className={style.titleBox}>
-      <h1>{location ? location.name : ''}</h1><button className={style.saveBtn}>{saveBtnText}</button> 
+      <h1>{location ? location.name : ''}</h1><button className={style.saveBtn} onClick={handleSaveBtnClick}>{saveBtnText}</button> 
     </div>
     <div className={style.hourly}>
       {loaded.hourly 
