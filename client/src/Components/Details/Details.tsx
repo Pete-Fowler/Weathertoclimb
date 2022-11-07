@@ -6,34 +6,50 @@ import { format } from 'date-fns';
 interface Props {
   user: {admin: boolean,
     default_location: null | string,
-    favorites?: number[],
+    favorites: [{}],
     id: number,
     password_digest: string
     username: string } | null,
+  onChangeUser: Function
 }
 
-export default function Details({ user }: Props) {
-  interface Iperiod {
-    number: number,
-    name: string,
-    startTime: string,
-    endTime: string,
-    isDaytime: boolean,
-    temperature: number,
-    temperatureUnit: "F",
-    temperatureTrend: string,
-    windSpeed: string,
-    windDirection: string,
-    icon: string,
-    shortForecast: string,
-    detailedForecast: string
-  }
+interface Iuser {
+  admin: boolean,
+  default_location: null | string,
+  favorites: number[],
+  id: number,
+  password_digest: string
+  username: string 
+}
 
-  interface Iloaded {
-    hourly: boolean,
-    daily: boolean
-  }
- 
+interface Ifavorite {
+  id: number,
+  user_id: number,
+  location_id: number,
+}
+interface Iperiod {
+  number: number,
+  name: string,
+  startTime: string,
+  endTime: string,
+  isDaytime: boolean,
+  temperature: number,
+  temperatureUnit: "F",
+  temperatureTrend: string,
+  windSpeed: string,
+  windDirection: string,
+  icon: string,
+  shortForecast: string,
+  detailedForecast: string
+}
+
+interface Iloaded {
+  hourly: boolean,
+  daily: boolean
+}
+
+export default function Details({ user, onChangeUser }: Props) {
+
   const [ location, setLocation ] = useState<any>(null);
   const [ hourly, setHourly ] = useState<any>([]);
   const [ daily, setDaily ] = useState<any>([]);
@@ -60,7 +76,7 @@ export default function Details({ user }: Props) {
 
   // Set saved status
   useEffect(() => {
-    if(user && location && user.favorites?.includes(location.id)) {
+    if(user && location && !!user.favorites.find((obj: any) => obj.location_id === location.id)) {
       setSaved(true);
     } else {
       setSaved(false);
@@ -99,28 +115,31 @@ export default function Details({ user }: Props) {
   function handleSaveBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
 
     // const favoriteID = ;
+    const method = saved === false ? 'POST' : 'DELETE';
 
-    if(saved === false) {
-      fetch(`/favorites`, {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({user_id: user?.id, location_id: location.id}),
-      })
-      .then(r => {
-        if(r.ok) {
-          r.json().then(data => setSaved(true));
-        } else {
-          r.json().then(err => console.log(err));
-        }
-      })
-    }
+    fetch(`/favorites`, {
+      method: method,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({user_id: user?.id, location_id: location.id}),
+    })
+    .then(r => {
+      if(r.ok) {
+        r.json().then(data => {
+          setSaved(true);
+          onChangeUser((user: Iuser) => ({...user, favorites: [...user.favorites, data]}))
+          console.log(data);
+        });
+      } else {
+        r.json().then(err => console.log(err));
+      }
+    })
   }
 
   let saveBtnText = saved ? 'Unsave area' : 'Save area';
 
-  console.log(user);
+  console.log(user, !!user?.favorites.find((obj: any) => obj.location_id === location.id));
 
   return <div className={style.details}>
     <div className={style.titleBox}>

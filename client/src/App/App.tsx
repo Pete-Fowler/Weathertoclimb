@@ -11,7 +11,7 @@ import Details from '../Components/Details/Details';
 interface Iuser {
   admin: boolean,
   default_location: null | string,
-  favorites?: number[],
+  favorites: [{}],
   id: number,
   password_digest: string
   username: string 
@@ -19,7 +19,6 @@ interface Iuser {
 
 export default function App() {
   const [ user, setUser ] = useState<Iuser | null>(null);
-
 
   useEffect(() => {
     fetch(`/me`)
@@ -44,7 +43,7 @@ export default function App() {
             <Route path='/' element={<Home user={user} onChangeUser={onChangeUser} />}/>
             <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
-            <Route path='/locations/:id' element={<Details user={user}/>} />
+            <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
         </Routes>
       </div>
       <Footer />
