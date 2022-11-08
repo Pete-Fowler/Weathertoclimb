@@ -115,7 +115,6 @@ export default function Details({ user, onChangeUser }: Props) {
 
   function handleSaveBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
    
-
     if(!saved) {
       fetch(`/favorites`, {
         method: 'POST',

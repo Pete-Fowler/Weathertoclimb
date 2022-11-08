@@ -2,6 +2,15 @@ import style from './Favorites.module.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+interface Iuser {
+  admin: boolean,
+  default_location: null | string,
+  favorites: Ifavorite[] | [],
+  id: number,
+  password_digest: string
+  username: string 
+}
+
 interface Ifavorite {
   id: number,
   user_id: number,
@@ -18,27 +27,28 @@ interface Props {
   onChangeUser: Function
 }
 
+interface Iperiod {
+  number: number,
+  name: string,
+  startTime: string,
+  endTime: string,
+  isDaytime: boolean,
+  temperature: number,
+  temperatureUnit: "F",
+  temperatureTrend: string,
+  windSpeed: string,
+  windDirection: string,
+  icon: string,
+  shortForecast: string,
+  detailedForecast: string
+}
+
 export default function Weather({ user, onChangeUser }: Props) {
-  interface Iperiod {
-    number: number,
-    name: string,
-    startTime: string,
-    endTime: string,
-    isDaytime: boolean,
-    temperature: number,
-    temperatureUnit: "F",
-    temperatureTrend: string,
-    windSpeed: string,
-    windDirection: string,
-    icon: string,
-    shortForecast: string,
-    detailedForecast: string
-  }
 
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
 
-  // Get saved locations
+  // Get saved locations from IDs
   useEffect(() => {
     const ids: number[] = [];
     user?.favorites.forEach(obj => {
@@ -73,7 +83,25 @@ export default function Weather({ user, onChangeUser }: Props) {
     });
   }, [locations])
 
-  console.log(weather);
+  function unSave(locationID: number) {  
+    const fav = user?.favorites.find(obj => obj.location_id === locationID);
+    const favID = fav?.id;
+
+    console.log(locationID, fav, favID);
+
+    fetch(`/favorites/${favID}`, {
+      method: 'DELETE'
+    })
+    .then(r => {
+      if(r.ok) {
+        r.json().then(data => {
+          onChangeUser((user: Iuser) => ({...user, favorites: [...user.favorites.filter(fav => fav.id !== favID)]}))
+        })
+      } else {
+        r.json().then(err => console.log(err));
+      }
+    })
+  }
 
   return <div className={style.weatherSection}>
     {weather.map(location => 
@@ -81,6 +109,7 @@ export default function Weather({ user, onChangeUser }: Props) {
         <div className={style.name}>
           <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
         </div>
+        <button className={style.unsaveBtn} onClick={() => unSave(location.id)}>Unsave area</button>
         <div className={style.periods}>
           {location.weather.properties.periods
           .map((period: Iperiod, index: number, array: Iperiod[] )=> 

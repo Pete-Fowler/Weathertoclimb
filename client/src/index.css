@@ -17,12 +17,12 @@ body {
   font-weight: 700;
   color: #308FAD;
   text-decoration: none;
+  transition: .4s;
 }
 
 .link:hover {
-  transition: .6s;
-  text-decoration: underline;
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  background-position: 0 0;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
