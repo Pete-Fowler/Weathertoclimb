@@ -1,5 +1,5 @@
 import style from './Favorites.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, MouseEventHandler } from 'react';
 import { Link } from 'react-router-dom';
 
 interface Iuser {
@@ -47,6 +47,7 @@ export default function Weather({ user, onChangeUser }: Props) {
 
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
+
 
   // Get saved locations from IDs
   useEffect(() => {
