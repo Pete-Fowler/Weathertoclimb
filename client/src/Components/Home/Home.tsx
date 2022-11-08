@@ -1,7 +1,7 @@
 import style from './Home.module.css';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Weather from '../Weather/Weather';
+import Weather from '../Favorites/Favorites';
 
 interface Props {
   user: {admin: boolean,

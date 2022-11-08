@@ -13,7 +13,8 @@ class LocationsController < ApplicationController
     if params[:q]
       locations = Location.where("name ILIKE ?", "%#{params[:q]}%")
     elsif params[:ids]
-      locations = Location.where(id: :ids)
+      id_array = params[:ids].split(',')
+      locations = Location.where(id: id_array)
     else
     locations = Location.all
     end

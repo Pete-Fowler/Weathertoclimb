@@ -1,0 +1,80 @@
+.weatherSection {
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+  padding: 25px;
+}
+
+.weatherCard {
+  color: white;
+  position: relative;
+  width: 700px;
+  border-radius: 5px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 20px;
+  box-shadow: 0 0 6px 1px white;
+}
+
+.name {
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.unSaveBtn {
+  color: white;
+  background: none;
+  transition: .4s;
+  margin-left: auto;
+}
+
+.unSaveBtn:hover {
+  color: #31397f;
+}
+
+.link {
+  color: white;
+  text-decoration: underline;
+  transition: .4s;
+}
+
+.link:hover {
+  color:#31397f;
+}
+
+.periods {
+  display: flex;
+  gap: 10px;
+  font-size: .8rem;
+  width: 100px;
+}
+
+.period {
+  position: relative;
+}
+
+.periodName {
+  height: 25px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.invisible {
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  z-index: 10;
+}
+
+.iconForecastBox {display: flex;}
+
+.icon {
+  border-radius: 5px;
+  width: 86px;
+  height: 86px;
+}
+
+.temp {
+  font-weight: 700;
+}
