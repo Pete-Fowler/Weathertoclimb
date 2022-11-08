@@ -15,13 +15,25 @@
 }
 
 .name {
+  display: flex;
   font-size: 1.2rem;
   font-weight: 700;
-  text-decoration: underline;
+}
+
+.unSaveBtn {
+  color: white;
+  background: none;
+  transition: .4s;
+  margin-left: auto;
+}
+
+.unSaveBtn:hover {
+  color: #31397f;
 }
 
 .link {
   color: white;
+  text-decoration: underline;
   transition: .4s;
 }
 

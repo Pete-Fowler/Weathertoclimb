@@ -1,6 +1,6 @@
 import style from './Header.module.css';
 import { Link } from 'react-router-dom';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 
 interface Props {
   user: {

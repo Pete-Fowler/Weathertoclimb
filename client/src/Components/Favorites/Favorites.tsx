@@ -108,8 +108,8 @@ export default function Weather({ user, onChangeUser }: Props) {
       <div key={location.name} className={style.weatherCard} >
         <div className={style.name}>
           <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
+          <button className={style.unSaveBtn} onClick={() => unSave(location.id)}>Unsave area</button>
         </div>
-        <button className={style.unsaveBtn} onClick={() => unSave(location.id)}>Unsave area</button>
         <div className={style.periods}>
           {location.weather.properties.periods
           .map((period: Iperiod, index: number, array: Iperiod[] )=> 
