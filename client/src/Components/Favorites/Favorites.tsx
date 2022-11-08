@@ -65,10 +65,11 @@ export default function Weather({ user, onChangeUser }: Props) {
         r.json().then(err => alert(err.errors));
       }
     })
-  }, [user?.favorites])
+  }, [user])
 
   // fetch forecasts for each location
   useEffect(() => {
+    setWeather([]);
     locations.forEach(location => {
       fetch(`${location.forecast_url}`)
       .then(r => {
@@ -87,14 +88,13 @@ export default function Weather({ user, onChangeUser }: Props) {
     const fav = user?.favorites.find(obj => obj.location_id === locationID);
     const favID = fav?.id;
 
-    console.log(locationID, fav, favID);
-
     fetch(`/favorites/${favID}`, {
       method: 'DELETE'
     })
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
+          // setLocations(locations => [...locations.filter(obj => obj.id !== locationID)]);
           onChangeUser((user: Iuser) => ({...user, favorites: [...user.favorites.filter(fav => fav.id !== favID)]}))
         })
       } else {

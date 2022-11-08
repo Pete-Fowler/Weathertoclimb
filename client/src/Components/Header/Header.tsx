@@ -1,5 +1,5 @@
 import style from './Header.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 
 interface Props {
@@ -17,8 +17,6 @@ export default function Header({ user, onChangeUser }: Props) {
   const [ searchTerm, setSearchTerm ] = useState<string>('');
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ isShown, setIsShown ] = useState(false);
-
-  const navigate = useNavigate(); 
 
   function handleLogout() {
     fetch(`/logout`, {

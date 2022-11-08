@@ -128,7 +128,6 @@ export default function Details({ user, onChangeUser }: Props) {
           r.json().then(data => {
             setSaved(true);
             onChangeUser((user: Iuser) => ({...user, favorites: [...user.favorites, data]}))
-            console.log(data);
           });
         } else {
           r.json().then(err => console.log(err));
@@ -154,8 +153,6 @@ export default function Details({ user, onChangeUser }: Props) {
   }
 
   let saveBtnText = saved ? 'Unsave area' : 'Save area';
-
-  console.log(user);
 
   return <div className={style.details}>
     <div className={style.titleBox}>
