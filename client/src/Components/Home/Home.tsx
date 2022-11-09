@@ -1,5 +1,6 @@
 import style from './Home.module.css';
 import Map from '../Map/Map';
+import { useEffect, useState } from 'react';
 
 interface Props {
   user: {admin: boolean,
@@ -13,6 +14,9 @@ interface Props {
 
 export default function Home({ user, onChangeUser }: Props) {
 
+  useEffect(() => {
+    
+  })
   // fetch user locations
   // store in state
   // array of lat/lon to Map in props

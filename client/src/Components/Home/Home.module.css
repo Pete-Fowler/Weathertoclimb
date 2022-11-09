@@ -11,7 +11,7 @@
   justify-content: center;
   font-size: 1.8rem;
   color: white;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 100px);
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
 }
 
