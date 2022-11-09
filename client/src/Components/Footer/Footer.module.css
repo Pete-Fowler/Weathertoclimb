@@ -1,4 +1,20 @@
 .footer {
-  height: 60px;
-  
+  position: relative;
+  height: 350px;
+}
+
+.footer img { 
+  width: 350px;
+  position: absolute;
+  z-index: 7;
+  right: 5rem;
+  top: -30%;
+}
+
+ul {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translate(0, -50%);
+  list-style-type: none;
 }
