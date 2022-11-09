@@ -32,7 +32,7 @@ export default function Login({ user, onChangeUser, toggleModal }: Props) {
       if(r.ok) {
         r.json().then(data => {
           onChangeUser(data);
-          navigate('/');
+          toggleModal('login');
         })
       } else {
         r.json().then(err => {
