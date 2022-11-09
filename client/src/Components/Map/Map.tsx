@@ -4,10 +4,11 @@ import Marker from './Marker';
 
 interface Iprops {
   center: {lat: number, lng: number},
-  zoom: number
+  zoom: number,
+  markers: any
 }
 
-export default function Map({center, zoom}: Iprops){
+export default function Map({center, zoom, markers}: Iprops){
 
   return (
     <div className={style.map}>
@@ -16,13 +17,12 @@ export default function Map({center, zoom}: Iprops){
         defaultCenter={center}
         defaultZoom={zoom}
       >
-        {
-        <Marker
-          lat={39.710506}
-          lng={-105.120089}
-          text="My Marker"
-        />
-        // Map locations prop here to <Marker /> 
+        {markers
+        // <Marker
+        //   lat={39.710506}
+        //   lng={-105.120089}
+        //   text="My Marker"
+        // />
         }
       </GoogleMapReact>
     </div>
