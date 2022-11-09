@@ -52,7 +52,16 @@ export default function App() {
   function toggleModal(modal: 'login' | 'createAccount' | 'submitArea') {
     const opposite = !modals[modal];
     setModals(modals => ({...modals, [modal]: opposite }))
-    console.log(modals);
+    if(Object.values(modals).some(val => val === true)) {
+      window.addEventListener('scroll', resetModals);
+      
+    } else {
+      window.removeEventListener('scroll', resetModals);
+    }
+
+    function resetModals() {
+      setModals(modals => ({login: false, createAccount: false, submitArea: false}))
+    }
   }
 
   return (
