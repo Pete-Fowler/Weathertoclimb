@@ -62,12 +62,12 @@ export default function App() {
         <Routes>
             <Route path='/' element={<Home user={user} />}/>
             {/* <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} /> */}
-            <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
+            {/* <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} /> */}
             <Route path='/favorites' element={<Favorites user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
         </Routes>
         {modals.login ? <Login user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/> : ''}
-        {modals.createAccount ? <CreateAccount user={user} onChangeUser={onChangeUser}/> : ''}
+        {modals.createAccount ? <CreateAccount user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/> : ''}
         {/* {modals.submitArea ? <SubmitArea /> : ''} */}
       </div>
       <Footer />

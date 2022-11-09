@@ -42,6 +42,11 @@ export default function Login({ user, onChangeUser, toggleModal }: Props) {
     })
   }
 
+  function createAccountModal() {
+    toggleModal('login');
+    toggleModal('createAccount');
+  }
+
   return <div className={style.login} onClick={() => toggleModal('login')}>
     <form className={style.loginForm} onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
       <label htmlFor='username'>Username:</label>
@@ -50,7 +55,7 @@ export default function Login({ user, onChangeUser, toggleModal }: Props) {
       <input type='password' id='password' onChange={handleChange} value={formData.password}></input>
       <button type='submit'>Login</button>
       {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
-      <Link to='/create-account'>Create an account</Link>
+      <div className='link' onClick={createAccountModal}>Create an account</div>
     </form>
   </div>
 }
