@@ -54,13 +54,18 @@ export default function Header({ user, onChangeUser }: Props) {
     }
   }
 
+  function handleBlur() {
+    setSearchTerm('');
+    setLocations([]); 
+    setIsShown(false);
+  }
+
   return <div className={style.header}>
     <Link to='/' className={`link ${style.icon}`}>
       Weather ☁️ to climb
     </Link>
     <div className={style.inputBox}>
-      <input className={style.input} type='text' placeholder='SEARCH  CLIMBING AREAS' value={searchTerm} onChange={handleChange}>
-      </input>
+      <input className={style.input} type='text' placeholder='SEARCH  CLIMBING AREAS' value={searchTerm} onChange={handleChange} onBlur={handleBlur}/>
       {isShown 
         ? <div className={style.dropdown}>
             {locations.map(location => 
