@@ -13,6 +13,9 @@ interface Props {
 
 export default function Home({ user, onChangeUser }: Props) {
 
+  // fetch user locations
+  // store in state
+  // array of lat/lon to Map in props
   
   return <div className={style.home}>
     <div className={style.hero}>
