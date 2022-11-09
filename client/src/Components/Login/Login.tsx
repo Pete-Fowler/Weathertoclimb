@@ -4,10 +4,11 @@ import style from './Login.module.css';
 
 interface Props {
   user: object | null,
-  onChangeUser: Function
+  onChangeUser: Function,
+  toggleModal: Function
 }
 
-export default function Login({ user, onChangeUser }: Props) {
+export default function Login({ user, onChangeUser, toggleModal }: Props) {
   const [ formData, setFormData ] = useState({username: '', password: ''});
   const [ errors, setErrors ] = useState([]);
 
@@ -41,8 +42,8 @@ export default function Login({ user, onChangeUser }: Props) {
     })
   }
 
-  return <div className={style.login}>
-    <form className={style.loginForm} onSubmit={handleSubmit}>
+  return <div className={style.login} onClick={() => toggleModal('login')}>
+    <form className={style.loginForm} onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
       <label htmlFor='username'>Username:</label>
       <input type='text' id='username' onChange={handleChange} value={formData.username}></input>
       <label htmlFor='password'>Password:</label> 
