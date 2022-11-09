@@ -47,7 +47,7 @@ export default function App() {
       <Header user={user} onChangeUser={onChangeUser}/>
       <div className={style.content}>
         <Routes>
-            <Route path='/' element={<Home user={user} onChangeUser={onChangeUser} />}/>
+            <Route path='/' element={<Home user={user} />}/>
             <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/favorites' element={<Favorites user={user} onChangeUser={onChangeUser}/>} />

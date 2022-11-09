@@ -5,14 +5,16 @@
 }
 
 .hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 1.8rem;
   color: white;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 100px);
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
 }
 
 .heroText {
-  position: relative;
-  top: 50px;
-  left: 50px;
+  margin-bottom: 20px;
 }
