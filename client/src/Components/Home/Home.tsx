@@ -1,7 +1,5 @@
 import style from './Home.module.css';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Weather from '../Favorites/Favorites';
+import Map from '../Map/Map';
 
 interface Props {
   user: {admin: boolean,
@@ -15,11 +13,11 @@ interface Props {
 
 export default function Home({ user, onChangeUser }: Props) {
 
+  
   return <div className={style.home}>
     <div className={style.hero}>
       <div className={style.heroText}>Compare climbing area weather forecasts side by side</div>
+      <Map />
     </div>
-    
-    {/* <Weather /> */}
   </div>
 }
