@@ -24,12 +24,6 @@ interface Iuser {
   username: string 
 }
 
-// interface Imodals {
-//   login: boolean,
-//   createAccount: boolean,
-//   submitArea: boolean
-// }
-
 export default function App() {
   const [ user, setUser ] = useState<Iuser | null>(null);
   const [ modals, setModals ] = useState({login: false, createAccount: false, submitArea: false});
@@ -70,8 +64,6 @@ export default function App() {
       <div className={style.content}>
         <Routes>
             <Route path='/' element={<Home user={user} />}/>
-            {/* <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} /> */}
-            {/* <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} /> */}
             <Route path='/favorites' element={<Favorites user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
         </Routes>
