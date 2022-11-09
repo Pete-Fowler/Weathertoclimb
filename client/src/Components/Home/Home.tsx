@@ -13,11 +13,13 @@ interface Props {
 }
 
 interface Ilocation {
+  id: number
   name: string,
-  coordinates: string,
+  lat: number,
+  lng: number
 }
 export default function Home({ user }: Props) {
-  const [ markers, setMarkers ] = useState([]);
+  const [ markers, setMarkers ] = useState<Ilocation[]>([]);
 
   // Fetch locations and save in state as map markers
   useEffect(() => {
@@ -25,14 +27,19 @@ export default function Home({ user }: Props) {
     .then(r => {
       if(r.ok) {
         r.json().then(data => setMarkers(data.map((loc: any) => 
-        <Marker key={loc.name} name={loc.name} lat={loc.coordinates.split(',')[0]} lng={loc.coordinates.split(',')[1]}/>)))
+          <Marker key={loc.id} 
+            id={loc.id} 
+            name={loc.name} 
+            lat={loc.coordinates.split(',')[0]} 
+            lng={loc.coordinates.split(',')[1]}
+          />
+        )));
       } else {
         r.json().then(err => console.log(err));
       }
     })
   }, [])
  
-console.log(markers);
   return <div className={style.home}>
     <div className={style.hero}>
       <div className={style.heroText}>Compare climbing area weather forecasts side by side</div>

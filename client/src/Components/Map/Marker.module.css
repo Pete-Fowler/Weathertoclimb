@@ -1,7 +1,18 @@
 
 .marker {
   position: absolute;
-  
+  transform: translate(-50%, -50%);
+  transition: .4s;
+}
+
+.marker:hover {
+  transform: scale(1.1) translate(-50%, -50%);
+}
+
+.modal {
+  position: absolute;
+  white-space: nowrap;
+  top: -15px;
 }
 
 img {
