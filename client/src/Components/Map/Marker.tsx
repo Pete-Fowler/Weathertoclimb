@@ -1,7 +1,7 @@
 
 
-export default function Marker ({ text }: any) {
+export default function Marker ({ name }: any) {
 
-return <div>{text}</div>;
+return <div>{name}</div>;
 
 }

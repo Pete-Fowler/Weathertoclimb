@@ -25,7 +25,7 @@ export default function Home({ user }: Props) {
     .then(r => {
       if(r.ok) {
         r.json().then(data => setMarkers(data.map((loc: any) => 
-        <Marker key={loc.name} name={loc.name} lat={loc.coordinates.split(',')[0]} lon={loc.coordinates.split(',')[1]}/>)))
+        <Marker key={loc.name} name={loc.name} lat={loc.coordinates.split(',')[0]} lng={loc.coordinates.split(',')[1]}/>)))
       } else {
         r.json().then(err => console.log(err));
       }
