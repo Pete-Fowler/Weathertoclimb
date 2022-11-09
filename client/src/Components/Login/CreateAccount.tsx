@@ -9,9 +9,10 @@ interface Props {
     password_digest: string
     username: string } | null,
   onChangeUser: Function,
+  toggleModal: Function
 }
 
-export default function CreateAccount({ user, onChangeUser }: Props) {
+export default function CreateAccount({ user, onChangeUser, toggleModal }: Props) {
   const [ formData, setFormData ] = useState({username: '', password: '', password_confirmation: ''})
   const [ errors, setErrors ] = useState([]);
 
@@ -44,10 +45,14 @@ export default function CreateAccount({ user, onChangeUser }: Props) {
         })
       }
     })
-
   }
 
-  return <div className={style.login}>
+  function switchToLogin() {
+    toggleModal('createAccount');
+    toggleModal('login');
+  }
+
+  return <div className={style.login} onClick={() => toggleModal('createAccount')}>
     <form className={style.loginForm} onSubmit={handleSubmit}>
       <label htmlFor='username'>Username:</label>
       <input type='text' id='username' onChange={handleChange} value={formData.username}></input>
@@ -57,7 +62,7 @@ export default function CreateAccount({ user, onChangeUser }: Props) {
       <input type='password' id='password_confirmation' onChange={handleChange} value={formData.password_confirmation}></input>
       {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
       <button type='submit'>Create account</button>
-      <div>Already have an account? <Link to='/login'>Log in instead</Link></div>
+      <div>Already have an account? <div className='link' onClick={switchToLogin}>Log in instead</div></div>
     </form>
   </div>
 }

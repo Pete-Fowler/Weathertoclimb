@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import style from './App.module.css';
 import Login from '../Components/Login/Login';
-import CreateAccount from '../Components/CreateAccount/CreateAccount';
+import CreateAccount from '../Components/Login/CreateAccount';
 import Home from '../Components/Home/Home';
 import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
@@ -26,6 +26,7 @@ interface Iuser {
 
 export default function App() {
   const [ user, setUser ] = useState<Iuser | null>(null);
+  const [ modals, setModals ] = useState({login: false, createAccount: false, submitArea: false});
 
   useEffect(() => {
     fetch(`/me`)
@@ -42,17 +43,33 @@ export default function App() {
     setUser(data);
   }
 
+  function toggleModal(modal: 'login' | 'createAccount' | 'submitArea') {
+    const opposite = !modals[modal];
+    setModals(modals => ({...modals, [modal]: opposite }))
+    if(Object.values(modals).some(val => val === true)) {
+      window.addEventListener('scroll', resetModals);
+      
+    } else {
+      window.removeEventListener('scroll', resetModals);
+    }
+
+    function resetModals() {
+      setModals(modals => ({login: false, createAccount: false, submitArea: false}))
+    }
+  }
+
   return (
     <div className={style.app}>
-      <Header user={user} onChangeUser={onChangeUser}/>
+      <Header user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/>
       <div className={style.content}>
         <Routes>
             <Route path='/' element={<Home user={user} />}/>
-            <Route path='/login' element={<Login user={user} onChangeUser={onChangeUser}/>} />
-            <Route path='/create-account' element={<CreateAccount user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/favorites' element={<Favorites user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
         </Routes>
+        {modals.login ? <Login user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/> : ''}
+        {modals.createAccount ? <CreateAccount user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/> : ''}
+        {/* {modals.submitArea ? <SubmitArea /> : ''} */}
       </div>
       <Footer />
     </div>
