@@ -60,7 +60,7 @@ export default function App() {
             <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
         </Routes>
         <Login user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
-        <CreateAccount user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
+        <CreateAccount onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         {/* {modals.submitArea ? <SubmitArea /> : ''} */}
       </div>
       <Footer />

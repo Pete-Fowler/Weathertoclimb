@@ -6,9 +6,13 @@ class UsersController < ApplicationController
   end
 
   def create 
+    if(params[:username].length > 3 && params[:password].length.between?(6, 30))
     user = User.create!(user_params)
     session[:user_id] = user.id
     render json: user, status: :created
+    else 
+      render json: {errors: ['Username or password is invalid']}, status: :unprocessable_entity
+    end 
   end
 
   private 
