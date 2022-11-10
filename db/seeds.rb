@@ -10,10 +10,25 @@
 puts 'seeding...'
 
 Location.create!({
+  name: "Black Canyon",
+  state: "Colorado",
+  coordinates: "38.577010,-107.732070",
+  forecast_url: "https://api.weather.gov/gridpoints/GJT/121,76/forecast",
+  popular: true
+})
+
+Location.create!({
   name: "Boulder Canyon",
   state: "Colorado",
   coordinates: "39.990531,-105.422562",
   forecast_url: "https://api.weather.gov/gridpoints/BOU/48,73/forecast",
+})
+
+Location.create!({
+  name: "Carter Lake",
+  state: "Colorado",
+  coordinates: "40.320320,-105.213900",
+  forecast_url: "https://api.weather.gov/gridpoints/BOU/56,87/forecast",
 })
 
 Location.create!({
@@ -24,17 +39,56 @@ Location.create!({
 })
 
 Location.create!({
+  name: "Cathedral Spires - South Platte",
+  state: "Colorado",
+  coordinates: "39.412990,-105.267280",
+  forecast_url: "https://api.weather.gov/gridpoints/BOU/51,46/forecast"
+})
+
+Location.create!({
   name: "Clear Creek Canyon",
   state: "Colorado",
   coordinates: "39.741328,-105.326352",
   forecast_url: "https://api.weather.gov/gridpoints/BOU/50,61/forecast"
   })
 
+  Location.create!({
+    name: "Colorado National Monument",
+    state: "Colorado",
+    coordinates: "39.101600,-108.734600",
+    forecast_url: "https://api.weather.gov/gridpoints/GJT/88,103/forecast"
+    })
+
+  
 Location.create!({
   name: "Eldorado Springs",
   state: "Colorado",
   coordinates: "39.932075,-105.288556",
   forecast_url: "https://api.weather.gov/gridpoints/BOU/52,70/forecast",
+  popular: true
+})
+
+Location.create!({
+  name: "Escalante Canyon",
+  state: "Colorado",
+  coordinates: "38.680250,-108.312270",
+  forecast_url: "https://api.weather.gov/gridpoints/GJT/101,83/forecast",
+  popular: false
+})
+
+Location.create!({
+  name: "Indian Creek",
+  state: "Utah",
+  coordinates: "38.025740,-109.539870",
+  forecast_url: "https://api.weather.gov/gridpoints/GJT/55,58/forecast",
+  popular: true
+})
+
+Location.create!({
+  name: "Moab",
+  state: "Utah",
+  coordinates: "38.576093,-109.563435",
+  forecast_url: "https://api.weather.gov/gridpoints/GJT/57,83/forecast",
   popular: true
 })
 
@@ -82,5 +136,15 @@ Location.create!({
   popular: true
 })
 
+Location.create!({
+  name: "Vedauwoo",
+  state: "Wyoming",
+  coordinates: "41.155301,-105.374888",
+  forecast_url: "https://api.weather.gov/gridpoints/CYS/90,15/forecast",
+  popular: true
+})
+
+
 puts 'done seeding!'
+
 
