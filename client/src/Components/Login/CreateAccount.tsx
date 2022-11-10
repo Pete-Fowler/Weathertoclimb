@@ -1,4 +1,3 @@
-import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 import style from '../Login/Login.module.css';
 
@@ -16,8 +15,6 @@ interface Props {
 export default function CreateAccount({ user, onChangeUser, modal, changeModal }: Props) {
   const [ formData, setFormData ] = useState({username: '', password: '', password_confirmation: ''})
   const [ errors, setErrors ] = useState([]);
-
-  const navigate = useNavigate();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {  
     setFormData({...formData, [e.target.id]: e.target.value})
