@@ -45,7 +45,6 @@ export default function App() {
 
   function changeModal(str: string) {
     setModal(str);
-    console.log('model set to ' + str);
   }
 
   const isHidden = modal === '' ? 'hidden' : '';
