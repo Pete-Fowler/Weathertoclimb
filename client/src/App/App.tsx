@@ -26,7 +26,7 @@ interface Iuser {
 
 export default function App() {
   const [ user, setUser ] = useState<Iuser | null>(null);
-  const [ modals, setModals ] = useState({login: false, createAccount: false, submitArea: false});
+  const [ modal, setModal ] = useState('');
 
   useEffect(() => {
     fetch(`/me`)
@@ -43,32 +43,25 @@ export default function App() {
     setUser(data);
   }
 
-  function toggleModal(modal: 'login' | 'createAccount' | 'submitArea') {
-    const opposite = !modals[modal];
-    setModals(modals => ({...modals, [modal]: opposite }))
-    if(Object.values(modals).some(val => val === true)) {
-      window.addEventListener('scroll', resetModals);
-      
-    } else {
-      window.removeEventListener('scroll', resetModals);
-    }
-
-    function resetModals() {
-      setModals(modals => ({login: false, createAccount: false, submitArea: false}))
-    }
+  function changeModal(str: string) {
+    setModal(str);
+    console.log('model set to ' + str);
   }
+
+  const isHidden = modal === '' ? 'hidden' : '';
 
   return (
     <div className={style.app}>
-      <Header user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/>
+      <div className={`${isHidden} ${style.screen}`}></div>
+      <Header user={user} onChangeUser={onChangeUser} changeModal={changeModal}/>
       <div className={style.content}>
         <Routes>
             <Route path='/' element={<Home user={user} />}/>
             <Route path='/favorites' element={<Favorites user={user} onChangeUser={onChangeUser}/>} />
             <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
         </Routes>
-        {modals.login ? <Login user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/> : ''}
-        {modals.createAccount ? <CreateAccount user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/> : ''}
+        <Login user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
+        {/* <CreateAccount user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/> */}
         {/* {modals.submitArea ? <SubmitArea /> : ''} */}
       </div>
       <Footer />
