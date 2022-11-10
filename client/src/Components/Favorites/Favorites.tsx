@@ -1,5 +1,5 @@
 import style from './Favorites.module.css';
-import { useState, useEffect, MouseEventHandler } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 interface Iuser {
@@ -104,26 +104,28 @@ export default function Weather({ user, onChangeUser }: Props) {
   }
 
   return <div className={style.weatherSection}>
-    {weather.map(location => 
-      <div key={location.name} className={style.weatherCard} >
-        <div className={style.name}>
-          <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
-          <button className={style.unSaveBtn} onClick={() => unSave(location.id)}>Unsave area</button>
+    {weather.length > 0 
+      ? weather.map(location => 
+        <div key={location.name} className={style.weatherCard} >
+          <div className={style.name}>
+            <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
+            <button className={style.unSaveBtn} onClick={() => unSave(location.id)}>Unsave area</button>
+          </div>
+          <div className={style.periods}>
+            {location.weather.properties.periods
+            .map((period: Iperiod, index: number, array: Iperiod[] )=> 
+              !period.name.toLowerCase().includes('night') ? 
+              <div key={period.number} className={style.period}>
+                <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
+                <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
+                <div className={style.temp}>{period.temperature}&deg; F / {index < array.length - 1 ? array[index + 1].temperature : ''}&deg; F</div>
+                <div className={style.windSpeed}>{period.windSpeed}</div>
+              </div>
+              : ''
+            )}
+          </div>
         </div>
-        <div className={style.periods}>
-          {location.weather.properties.periods
-          .map((period: Iperiod, index: number, array: Iperiod[] )=> 
-            !period.name.toLowerCase().includes('night') ? 
-            <div key={period.number} className={style.period}>
-              <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
-              <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
-              <div className={style.temp}>{period.temperature}&deg; F / {index < array.length - 1 ? array[index + 1].temperature : ''}&deg; F</div>
-              <div className={style.windSpeed}>{period.windSpeed}</div>
-            </div>
-            : ''
-          )}
-        </div>
-      </div>
-    )}
+        ) 
+      : <div className={style.saveMessage}>Save areas to compare forecasts side by side</div>}
   </div>
 }

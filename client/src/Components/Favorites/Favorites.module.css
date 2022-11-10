@@ -1,6 +1,15 @@
 .weatherSection {
+  min-height: 80vh;
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
   padding: 25px;
+}
+
+.saveMessage {
+  font-size: 1.8rem;
+  color: white;
+  position: relative;
+  top: 50px;
+  left: 50px;
 }
 
 .weatherCard {
@@ -62,11 +71,6 @@
   display: none;
 }
 
-.modal {
-  position: absolute;
-  z-index: 10;
-}
-
 .iconForecastBox {display: flex;}
 
 .icon {
@@ -78,3 +82,6 @@
 .temp {
   font-weight: 700;
 }
+
+
+
