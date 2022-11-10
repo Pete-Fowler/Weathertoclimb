@@ -52,7 +52,7 @@ export default function App() {
 
   return (
     <div className={style.app}>
-      <div className={`${isHidden} ${style.screen}`}></div>
+      <div className={`${isHidden} ${style.screen}`} onClick={() => setModal('')}></div>
       <Header user={user} onChangeUser={onChangeUser} changeModal={changeModal}/>
       <div className={style.content}>
         <Routes>
@@ -61,7 +61,7 @@ export default function App() {
             <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
         </Routes>
         <Login user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
-        {/* <CreateAccount user={user} onChangeUser={onChangeUser} toggleModal={toggleModal}/> */}
+        <CreateAccount user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         {/* {modals.submitArea ? <SubmitArea /> : ''} */}
       </div>
       <Footer />
