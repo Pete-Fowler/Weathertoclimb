@@ -30,4 +30,6 @@
 
 label { display: inline-block; }
 
-button { margin: 10px 0;}
+.login button { 
+  margin: 10px 0;
+}

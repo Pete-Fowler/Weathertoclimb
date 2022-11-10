@@ -51,7 +51,7 @@ export default function Login({ user, onChangeUser, modal, changeModal }: Props)
       <input type='text' id='username' onChange={handleChange} value={formData.username}></input>
       <label htmlFor='password'>Password:</label> 
       <input type='password' id='password' onChange={handleChange} value={formData.password}></input>
-      <button type='submit'>Login</button>
+      <button className='link' type='submit'>Login</button>
       {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
       <div className='link' onClick={() => changeModal('createAccount')}>Create an account</div>
     </form>

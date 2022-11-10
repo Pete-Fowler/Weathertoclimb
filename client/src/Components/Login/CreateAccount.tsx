@@ -59,8 +59,8 @@ export default function CreateAccount({ user, onChangeUser, modal, changeModal }
       <label htmlFor='password_confirmation'>Password confirmation:</label>
       <input type='password' id='password_confirmation' onChange={handleChange} value={formData.password_confirmation}></input>
       {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
-      <button type='submit'>Create account</button>
-      <div>Already have an account? <div className='link' onClick={() => changeModal('login')}>Log in instead</div></div>
+      <button className='link' type='submit'>Create account</button>
+      <div>Already have an account? <span className='link' onClick={() => changeModal('login')}>Log in instead</span></div>
     </form>
   </div>
 }
