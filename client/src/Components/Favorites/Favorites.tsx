@@ -44,7 +44,8 @@ interface Iperiod {
 }
 
 export default function Weather({ user, onChangeUser }: Props) {
-
+  const [ loaded, setLoaded ] = useState<boolean>(false);
+  const [ errors, setErrors ] = useState<string | null>(null);
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
 
@@ -80,6 +81,21 @@ export default function Weather({ user, onChangeUser }: Props) {
           });
         } else {
           r.json().then(err => console.log(err.errors));
+          let i = 0;
+          while(i < 10 && loaded === false) {
+            setTimeout(() => {
+              fetch(`${location.forecast_url}`)
+              .then(r => {
+                if(r.ok) {
+                  r.json().then(data => {
+                    setWeather(weather => ([...weather, {name: location.name, id: location.id, weather: data}]));
+                  })
+                } 
+              })
+            }, 100);
+            i++;
+          }
+          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
         }
       })
     });
