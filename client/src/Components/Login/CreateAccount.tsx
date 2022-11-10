@@ -21,6 +21,7 @@ export default function CreateAccount({ onChangeUser, modal, changeModal }: Prop
     const { id, value } = e.target;
 
     setFrontendErrors(err => ({...err, [id]: ''}));
+    setErrors([]);
 
     switch(id) {
       case "username":
