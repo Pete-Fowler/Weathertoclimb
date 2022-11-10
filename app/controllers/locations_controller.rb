@@ -2,8 +2,6 @@ class LocationsController < ApplicationController
 
   skip_before_action :authorize, only: [:index, :show]
 
-
-
   def show
     location = Location.find_by(id: params[:id])
     render json: location
