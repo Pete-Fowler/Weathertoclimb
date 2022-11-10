@@ -120,6 +120,7 @@ export default function Weather({ user, onChangeUser }: Props) {
   }
 
   return <div className={style.weatherSection}>
+    {errors && <div>{errors}</div>}
     {weather.length > 0 
       ? weather.map(location => 
         <div key={location.name} className={style.weatherCard} >
