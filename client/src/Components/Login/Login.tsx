@@ -5,10 +5,11 @@ import style from './Login.module.css';
 interface Props {
   user: object | null,
   onChangeUser: Function,
-  toggleModal: Function
+  modal: string,
+  changeModal: Function
 }
 
-export default function Login({ user, onChangeUser, toggleModal }: Props) {
+export default function Login({ user, onChangeUser, modal, changeModal }: Props) {
   const [ formData, setFormData ] = useState({username: '', password: ''});
   const [ errors, setErrors ] = useState([]);
 
@@ -32,7 +33,7 @@ export default function Login({ user, onChangeUser, toggleModal }: Props) {
       if(r.ok) {
         r.json().then(data => {
           onChangeUser(data);
-          toggleModal('login');
+          changeModal('');
         })
       } else {
         r.json().then(err => {
@@ -42,12 +43,9 @@ export default function Login({ user, onChangeUser, toggleModal }: Props) {
     })
   }
 
-  function createAccountModal() {
-    toggleModal('login');
-    toggleModal('createAccount');
-  }
+  const isHidden = modal === 'login' ? '' : 'hidden';
 
-  return <div className={style.login} onClick={() => toggleModal('login')}>
+  return <div className={`${isHidden} ${style.login}`}>
     <form className={style.loginForm} onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
       <label htmlFor='username'>Username:</label>
       <input type='text' id='username' onChange={handleChange} value={formData.username}></input>
@@ -55,7 +53,7 @@ export default function Login({ user, onChangeUser, toggleModal }: Props) {
       <input type='password' id='password' onChange={handleChange} value={formData.password}></input>
       <button type='submit'>Login</button>
       {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
-      <div className='link' onClick={createAccountModal}>Create an account</div>
+      <div className='link' onClick={() => changeModal('createAccount')}>Create an account</div>
     </form>
   </div>
 }

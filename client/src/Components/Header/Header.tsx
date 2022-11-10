@@ -11,10 +11,10 @@ interface Props {
     username: string 
   } | null,
   onChangeUser: Function,
-  toggleModal: Function
+  changeModal: Function
 }
 
-export default function Header({ user, onChangeUser, toggleModal }: Props) {
+export default function Header({ user, onChangeUser, changeModal }: Props) {
   const [ searchTerm, setSearchTerm ] = useState<string>('');
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ isShown, setIsShown ] = useState(false);
@@ -81,7 +81,7 @@ export default function Header({ user, onChangeUser, toggleModal }: Props) {
       ? <><Link className='link' to='/favorites'>MY AREAS</   Link>
         <div className={style.username}>{user.username}</div> 
         <button className='link' onClick={handleLogout}>LOG OUT</button></>
-      : <div className='link' onClick={() => toggleModal('login')}>LOG IN</div>}
+      : <div className='link' onClick={() => changeModal('login')}>LOG IN</div>}
     </div>
   </div>
 }

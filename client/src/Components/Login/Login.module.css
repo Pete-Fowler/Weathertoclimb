@@ -1,15 +1,15 @@
 .login {
-  background-color: rgba(60, 60, 60, .6);
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  margin: auto;
-  top: 0;
+  margin-inline: auto;
+  top: 200px;
   left: 0;
   right: 0;
-  bottom: 0;
   z-index: 10;
+  transition: .4s;
+  width: 350px;
 }
 
 .loginForm {
