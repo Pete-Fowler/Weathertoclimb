@@ -25,5 +25,4 @@ export default function Marker ({ name, id }: Iprops) {
     {isShown ? <div className={style.modal}>{name}</div> : ''}
     <img src={pin} alt='marker'/>
     </Link>
-
 }

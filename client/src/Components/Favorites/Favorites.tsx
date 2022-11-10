@@ -95,7 +95,6 @@ export default function Weather({ user, onChangeUser }: Props) {
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
-          // setLocations(locations => [...locations.filter(obj => obj.id !== locationID)]);
           onChangeUser((user: Iuser) => ({...user, favorites: [...user.favorites.filter(fav => fav.id !== favID)]}))
         })
       } else {

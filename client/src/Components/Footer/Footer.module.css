@@ -11,10 +11,12 @@
   top: -30%;
 }
 
-ul {
+.footer ul {
   position: absolute;
   left: 25px;
   top: 50%;
   transform: translate(0, -50%);
   list-style-type: none;
 }
+
+.footer li { font-size: .9rem;}

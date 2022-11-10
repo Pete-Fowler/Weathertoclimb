@@ -95,6 +95,7 @@ export default function Details({ user, onChangeUser }: Props) {
             setLoaded(loaded => ({...loaded, daily: true}))
           });
         } else {
+          
           r.json().then(err => console.log(err));
         }
       })
