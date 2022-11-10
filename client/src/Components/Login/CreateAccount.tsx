@@ -33,7 +33,7 @@ export default function CreateAccount({ onChangeUser, modal, changeModal }: Prop
       if(value.length < 6 || value.length > 16) {
         setFrontendErrors(err => ({...err, [id]: 'Password must be between 6 and 16 characters'}));
       } else if(formData.password_confirmation && value !== formData.password_confirmation) {
-        setFrontendErrors(err => ({...err, [id]: 'Passwords must match'}));
+        setFrontendErrors(err => ({...err, password_confirmation: 'Passwords must match'}));
       }
       break;
 
@@ -74,27 +74,29 @@ export default function CreateAccount({ onChangeUser, modal, changeModal }: Prop
   }
 
   const isHidden = modal === 'createAccount' ? '' : 'hidden'
-
-  console.log(frontendErrors);
+  const usernameClass = frontendErrors.username ? style.invalid : '';
+  const passwordClass = frontendErrors.password ? style.invalid : '';
+  const passwordConfirmationClass = frontendErrors.password_confirmation ? style.invalid : '';
+  const isDisabled = Object.values(frontendErrors).some(val => val !== '') ? true : false; 
 
   return <div className={`${isHidden} ${style.login}`}>
     <form className={style.loginForm} onSubmit={handleSubmit}>
       <label htmlFor='username'>Username:</label>
-      <input type='text' id='username' name='username' onChange={handleChange} value={formData.username}></input>
+      <input className={usernameClass} type='text' id='username' name='username' onChange={handleChange} value={formData.username}></input>
       {frontendErrors.username && <div className={style.errors}>{frontendErrors.username}</div>}
 
       <label htmlFor='password'>Password:</label>
-      <input type='password' id='password' name='password' onChange={handleChange} value={formData.password}></input>
+      <input className={passwordClass} type='password' id='password' name='password' onChange={handleChange} value={formData.password}></input>
       {frontendErrors.password && <div className={style.errors}>{frontendErrors.password}</div>}
 
       <label htmlFor='password_confirmation'>Password confirmation:</label>
-      <input type='password' id='password_confirmation' name='password_confirmation' onChange={handleChange} value={formData.password_confirmation}></input>
+      <input className={passwordConfirmationClass} type='password' id='password_confirmation' name='password_confirmation' onChange={handleChange} value={formData.password_confirmation}></input>
       
       {frontendErrors.password_confirmation && <div className={style.errors}>{frontendErrors.password_confirmation}</div>}
 
       {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
       
-      <button className='link' type='submit'>Create account</button>
+      <button className='link' type='submit' disabled={isDisabled}>Create account</button>
       
       <div>Already have an account? <span className='link' onClick={() => changeModal('login')}>Log in instead</span></div>
     </form>

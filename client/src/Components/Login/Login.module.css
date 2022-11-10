@@ -28,8 +28,18 @@
   font-size: .8rem;
 }
 
-label { display: inline-block; }
+.login label { 
+  display: inline-block; 
+}
 
 .login button { 
   margin: 10px 0;
+}
+
+.invalid {
+  border: 1px solid red;
+}
+
+.invalid:focus-visible {
+  outline: none;
 }
