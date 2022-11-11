@@ -1,5 +1,5 @@
 import style from './Header.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ChangeEvent, useState } from 'react';
 
 interface Props {
@@ -19,14 +19,16 @@ export default function Header({ user, onChangeUser, changeModal }: Props) {
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ isShown, setIsShown ] = useState(false);
 
+  const navigate = useNavigate();
+
   function handleLogout() {
     fetch(`/logout`, {
     method: "DELETE"})
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
-          console.log(data);
           onChangeUser(null);
+          navigate('/');
         }) 
       } else {
         r.json().then(err => console.log(err.errors));

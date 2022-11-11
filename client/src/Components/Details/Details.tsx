@@ -10,7 +10,8 @@ interface Props {
     id: number,
     password_digest: string
     username: string } | null,
-  onChangeUser: Function
+  onChangeUser: Function, 
+  changeModal: Function
 }
 
 interface Iuser {
@@ -49,7 +50,7 @@ interface Iloaded {
   daily: boolean
 }
 
-export default function Details({ user, onChangeUser }: Props) {
+export default function Details({ user, onChangeUser, changeModal }: Props) {
   const [ errors, setErrors ] = useState<string | null>(null);
   const [ location, setLocation ] = useState<any>(null);
   const [ hourly, setHourly ] = useState<any>([]);
@@ -185,12 +186,14 @@ export default function Details({ user, onChangeUser }: Props) {
     }
   }
 
-  let saveBtnText = saved ? 'Unsave area' : 'Save area';
+  const saveBtnText = saved ? 'Unsave area' : 'Save area';
+  const isDisabled = user && user.favorites.length > 15 ? true : false;
 
   return <div className={style.details}>
     {errors && <div>{errors}</div>}
     <div className={style.titleBox}>
-      <h1>{location ? location.name : ''}</h1><button className={style.saveBtn} onClick={handleSaveBtnClick}>{saveBtnText}</button> 
+      <h1>{location && location.name}</h1>
+      {<button className={style.saveBtn} onClick={isDisabled ? () => changeModal('max-favorites') : handleSaveBtnClick}>{saveBtnText}</button>} 
     </div>
     <div className={style.hourly}>
       {loaded.hourly 
