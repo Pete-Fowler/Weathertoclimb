@@ -50,7 +50,7 @@ interface Iloaded {
 }
 
 export default function Details({ user, onChangeUser }: Props) {
-
+  const [ errors, setErrors ] = useState<string | null>(null);
   const [ location, setLocation ] = useState<any>(null);
   const [ hourly, setHourly ] = useState<any>([]);
   const [ daily, setDaily ] = useState<any>([]);
@@ -86,6 +86,7 @@ export default function Details({ user, onChangeUser }: Props) {
 
   // Fetch forecasts
   useEffect(() => {
+    setErrors('');
     if(location) {
       fetch(`${location.forecast_url}`)
       .then(r => {
@@ -96,6 +97,22 @@ export default function Details({ user, onChangeUser }: Props) {
           });
         } else {
           r.json().then(err => console.log(err));
+          let i = 0;
+          while(i < 10 && loaded.daily === false) {
+            setTimeout(() => {
+              fetch(`${location.forecast_url}`)
+              .then(r => {
+                if(r.ok) {
+                  r.json().then(data => {
+                    setDaily(data);
+                    setLoaded(loaded => ({...loaded, daily: true}))
+                  })
+                } 
+              })
+            }, 100);
+            i++;
+          }
+          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
         }
       })
 
@@ -108,6 +125,22 @@ export default function Details({ user, onChangeUser }: Props) {
           });
         } else {
           r.json().then(err => console.log(err));
+          let i = 0;
+          while(i < 10 && loaded.hourly === false) {
+            setTimeout(() => {
+              fetch(`${location.forecast_url}/hourly`)
+              .then(r => {
+                if(r.ok) {
+                  r.json().then(data => {
+                    setHourly(data);
+                    setLoaded(loaded => ({...loaded, hourly: true}))
+                  })
+                } 
+              })
+            }, 100);
+            i++;
+          }
+          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.');
         }
       })
    }
@@ -155,6 +188,7 @@ export default function Details({ user, onChangeUser }: Props) {
   let saveBtnText = saved ? 'Unsave area' : 'Save area';
 
   return <div className={style.details}>
+    {errors && <div>{errors}</div>}
     <div className={style.titleBox}>
       <h1>{location ? location.name : ''}</h1><button className={style.saveBtn} onClick={handleSaveBtnClick}>{saveBtnText}</button> 
     </div>

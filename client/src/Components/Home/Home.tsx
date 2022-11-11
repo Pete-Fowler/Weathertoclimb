@@ -40,9 +40,11 @@ export default function Home({ user }: Props) {
     })
   }, [])
  
+  const heroText = user ? 'Save areas and go to my areas to compare forecasts side by side' : 'Log in and save areas to compare forecasts side by side';
+
   return <div className={style.home}>
     <div className={style.hero}>
-      <div className={style.heroText}>Compare climbing area weather forecasts side by side</div>
+      <div className={style.heroText}>{heroText}</div>
       <Map center={{lat: 39.725194, lng: -105.175531}} zoom={7} markers={markers}/>
     </div>
   </div>

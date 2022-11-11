@@ -1,5 +1,5 @@
 import style from './Favorites.module.css';
-import { useState, useEffect, MouseEventHandler } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 interface Iuser {
@@ -44,7 +44,8 @@ interface Iperiod {
 }
 
 export default function Weather({ user, onChangeUser }: Props) {
-
+  const [ loaded, setLoaded ] = useState<boolean>(false);
+  const [ errors, setErrors ] = useState<string | null>(null);
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
 
@@ -77,9 +78,26 @@ export default function Weather({ user, onChangeUser }: Props) {
         if(r.ok) {
           r.json().then(data => {
             setWeather(weather => ([...weather, {name: location.name, id: location.id, weather: data}]));
+            setLoaded(true);
           });
         } else {
           r.json().then(err => console.log(err.errors));
+          let i = 0;
+          while(i < 10 && loaded === false) {
+            setTimeout(() => {
+              fetch(`${location.forecast_url}`)
+              .then(r => {
+                if(r.ok) {
+                  r.json().then(data => {
+                    setWeather(weather => ([...weather, {name: location.name, id: location.id, weather: data}]));
+                    setLoaded(true);
+                  })
+                } 
+              })
+            }, 100);
+            i++;
+          }
+          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
         }
       })
     });
@@ -95,7 +113,6 @@ export default function Weather({ user, onChangeUser }: Props) {
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
-          // setLocations(locations => [...locations.filter(obj => obj.id !== locationID)]);
           onChangeUser((user: Iuser) => ({...user, favorites: [...user.favorites.filter(fav => fav.id !== favID)]}))
         })
       } else {
@@ -105,6 +122,8 @@ export default function Weather({ user, onChangeUser }: Props) {
   }
 
   return <div className={style.weatherSection}>
+    {errors && <div>{errors}</div>}
+    {user?.favorites.length === 0 && 'Save areas to compare weather forecases side by side'}
     {weather.map(location => 
       <div key={location.name} className={style.weatherCard} >
         <div className={style.name}>
@@ -125,6 +144,7 @@ export default function Weather({ user, onChangeUser }: Props) {
           )}
         </div>
       </div>
-    )}
+      ) 
+     }
   </div>
 }

@@ -1,6 +1,6 @@
 import style from './Header.module.css';
 import { Link } from 'react-router-dom';
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 interface Props {
   user: {
@@ -61,12 +61,13 @@ export default function Header({ user, onChangeUser, changeModal }: Props) {
     setIsShown(false);
   }
 
-  return <div className={style.header}>
+return <div className={style.header}>
     <Link to='/' className={`link ${style.icon}`}>
       Weather ☁️ to climb
     </Link>
     <div className={style.inputBox}>
-      <input className={style.input} type='text' placeholder='SEARCH  CLIMBING AREAS' value={searchTerm} onChange={handleChange} onBlur={handleBlur}/>
+      <input className={style.input} type='text' placeholder='SEARCH  CLIMBING AREAS' value={searchTerm} onChange={handleChange} onBlur={() => setTimeout(handleBlur, 100)}
+/>
       {isShown 
         ? <div className={style.dropdown}>
             {locations.map(location => 

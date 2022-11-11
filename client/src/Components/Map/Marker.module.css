@@ -3,6 +3,7 @@
   position: absolute;
   transform: translate(-50%, -50%);
   transition: .4s;
+  z-index: 5;
 }
 
 .marker:hover {
@@ -13,8 +14,13 @@
   position: absolute;
   white-space: nowrap;
   top: -15px;
+  padding: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, .4);
+  backdrop-filter: blur(1px);
+  z-index: 900;
 }
 
 .marker img {
-  width: 25px;
+  width: 20px;
 }
