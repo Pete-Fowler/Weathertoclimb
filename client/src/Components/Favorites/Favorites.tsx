@@ -78,6 +78,7 @@ export default function Weather({ user, onChangeUser }: Props) {
         if(r.ok) {
           r.json().then(data => {
             setWeather(weather => ([...weather, {name: location.name, id: location.id, weather: data}]));
+            setLoaded(true);
           });
         } else {
           r.json().then(err => console.log(err.errors));
@@ -89,6 +90,7 @@ export default function Weather({ user, onChangeUser }: Props) {
                 if(r.ok) {
                   r.json().then(data => {
                     setWeather(weather => ([...weather, {name: location.name, id: location.id, weather: data}]));
+                    setLoaded(true);
                   })
                 } 
               })
