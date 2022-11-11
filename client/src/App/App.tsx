@@ -8,6 +8,7 @@ import Header from '../Components/Header/Header';
 import Footer from '../Components/Footer/Footer';
 import Details from '../Components/Details/Details';
 import Favorites from '../Components/Favorites/Favorites';
+import MaxFavorites from '../Components/MaxFavorites/MaxFavorites';
 
 interface Ifavorite {
   id: number,
@@ -57,10 +58,11 @@ export default function App() {
         <Routes>
             <Route path='/' element={<Home user={user} />}/>
             <Route path='/favorites' element={<Favorites user={user} onChangeUser={onChangeUser}/>} />
-            <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser}/>} />
+            <Route path='/locations/:id' element={<Details user={user} onChangeUser={onChangeUser} changeModal={changeModal}/>} />
         </Routes>
         <Login user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <CreateAccount onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
+        <MaxFavorites modal={modal}/>
         {/* {modals.submitArea ? <SubmitArea /> : ''} */}
       </div>
       <Footer />
