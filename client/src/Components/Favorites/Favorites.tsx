@@ -78,19 +78,17 @@ export default function Weather({ user, onChangeUser }: Props) {
         if(r.ok) {
           r.json().then(data => {
             setWeather(weather => ([...weather, {name: location.name, id: location.id, weather: data}]));
-            setLoaded(true);
           });
         } else {
           r.json().then(err => console.log(err.errors));
           let i = 0;
-          while(i < 10 && loaded === false) {
+          while(i < 10 && weather.some(obj => obj.id === location.id)) {
             setTimeout(() => {
               fetch(`${location.forecast_url}`)
               .then(r => {
                 if(r.ok) {
                   r.json().then(data => {
                     setWeather(weather => ([...weather, {name: location.name, id: location.id, weather: data}]));
-                    setLoaded(true);
                   })
                 } 
               })
@@ -122,7 +120,7 @@ export default function Weather({ user, onChangeUser }: Props) {
   }
 
   return <div className={style.weatherSection}>
-    {errors && <div>{errors}</div>}
+    {errors && <div className='errors'>{errors}</div>}
     {user?.favorites.length === 0 && 'Save areas to compare weather forecases side by side'}
     {weather.map(location => 
       <div key={location.name} className={style.weatherCard} >

@@ -187,7 +187,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
   }
 
   const saveBtnText = saved ? 'Unsave area' : 'Save area';
-  const isDisabled = user && user.favorites.length > 5 ? true : false;
+  const isDisabled = user && user.favorites.length > 15 ? true : false;
 
   return <div className={style.details}>
     {errors && <div>{errors}</div>}

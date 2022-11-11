@@ -8,7 +8,7 @@ class Favorite < ApplicationRecord
   validate :max_entries
 
   def max_entries 
-    if Favorite.where(user_id: user_id).length > 5 
+    if Favorite.where(user_id: user_id).length > 15 
       errors.add(:user_id, :exceeded_15, message: 'Maximum saved areas is 15')
     end
   end
