@@ -9,6 +9,7 @@ import Footer from '../Components/Footer/Footer';
 import Details from '../Components/Details/Details';
 import Favorites from '../Components/Favorites/Favorites';
 import MaxFavorites from '../Components/MaxFavorites/MaxFavorites';
+import SuggestArea from '../Components/SuggestArea/SuggestArea';
 
 interface Ifavorite {
   id: number,
@@ -63,9 +64,9 @@ export default function App() {
         <Login user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <CreateAccount onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <MaxFavorites modal={modal}/>
-        {/* {modals.submitArea ? <SubmitArea /> : ''} */}
+        <SuggestArea modal={modal}/>
       </div>
-      <Footer />
+      <Footer changeModal={changeModal}/>
     </div>
   );
 }
