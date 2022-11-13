@@ -1,6 +1,9 @@
 .details {
+  color: white;
   padding: 10px 50px;
   border-top: 1px solid #2ebdc5;
+  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
+
 }
 
 .titleBox {
@@ -13,18 +16,15 @@
   margin-right: 250px;
   font-size: 16px;
   font-weight: 700;
-  color: #308FAD;
-  background: white;
+  color: white;
   border: none;
   text-decoration: none;
+  background-color: rgba(0, 0, 0, 0);
   transition: .6s;
 }
 
 .saveBtn:hover {
   text-decoration: underline;
-  background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .maxMessage {
@@ -43,6 +43,8 @@
   gap: 10px;
   padding: 10px;
   overflow-x: scroll;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(1px);
   border: 1px solid #2ebdc5;
   border-radius: 5px;
 }
@@ -74,7 +76,10 @@ img {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px;
   margin: 5px 0 5px 0;
+  border-radius: 5px;
 }
 
 .periodName {
