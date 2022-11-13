@@ -123,7 +123,7 @@ export default function Weather({ user, onChangeUser }: Props) {
     {errors && <div className='errors'>{errors}</div>}
     {user?.favorites.length === 0 && 'Save areas to compare weather forecases side by side'}
     {weather.map(location => 
-      <div key={location.name} className={style.weatherCard} >
+      <div key={location.name} className={style.weatherCard}>
         <div className={style.name}>
           <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
           <button className={style.unSaveBtn} onClick={() => unSave(location.id)}>Unsave area</button>
