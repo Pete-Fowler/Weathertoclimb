@@ -193,7 +193,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
     {errors && <div>{errors}</div>}
     <div className={style.titleBox}>
       <h1>{location && location.name}</h1>
-      {<button className={style.saveBtn} onClick={isDisabled ? () => changeModal('max-favorites') : handleSaveBtnClick}>{saveBtnText}</button>} 
+      {user && <button className={style.saveBtn} onClick={isDisabled ? () => changeModal('max-favorites') : handleSaveBtnClick}>{saveBtnText}</button>} 
     </div>
     <div className={style.hourly}>
       {loaded.hourly 
