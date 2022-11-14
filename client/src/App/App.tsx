@@ -9,7 +9,7 @@ import Footer from '../Components/Footer/Footer';
 import Details from '../Components/Details/Details';
 import Favorites from '../Components/Favorites/Favorites';
 import MaxFavorites from '../Components/MaxFavorites/MaxFavorites';
-import SuggestArea from '../Components/SuggestArea/SuggestArea';
+import SuggestArea from '../Components/SuggestArea/Contact';
 
 interface Ifavorite {
   id: number,
