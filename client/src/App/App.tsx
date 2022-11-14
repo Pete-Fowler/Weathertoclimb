@@ -9,7 +9,7 @@ import Footer from '../Components/Footer/Footer';
 import Details from '../Components/Details/Details';
 import Favorites from '../Components/Favorites/Favorites';
 import MaxFavorites from '../Components/MaxFavorites/MaxFavorites';
-import SuggestArea from '../Components/SuggestArea/SuggestArea';
+import SuggestArea from '../Components/SuggestArea/Contact';
 
 interface Ifavorite {
   id: number,
@@ -64,7 +64,7 @@ export default function App() {
         <Login user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <CreateAccount onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <MaxFavorites modal={modal}/>
-        <SuggestArea modal={modal}/>
+        <SuggestArea modal={modal} changeModal={changeModal}/>
       </div>
       <Footer changeModal={changeModal}/>
     </div>
