@@ -27,7 +27,7 @@ export default function SuggestArea({ modal }: Iprops) {
       <input type='text' id='lat' name='lat' value={formData.lat} onChange={handleChange}></input>
       <label htmlFor='lng'>Longitude</label>
       <input type='text' id='lng' name='lng' value={formData.lng} onChange={handleChange}></input>
-      <button type='submit'>Submit</button>
+      <button type='submit' className='link'>Submit</button>
     </form>
   </div>
 }

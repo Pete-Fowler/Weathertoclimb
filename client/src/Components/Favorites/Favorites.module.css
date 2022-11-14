@@ -22,8 +22,7 @@
   border-radius: 5px;
   padding: 16px;
   background: rgba(255, 255, 255, 0.2);
-  margin: 20px;
-  box-shadow: 0 0 6px 1px white;
+  margin: 5px 0 5px 0;
 }
 
 .name {

@@ -16,9 +16,14 @@
   top: -15px;
   padding: 5px;
   border-radius: 3px;
-  background: rgba(255, 255, 255, .4);
+  color: black;
+  background: rgba(255, 255, 255, .8);
   backdrop-filter: blur(1px);
-  z-index: 900;
+  z-index: 250;
+}
+
+.modal:hover {
+  text-decoration: underline;
 }
 
 .marker img {
