@@ -64,7 +64,7 @@ export default function App() {
         <Login user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <CreateAccount onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <MaxFavorites modal={modal}/>
-        <SuggestArea modal={modal}/>
+        <SuggestArea modal={modal} changeModal={changeModal}/>
       </div>
       <Footer changeModal={changeModal}/>
     </div>
