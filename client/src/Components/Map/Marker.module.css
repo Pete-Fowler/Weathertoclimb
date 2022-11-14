@@ -19,7 +19,7 @@
   color: black;
   background: rgba(255, 255, 255, .8);
   backdrop-filter: blur(1px);
-  z-index: 90000;
+  z-index: 250;
 }
 
 .modal:hover {
