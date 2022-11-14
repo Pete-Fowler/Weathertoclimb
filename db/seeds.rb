@@ -9,6 +9,9 @@
 
 puts 'seeding...'
 
+User.create(username: 'admin', password: )
+
+# ===========Locations==============
 Location.create!({
   name: "Black Canyon",
   state: "Colorado",
