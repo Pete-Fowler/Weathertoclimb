@@ -214,7 +214,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
       {loaded.daily ? daily.properties.periods.map((period: Iperiod, index: number,  array: Iperiod[]) => 
         !period.name.toLowerCase().includes('night') ? 
         <div key={period.number} className={style.period}>
-          <div className={style.periodName}>{index === 0 ? 'Today' : period.name.toUpperCase()}</div>
+          <div className={style.periodName}>{index === 0 ? 'TODAY' : period.name.toUpperCase()}</div>
           <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
           <div className={style.temp}>{period.temperature}&deg; F / {index < array.length - 1 ? array[index + 1].temperature : ''}&deg; F</div>
           <div className={style.windSpeed}>{period.windSpeed}</div>
