@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy]
-  resources :locations, only: [:index, :show]
+  resources :locations, only: [:index, :show, :create, :destroy]
   resources :users, only: [:show, :create]
   
   post '/login', to: 'sessions#create'

@@ -19,4 +19,20 @@ class LocationsController < ApplicationController
     render json: locations
   end
 
+  def create 
+    location = Location.create!(location_params)
+    render json: location, status: :created
+  end
+
+  def destroy 
+    location = Location.find_by(id: params[:id])
+    location.destroy
+    render json: {}, status: :accepted
+  end 
+
+  private 
+
+  def location_params 
+    params.permit(:name, :state, :coordinates, :forecast_url, :popular)
+  end
 end
