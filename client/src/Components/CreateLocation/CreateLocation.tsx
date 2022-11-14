@@ -1,5 +1,5 @@
 import style from './CreateLocation.module.css';
-import { useState, ChangeEvent } from 'react';
+import React, { useState, ChangeEvent } from 'react';
 
 interface Iprops {
   modal: string,
@@ -20,8 +20,23 @@ export default function CreateLocation({ modal, changeModal }: Iprops) {
     setFormData({...formData, [e.target.name]: value})
   }
 
-  function handleSubmit() {
-
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    fetch(`/locations`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(r => {
+      if(r.ok) {
+        r.json().then(data => console.log(data));
+      } else {
+        r.json().then(err => console.log(err));
+      }
+      changeModal('');
+    })
   }
 
   const isHidden = modal === 'createLocation' ? '' : 'hidden';
@@ -33,7 +48,7 @@ export default function CreateLocation({ modal, changeModal }: Iprops) {
       <input type='text' id="name" name="name" value={formData.name} onChange={handleChange}></input>
       
       <label htmlFor='state'>State:</label>
-      <input type='email' id='state' name='state' value={formData.state} onChange={handleChange}></input>
+      <input type='text' id='state' name='state' value={formData.state} onChange={handleChange}></input>
       
       <label htmlFor='coordinates'>Coordinates:</label>
       <input id='coordinates' name='coordinates' value={formData.coordinates} onChange={handleChange}></input>
