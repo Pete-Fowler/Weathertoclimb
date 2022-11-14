@@ -9,7 +9,7 @@
 
 puts 'seeding...'
 
-User.create(username: 'admin', password: )
+User.create!(username: "admin", password: ENV['PASSWORD'], password_confirmation: ENV['PASSWORD'], admin: true)
 
 # ===========Locations==============
 Location.create!({
