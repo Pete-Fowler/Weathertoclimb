@@ -10,6 +10,7 @@ import Details from '../Components/Details/Details';
 import Favorites from '../Components/Favorites/Favorites';
 import MaxFavorites from '../Components/MaxFavorites/MaxFavorites';
 import SuggestArea from '../Components/SuggestArea/Contact';
+import CreateLocation from '../Components/CreateLocation/CreateLocation';
 
 interface Ifavorite {
   id: number,
@@ -64,9 +65,10 @@ export default function App() {
         <Login user={user} onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <CreateAccount onChangeUser={onChangeUser} modal={modal} changeModal={changeModal}/>
         <MaxFavorites modal={modal}/>
-        <SuggestArea modal={modal} changeModal={changeModal}/>
+        <SuggestArea modal={modal} changeModal={changeModal} />
+        <CreateLocation modal={modal} changeModal={changeModal} />
       </div>
-      <Footer changeModal={changeModal}/>
+      <Footer changeModal={changeModal} />
     </div>
   );
 }

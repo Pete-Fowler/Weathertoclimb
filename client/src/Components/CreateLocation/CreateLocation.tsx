@@ -24,19 +24,26 @@ export default function CreateLocation({ modal, changeModal }: Iprops) {
 
   }
 
-  const isHidden = modal === 'max-favorites' ? '' : 'hidden';
-console.log(formData)
+  const isHidden = modal === 'createLocation' ? '' : 'hidden';
+
   return (
   <div className={`${isHidden} ${style.formBox}`}>
     <form className={style.form} onSubmit={handleSubmit}>
       <label htmlFor='name'>Name:</label>
       <input type='text' id="name" name="name" value={formData.name} onChange={handleChange}></input>
-      <label htmlFor='state'>Email:</label>
+      
+      <label htmlFor='state'>State:</label>
       <input type='email' id='state' name='state' value={formData.state} onChange={handleChange}></input>
-      <label htmlFor='coordinates'>Message:</label>
+      
+      <label htmlFor='coordinates'>Coordinates:</label>
       <input id='coordinates' name='coordinates' value={formData.coordinates} onChange={handleChange}></input>
-      <label htmlFor='popular'>Popular</label>
-      <input type='checkbox' id='popular' name='popular' checked={formData.popular}></input>
+      
+      <label htmlFor='forecast_url'>Forecast URL:</label>
+      <input id='forecast_url' name='forecast_url' value={formData.forecast_url} onChange={handleChange}></input>
+      
+      <label htmlFor='popular'>Popular:    
+      <input type='checkbox' id='popular' name='popular' checked={formData.popular} onChange={handleChange}></input></label>
+      
       <button type='submit' className='link'>Submit</button>
     </form>
   </div>)
