@@ -40,7 +40,7 @@ export default function Home({ user }: Props) {
     })
   }, [])
  
-  const heroText = user ? 'Save areas and go to my areas to compare forecasts side by side' : 'Log in and save areas to compare forecasts side by side';
+  const heroText = user ? 'Save areas to compare forecasts side by side' : 'Log in to save areas and compare forecasts side by side';
   return <div className={style.home}>
     <div className={style.hero}>
       <div className={style.heroText}>{heroText}</div>
