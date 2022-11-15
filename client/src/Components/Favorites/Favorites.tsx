@@ -1,5 +1,5 @@
 import style from './Favorites.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 interface Iuser {
@@ -53,6 +53,8 @@ export default function Weather({ user, onChangeUser }: Iprops) {
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
   const [ modal, setModal ] = useState<Imodal | null>(null);
+
+  const dragged = useRef();
 
   // Get user's saved locations from IDs
   useEffect(() => {
@@ -133,13 +135,17 @@ export default function Weather({ user, onChangeUser }: Iprops) {
     setModal(null);
   }
 
+  function handleDrag(e: DragEvent, index: number) {
+    dragged.current = index;
+  }
+
   return <div className={style.weatherSection}>
     {errors && <div className='errors'>{errors}</div>}
     
     {user?.favorites.length === 0 && <div className={style.saveMessage}>Save areas to compare weather forecases side by side</div>}
     
-    {weather.map(location => 
-      <div key={location.name} className={style.weatherCard}>
+    {weather.map((location, index) => 
+      <div key={location.name} className={style.weatherCard} draggable onDragStart={(e) => handleDrag(e, index)}>
         <div className={style.name}>
           <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
           <button className={style.unSaveBtn} onClick={() => unSave(location.id)}>Unsave Area</button>
