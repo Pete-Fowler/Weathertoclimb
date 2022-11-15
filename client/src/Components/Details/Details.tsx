@@ -1,6 +1,6 @@
 import style from './Details.module.css';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { format } from 'date-fns';
 
 interface Props {
@@ -63,7 +63,9 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
 
   const { id } = useParams();
 
-  // Set location name from params id, set saved
+  const navigate = useNavigate();
+
+  // Set location from params id
   useEffect(() => {
     fetch(`/locations/${id}`)
     .then(r => {
@@ -149,7 +151,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
    }
   }, [location])
 
-  function handleSaveBtnClick(e: React.MouseEvent<HTMLButtonElement>) {
+  function handleSaveBtnClick() {
    
     if(!saved) {
       fetch(`/favorites`, {
@@ -188,6 +190,20 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
     }
   }
 
+  function deleteArea() {
+    fetch(`/locations/${location.id}`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(r => r.json())
+    .then(data => {
+      console.log(data);
+      navigate('/');
+    });
+  }
+
   const saveBtnText = saved ? 'Unsave area' : 'Save area';
   const isDisabled = user && user.favorites.length > 15 ? true : false;
 
@@ -196,7 +212,8 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
     
     <div className={style.titleBox}>
       <h1>{location && location.name}</h1>
-      {user && <button className={style.saveBtn} onClick={isDisabled ? () => changeModal('max-favorites') : handleSaveBtnClick}>{saveBtnText}</button>} 
+      {user && <button className={style.saveBtn} onClick={isDisabled ? () => changeModal('max-favorites') : handleSaveBtnClick}>{saveBtnText}</button>}
+      {user && user.admin ? <button className={style.deleteBtn} onClick={deleteArea}>Delete Area</button> : ''}
     </div>
     
     <div className={style.hourly}>
