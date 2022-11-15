@@ -43,10 +43,16 @@ interface Iperiod {
   detailedForecast: string
 }
 
+interface Imodal {
+  locationID: number,
+  periodNumber: number,
+}
+
 export default function Weather({ user, onChangeUser }: Iprops) {
   const [ errors, setErrors ] = useState<string | null>(null);
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
+  const [ modal, setModal ] = useState<Imodal | null>(null);
 
   // Get user's saved locations from IDs
   useEffect(() => {
@@ -119,25 +125,39 @@ export default function Weather({ user, onChangeUser }: Iprops) {
     })
   }
 
+  function showModal(location: number, period: number) {
+    setModal({locationID: location, periodNumber: period})
+  }
+
+  function hideModal() {
+    setModal(null);
+  }
+
   return <div className={style.weatherSection}>
     {errors && <div className='errors'>{errors}</div>}
+    
     {user?.favorites.length === 0 && <div className={style.saveMessage}>Save areas to compare weather forecases side by side</div>}
+    
     {weather.map(location => 
       <div key={location.name} className={style.weatherCard}>
         <div className={style.name}>
           <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
-          <button className={style.unSaveBtn} onClick={() => unSave(location.id)}>Unsave area</button>
+          <button className={style.unSaveBtn} onClick={() => unSave(location.id)}>Unsave Area</button>
         </div>
+        
         <div className={style.periods}>
           {location.weather.properties.periods
-          .map((period: Iperiod, index: number, array: Iperiod[] )=> 
-            !period.name.toLowerCase().includes('night') ? 
-            <div key={period.number} className={style.period}>
-              <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
-              <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
-              <div className={style.temp}>{period.temperature}&deg; F / {index < array.length - 1 ? array[index + 1].temperature : ''}&deg; F</div>
-              <div className={style.windSpeed}>{period.windSpeed}</div>
-            </div>
+          .map((period: Iperiod, index: number, array: Iperiod[]) => 
+            !period.name.toLowerCase().includes('night')
+            ? <div key={period.number} className={style.period} onMouseEnter={() => showModal(location.id, period.number)} onMouseLeave={hideModal}>
+              
+              <div className={`${location.id === modal?.locationID && period.number === modal?.periodNumber ? '' : 'hidden'} ${style.modal}`}>{period.detailedForecast}</div>
+
+                <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
+                <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
+                <div className={style.temp}>{period.temperature}&deg; F / {index < array.length - 1 ? array[index + 1].temperature : ''}&deg; F</div>
+                <div className={style.windSpeed}>{period.windSpeed}</div>
+              </div>
             : ''
           )}
         </div>

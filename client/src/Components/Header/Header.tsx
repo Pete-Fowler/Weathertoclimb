@@ -68,7 +68,7 @@ return <div className={style.header}>
       Weather ☁️ to climb
     </Link>
     <div className={style.inputBox}>
-      <input className={style.input} type='text' placeholder='SEARCH  CLIMBING AREAS' value={searchTerm} onChange={handleChange} onBlur={() => setTimeout(handleBlur, 100)}
+      <input className={style.input} type='text' placeholder='Search  Climbing Areas' value={searchTerm} onChange={handleChange} onBlur={() => setTimeout(handleBlur, 100)}
 />
       {isShown 
         ? <div className={style.dropdown}>
@@ -79,7 +79,6 @@ return <div className={style.header}>
         : ''}
     </div>
     <div className={style.links}>
-      {/* <Link className='link' to='/'>BROWSE AREAS</Link> */}
       {user 
       ? <><Link className='link' to='/favorites'>MY AREAS</   Link>
         <div className={style.username}>{user.username}</div> 
