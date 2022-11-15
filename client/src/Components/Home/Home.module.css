@@ -12,6 +12,7 @@
   font-size: 1.8rem;
   color: white;
   height: 125vh;
+  padding-inline: 25px;
   padding-bottom: 200px;
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
 }

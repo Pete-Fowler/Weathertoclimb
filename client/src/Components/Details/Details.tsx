@@ -106,14 +106,15 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
                 if(r.ok) {
                   r.json().then(data => {
                     setDaily(data);
-                    setLoaded(loaded => ({...loaded, daily: true}))
+                    setLoaded(loaded => ({...loaded, daily: true}));
+                    setErrors('');
                   })
                 } 
               })
             }, 100);
             i++;
           }
-          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
+          i > 10 && setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
         }
       })
 
@@ -135,13 +136,14 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
                   r.json().then(data => {
                     setHourly(data);
                     setLoaded(loaded => ({...loaded, hourly: true}))
+                    setErrors('');
                   })
                 } 
               })
             }, 100);
             i++;
           }
-          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.');
+          i > 10 && setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.');
         }
       })
    }
@@ -191,10 +193,12 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
 
   return <div className={style.details}>
     {errors && <div>{errors}</div>}
+    
     <div className={style.titleBox}>
       <h1>{location && location.name}</h1>
       {user && <button className={style.saveBtn} onClick={isDisabled ? () => changeModal('max-favorites') : handleSaveBtnClick}>{saveBtnText}</button>} 
     </div>
+    
     <div className={style.hourly}>
       {loaded.hourly 
         ? hourly.properties.periods.slice(0, 72).map((hour: Iperiod, index: number, array: Iperiod) => 
@@ -210,6 +214,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
         </div>)
         : ''}
     </div>
+    
     <div className={style.daily}>
       {loaded.daily ? daily.properties.periods.map((period: Iperiod, index: number,  array: Iperiod[]) => 
         !period.name.toLowerCase().includes('night') ? 

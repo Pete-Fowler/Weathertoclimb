@@ -17,7 +17,7 @@ interface Ifavorite {
   location_id: number,
 }
 
-interface Props {
+interface Iprops {
   user: {admin: boolean,
     default_location: null | string,
     favorites: Ifavorite[] | [],
@@ -43,13 +43,12 @@ interface Iperiod {
   detailedForecast: string
 }
 
-export default function Weather({ user, onChangeUser }: Props) {
+export default function Weather({ user, onChangeUser }: Iprops) {
   const [ errors, setErrors ] = useState<string | null>(null);
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
 
-
-  // Get saved locations from IDs
+  // Get user's saved locations from IDs
   useEffect(() => {
     const ids: number[] = [];
     user?.favorites.forEach(obj => {
@@ -60,10 +59,10 @@ export default function Weather({ user, onChangeUser }: Props) {
     .then(r => {
       if(r.ok) {
         r.json().then(data => {
-          setLocations(data.slice(0, 10));
+          setLocations(data);
         });
       } else {
-        r.json().then(err => alert(err.errors));
+        r.json().then(err => console.log(err));
       }
     })
   }, [user])
@@ -80,8 +79,10 @@ export default function Weather({ user, onChangeUser }: Props) {
           });
         } else {
           r.json().then(err => console.log(err.errors));
+          
           let i = 0;
           while(i < 10 && weather.some(obj => obj.id === location.id)) {
+            console.log('loop');
             setTimeout(() => {
               fetch(`${location.forecast_url}`)
               .then(r => {
@@ -94,7 +95,7 @@ export default function Weather({ user, onChangeUser }: Props) {
             }, 100);
             i++;
           }
-          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
+          i > 10 && setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
         }
       })
     });
