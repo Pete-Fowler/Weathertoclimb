@@ -114,7 +114,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
             }, 100);
             i++;
           }
-          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
+          i > 10 && setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.')
         }
       })
 
@@ -143,7 +143,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
             }, 100);
             i++;
           }
-          setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.');
+          i > 10 && setErrors('The National Weather Service did not load all data. Try refreshing the page momentarily.');
         }
       })
    }
