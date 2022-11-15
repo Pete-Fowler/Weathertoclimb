@@ -34,6 +34,7 @@ export default function Login({ user, onChangeUser, modal, changeModal }: Props)
         r.json().then(data => {
           onChangeUser(data);
           changeModal('');
+          setFormData({username: '', password: ''});
         })
       } else {
         r.json().then(err => {

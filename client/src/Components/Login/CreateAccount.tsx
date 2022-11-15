@@ -65,6 +65,7 @@ export default function CreateAccount({ onChangeUser, modal, changeModal }: Prop
         .then(data => {
           onChangeUser(data);
           changeModal('');
+          setFormData({username: '', password: '', password_confirmation: ''});
         });
       } else {
         r.json().then(err => {
