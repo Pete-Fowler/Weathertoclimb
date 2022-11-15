@@ -149,12 +149,12 @@ export default function Weather({ user, onChangeUser }: Iprops) {
           {location.weather.properties.periods
           .map((period: Iperiod, index: number, array: Iperiod[]) => 
             !period.name.toLowerCase().includes('night')
-            ? <div key={period.number} className={style.period} onMouseEnter={() => showModal(location.id, period.number)} onMouseLeave={hideModal}>
+            ? <div key={period.number} className={style.period} >
               
               <div className={`${location.id === modal?.locationID && period.number === modal?.periodNumber ? '' : 'hidden'} ${style.modal}`}>{period.detailedForecast}</div>
 
                 <div className={style.periodName}>{index === 0 ? 'Today' : period.name}</div>
-                <img className={style.icon} src={period.icon} alt={period.shortForecast}/>
+                <img className={style.icon} src={period.icon} alt={period.shortForecast} onMouseEnter={() => showModal(location.id, period.number)} onMouseLeave={hideModal}/>
                 <div className={style.temp}>{period.temperature}&deg; F / {index < array.length - 1 ? array[index + 1].temperature : ''}&deg; F</div>
                 <div className={style.windSpeed}>{period.windSpeed}</div>
               </div>
