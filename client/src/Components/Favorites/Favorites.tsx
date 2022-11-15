@@ -79,7 +79,7 @@ export default function Weather({ user, onChangeUser }: Iprops) {
           });
         } else {
           r.json().then(err => console.log(err.errors));
-          
+          console.log('fail');
           let i = 0;
           while(i < 10 && weather.some(obj => obj.id === location.id)) {
             console.log('loop');

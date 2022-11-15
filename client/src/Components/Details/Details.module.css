@@ -13,7 +13,18 @@
 
 .saveBtn {
   margin-left: auto;
-  margin-right: 250px;
+  margin-right: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  border: none;
+  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0);
+  transition: .6s;
+}
+
+.deleteBtn {
+  margin-right: 50px;
   font-size: 16px;
   font-weight: 700;
   color: white;
