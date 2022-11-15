@@ -1,5 +1,5 @@
 import style from './Favorites.module.css';
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 interface Iuser {
@@ -54,7 +54,9 @@ export default function Weather({ user, onChangeUser }: Iprops) {
   const [ weather, setWeather ] = useState<any[]>([]);
   const [ modal, setModal ] = useState<Imodal | null>(null);
 
-  const dragged = useRef();
+  const dragged = useRef<number | null>(null);
+  const draggedOver = useRef<number | null>(null);
+
 
   // Get user's saved locations from IDs
   useEffect(() => {
@@ -135,8 +137,20 @@ export default function Weather({ user, onChangeUser }: Iprops) {
     setModal(null);
   }
 
-  function handleDrag(e: DragEvent, index: number) {
+  function handleDragStart(index: number) {
     dragged.current = index;
+  }
+
+  function handleDragEnter(index: number) {
+    draggedOver.current = index;
+  }
+
+  function handleDrop() {
+    const weatherCopy = [...weather];
+    const draggedItem = weatherCopy[dragged.current as number];
+    weatherCopy.splice(dragged.current as number, 1);
+    weatherCopy.splice(draggedOver.current as number, 0, draggedItem);
+    setWeather(weatherCopy);
   }
 
   return <div className={style.weatherSection}>
@@ -145,7 +159,7 @@ export default function Weather({ user, onChangeUser }: Iprops) {
     {user?.favorites.length === 0 && <div className={style.saveMessage}>Save areas to compare weather forecases side by side</div>}
     
     {weather.map((location, index) => 
-      <div key={location.name} className={style.weatherCard} draggable onDragStart={(e) => handleDrag(e, index)}>
+      <div key={location.name} className={style.weatherCard} draggable onDragStart={() => handleDragStart(index)} onDragEnter={() => handleDragEnter(index)} onDragEnd={handleDrop}>
         <div className={style.name}>
           <Link className={style.link} to={`/locations/${location.id}`}>{location.name}</Link>
           <button className={style.unSaveBtn} onClick={() => unSave(location.id)}>Unsave Area</button>
