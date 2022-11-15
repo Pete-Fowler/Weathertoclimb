@@ -68,7 +68,7 @@ export default function App() {
         <SuggestArea modal={modal} changeModal={changeModal} />
         <CreateLocation modal={modal} changeModal={changeModal} />
       </div>
-      <Footer changeModal={changeModal} />
+      <Footer user={user} changeModal={changeModal} />
     </div>
   );
 }

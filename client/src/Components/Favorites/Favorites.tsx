@@ -44,7 +44,6 @@ interface Iperiod {
 }
 
 export default function Weather({ user, onChangeUser }: Props) {
-  const [ loaded, setLoaded ] = useState<boolean>(false);
   const [ errors, setErrors ] = useState<string | null>(null);
   const [ locations, setLocations ] = useState<any[]>([]);
   const [ weather, setWeather ] = useState<any[]>([]);
@@ -121,7 +120,7 @@ export default function Weather({ user, onChangeUser }: Props) {
 
   return <div className={style.weatherSection}>
     {errors && <div className='errors'>{errors}</div>}
-    {user?.favorites.length === 0 && 'Save areas to compare weather forecases side by side'}
+    {user?.favorites.length === 0 && <div className={style.saveMessage}>Save areas to compare weather forecases side by side</div>}
     {weather.map(location => 
       <div key={location.name} className={style.weatherCard}>
         <div className={style.name}>
