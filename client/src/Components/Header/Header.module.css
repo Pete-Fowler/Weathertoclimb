@@ -9,12 +9,12 @@
 
 .icon {
   flex-shrink: 0;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 900;
   line-height: 38px;
   display: flex;
   flex-direction: column;
-  width: 210px;
+  width: 195px;
   margin-left: 50px;
   margin-right: 25px;
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);

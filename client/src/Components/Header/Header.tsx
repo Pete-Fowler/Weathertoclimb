@@ -65,7 +65,7 @@ export default function Header({ user, onChangeUser, changeModal }: Props) {
 
 return <div className={style.header}>
     <Link to='/' className={`link ${style.icon}`}>
-      Weather ☁️ to climb
+      Weather ☁️ to Climb
     </Link>
     <div className={style.inputBox}>
       <input className={style.input} type='text' placeholder='Search  Climbing Areas' value={searchTerm} onChange={handleChange} onBlur={() => setTimeout(handleBlur, 100)}
