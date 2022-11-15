@@ -1,4 +1,3 @@
-import { Link, useNavigate } from 'react-router-dom';
 import React, { ChangeEvent, useState } from 'react';
 import style from './Login.module.css';
 
@@ -13,10 +12,9 @@ export default function Login({ user, onChangeUser, modal, changeModal }: Props)
   const [ formData, setFormData ] = useState({username: '', password: ''});
   const [ errors, setErrors ] = useState([]);
 
-  const navigate = useNavigate();
 
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setFormData({...formData, [e.target.id]: e.target.value});
+    setFormData({...formData, [e.target.name]: e.target.value});
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -48,12 +46,16 @@ export default function Login({ user, onChangeUser, modal, changeModal }: Props)
 
   return <div className={`${isHidden} ${style.login}`}>
     <form className={style.loginForm} onSubmit={handleSubmit} onClick={(e) => e.stopPropagation()}>
-      <label htmlFor='username'>Username:</label>
-      <input type='text' id='username' onChange={handleChange} value={formData.username}></input>
-      <label htmlFor='password'>Password:</label> 
-      <input type='password' id='password' onChange={handleChange} value={formData.password}></input>
+      <label htmlFor='usernameLogin'>Username:</label>
+      <input type='text' id='usernameLogin' name='username' onChange={handleChange} value={formData.username}></input>
+      
+      <label htmlFor='passwordLogin'>Password:</label> 
+      <input type='password' id='passwordLogin' name='password' onChange={handleChange} value={formData.password}></input>
+      
       <button className='link' type='submit'>Login</button>
+      
       {errors.map(err => <div key={err} className={style.errors}>{err}</div>)}
+      
       <div className='link' onClick={() => changeModal('createAccount')}>Create an account</div>
     </form>
   </div>
