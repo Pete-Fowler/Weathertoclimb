@@ -1,14 +1,13 @@
-import GoogleMapReact from 'google-map-react';
-import style from './Map.module.css';
+import GoogleMapReact from "google-map-react";
+import style from "./Map.module.css";
 
 interface Iprops {
-  center: {lat: number, lng: number},
-  zoom: number,
-  markers: any
+  center: { lat: number; lng: number };
+  zoom: number;
+  markers: any;
 }
 
-export default function Map({center, zoom, markers}: Iprops){
-
+export default function Map({ center, zoom, markers }: Iprops) {
   return (
     <div className={style.map}>
       <GoogleMapReact

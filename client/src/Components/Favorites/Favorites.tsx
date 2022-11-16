@@ -1,6 +1,7 @@
 import style from "./Favorites.module.css";
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 interface Iuser {
   admin: boolean;
@@ -143,72 +144,96 @@ export default function Weather({ user, onChangeUser }: Iprops) {
     setModal(null);
   }
 
+  function onDragEnd() {}
+
   return (
-    <div className={style.weatherSection}>
-      {errors && <div className="errors">{errors}</div>}
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="droppable">
+        {(provided, snapshot) => (
+          <div className={style.weatherSection}>
+            {errors && <div className="errors">{errors}</div>}
 
-      {user?.favorites.length === 0 && (
-        <div className={style.saveMessage}>
-          Save areas to compare weather forecases side by side
-        </div>
-      )}
-
-      {weather.map((location, index) => (
-        <div key={location.name} className={style.weatherCard}>
-          <div className={style.name}>
-            <Link className={style.link} to={`/locations/${location.id}`}>
-              {location.name}
-            </Link>
-            <button
-              className={style.unSaveBtn}
-              onClick={() => unSave(location.id)}
-            >
-              Unsave Area
-            </button>
-          </div>
-
-          <div className={style.periods}>
-            {location.weather.properties.periods.map(
-              (period: Iperiod, index: number, array: Iperiod[]) =>
-                !period.name.toLowerCase().includes("night") ? (
-                  <div key={period.number} className={style.period}>
-                    <div
-                      className={`${
-                        location.id === modal?.locationID &&
-                        period.number === modal?.periodNumber
-                          ? ""
-                          : "hidden"
-                      } ${style.modal}`}
-                    >
-                      {period.detailedForecast}
-                    </div>
-
-                    <div className={style.periodName}>
-                      {index === 0 ? "Today" : period.name}
-                    </div>
-                    <img
-                      className={style.icon}
-                      src={period.icon}
-                      alt={period.shortForecast}
-                      onMouseEnter={() => showModal(location.id, period.number)}
-                      onMouseLeave={hideModal}
-                    />
-                    <div className={style.temp}>
-                      {period.temperature}&deg; F /{" "}
-                      {index < array.length - 1
-                        ? array[index + 1].temperature
-                        : ""}
-                      &deg; F
-                    </div>
-                    <div className={style.windSpeed}>{period.windSpeed}</div>
-                  </div>
-                ) : (
-                  ""
-                )
+            {user?.favorites.length === 0 && (
+              <div className={style.saveMessage}>
+                Save areas to compare weather forecases side by side
+              </div>
             )}
+
+            {weather.map((location, index) => (
+              <Draggable draggableId={location.id} index={index}>
+                {(provided, snapshot) => (
+                  <div
+                    className={style.weatherCard}
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    <div className={style.name}>
+                      <Link
+                        className={style.link}
+                        to={`/locations/${location.id}`}
+                      >
+                        {location.name}
+                      </Link>
+                      <button
+                        className={style.unSaveBtn}
+                        onClick={() => unSave(location.id)}
+                      >
+                        Unsave Area
+                      </button>
+                    </div>
+
+                    <div className={style.periods}>
+                      {location.weather.properties.periods.map(
+                        (period: Iperiod, index: number, array: Iperiod[]) =>
+                          !period.name.toLowerCase().includes("night") ? (
+                            <div key={period.number} className={style.period}>
+                              <div
+                                className={`${
+                                  location.id === modal?.locationID &&
+                                  period.number === modal?.periodNumber
+                                    ? ""
+                                    : "hidden"
+                                } ${style.modal}`}
+                              >
+                                {period.detailedForecast}
+                              </div>
+
+                              <div className={style.periodName}>
+                                {index === 0 ? "Today" : period.name}
+                              </div>
+                              <img
+                                className={style.icon}
+                                src={period.icon}
+                                alt={period.shortForecast}
+                                onMouseEnter={() =>
+                                  showModal(location.id, period.number)
+                                }
+                                onMouseLeave={hideModal}
+                              />
+                              <div className={style.temp}>
+                                {period.temperature}&deg; F /{" "}
+                                {index < array.length - 1
+                                  ? array[index + 1].temperature
+                                  : ""}
+                                &deg; F
+                              </div>
+                              <div className={style.windSpeed}>
+                                {period.windSpeed}
+                              </div>
+                            </div>
+                          ) : (
+                            ""
+                          )
+                      )}
+                    </div>
+                  </div>
+                )}
+              </Draggable>
+            ))}
           </div>
-        </div>
-      ))}
-    </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 }

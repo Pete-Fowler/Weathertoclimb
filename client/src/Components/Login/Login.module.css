@@ -8,7 +8,7 @@
   left: 0;
   right: 0;
   z-index: 10;
-  transition: .4s;
+  transition: 0.4s;
   width: 350px;
 }
 
@@ -25,14 +25,14 @@
 
 .errors {
   color: red;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
-.login label { 
-  display: inline-block; 
+.login label {
+  display: inline-block;
 }
 
-.login button { 
+.login button {
   margin: 10px 0;
 }
 
