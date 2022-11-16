@@ -1,6 +1,6 @@
 .map {
   width: 50%;
-  min-width: 350px;
-  height: 75%;
+  min-width: 300px;
+  height: 50vh;
   box-shadow: 0 0 5px 1px white;
 }

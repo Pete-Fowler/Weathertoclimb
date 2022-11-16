@@ -91,3 +91,24 @@
   box-shadow: 0 0 8px rgb(63, 63, 63);
   transition: 0.4s;
 }
+
+@media (max-width: 750px) {
+  .weatherCard {
+    width: 100%;
+  }
+
+  .periods {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+  .periods {
+    font-size: 0.7rem;
+  }
+}

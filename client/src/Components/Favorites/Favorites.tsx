@@ -92,7 +92,7 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
             setLoading(false);
           });
         } else {
-          r.json().then((err) => console.log(err.errors));
+          r.json().then((err) => console.log(err));
           console.log("fail");
           let i = 0;
           while (i < 10 && weather.some((obj) => obj.id === location.id)) {

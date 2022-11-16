@@ -71,7 +71,7 @@ export default function Header({ user, onChangeUser, changeModal }: Props) {
         <input
           className={style.input}
           type="text"
-          placeholder="Search  Climbing Areas"
+          placeholder="Search Areas"
           value={searchTerm}
           onChange={handleChange}
           onBlur={() => setTimeout(handleBlur, 100)}
