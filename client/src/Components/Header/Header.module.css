@@ -3,8 +3,8 @@
   align-items: center;
   height: 100px;
   gap: 20px;
-  color: #308FAD;
-  background-color: white;
+  color: #308fad;
+  background-color: rgb(255, 255, 255);
 }
 
 .icon {
@@ -30,7 +30,6 @@
   margin-right: 50px;
 }
 
-
 .inputBox {
   position: relative;
   min-width: 125px;
@@ -38,17 +37,17 @@
 }
 
 .input {
-  color: #308FAD;
+  color: #308fad;
   width: 100%;
   height: 30px;
   padding-inline: 20px;
-  border: 1px solid #308FAD;
+  border: 1px solid #308fad;
   border-radius: 3px;
   outline: none;
 }
 
 .input::placeholder {
-  color: #308FAD;
+  color: #308fad;
 }
 
 .dropdown {
@@ -63,7 +62,7 @@
 }
 
 .username {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 button {

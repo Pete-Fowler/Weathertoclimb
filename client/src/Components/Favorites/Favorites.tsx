@@ -1,4 +1,5 @@
 import style from "./Favorites.module.css";
+import dragIndicator from "./dragIndicator.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
