@@ -217,7 +217,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
       });
   }
 
-  const saveBtnText = saved ? "Unsave area" : "Save area";
+  const saveBtnText = saved ? "Unsave Area" : "Save Area";
   const isDisabled = user && user.favorites.length > 15 ? true : false;
 
   return (
