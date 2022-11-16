@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
-interface Props {
+interface Iprops {
   user: {
     admin: boolean;
     default_location: null | string;
@@ -14,6 +14,8 @@ interface Props {
   } | null;
   onChangeUser: Function;
   changeModal: Function;
+  loading: boolean;
+  setLoading: Function;
 }
 
 interface Iuser {
@@ -52,7 +54,13 @@ interface Iloaded {
   daily: boolean;
 }
 
-export default function Details({ user, onChangeUser, changeModal }: Props) {
+export default function Details({
+  user,
+  onChangeUser,
+  changeModal,
+  loading,
+  setLoading,
+}: Iprops) {
   const [errors, setErrors] = useState<string | null>(null);
   const [location, setLocation] = useState<any>(null);
   const [hourly, setHourly] = useState<any>([]);
@@ -69,6 +77,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
 
   // Set location from params id
   useEffect(() => {
+    setLoading(true);
     fetch(`/locations/${id}`).then((r) => {
       if (r.ok) {
         r.json().then((data) => setLocation(data));
@@ -94,6 +103,7 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
   // Fetch forecasts
   useEffect(() => {
     setErrors("");
+    setLoading(true);
     if (location) {
       fetch(`${location.forecast_url}`).then((r) => {
         if (r.ok) {
@@ -219,6 +229,8 @@ export default function Details({ user, onChangeUser, changeModal }: Props) {
 
   const saveBtnText = saved ? "Unsave Area" : "Save Area";
   const isDisabled = user && user.favorites.length > 15 ? true : false;
+
+  if (loaded.daily && loaded.hourly) setLoading(false);
 
   return (
     <div className={style.details}>

@@ -31,7 +31,7 @@ interface Iuser {
 export default function App() {
   const [user, setUser] = useState<Iuser | null>(null);
   const [modal, setModal] = useState("");
-  const [loaded, setLoaded] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetch(`/me`).then((r) => {
@@ -78,6 +78,8 @@ export default function App() {
                 user={user}
                 onChangeUser={onChangeUser}
                 changeModal={changeModal}
+                loading={loading}
+                setLoading={setLoading}
               />
             }
           />
@@ -96,7 +98,7 @@ export default function App() {
         <MaxFavorites modal={modal} />
         <SuggestArea modal={modal} changeModal={changeModal} />
         <CreateLocation modal={modal} changeModal={changeModal} />
-        <Loading modal={modal} />
+        <Loading loading={loading} />
       </div>
       <Footer user={user} changeModal={changeModal} />
     </div>

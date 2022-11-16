@@ -1,11 +1,11 @@
 import style from "./Loading.module.css";
 
 interface Iprops {
-  modal: string;
+  loading: boolean;
 }
 
-export default function Loading({ modal }: Iprops) {
-  const isShown = modal === "loading" ? "" : "hidden";
+export default function Loading({ loading }: Iprops) {
+  const isShown = loading ? "" : "hidden";
 
-  return <div className={`${style.loading}`}></div>;
+  return <div className={`${isShown} ${style.loading}`}></div>;
 }
