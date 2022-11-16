@@ -33,7 +33,7 @@
 .unSaveBtn {
   color: white;
   background: none;
-  transition: .4s;
+  transition: 0.4s;
   margin-left: auto;
 }
 
@@ -44,17 +44,17 @@
 .link {
   color: white;
   text-decoration: underline;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .link:hover {
-  color:#31397f;
+  color: #31397f;
 }
 
 .periods {
   display: flex;
   gap: 10px;
-  font-size: .8rem;
+  font-size: 0.8rem;
   width: 100px;
 }
 
@@ -64,7 +64,9 @@
   font-weight: 500;
 }
 
-.iconForecastBox {display: flex;}
+.iconForecastBox {
+  display: flex;
+}
 
 .icon {
   border-radius: 5px;
@@ -87,7 +89,5 @@
   background-color: rgba(62, 62, 62, 0.6);
   backdrop-filter: blur(3px);
   box-shadow: 0 0 8px rgb(63, 63, 63);
-  transition: .4s;
+  transition: 0.4s;
 }
-
-
