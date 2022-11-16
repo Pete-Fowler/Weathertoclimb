@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@400;500;700&display=swap");
 
 * {
   box-sizing: border-box;
@@ -7,17 +7,18 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Hind', sans-serif;
+  font-family: "Hind", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .link {
+  flex-shrink: 0;
   font-size: 16px;
   font-weight: 700;
-  color: #308FAD;
+  color: #308fad;
   text-decoration: none;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .link:hover {
@@ -34,4 +35,10 @@ body {
 
 .errors {
   color: red;
+}
+
+@media (max-width: 450px) {
+  .link {
+    font-size: 12px;
+  }
 }
