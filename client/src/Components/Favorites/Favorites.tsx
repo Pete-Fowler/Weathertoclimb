@@ -147,86 +147,96 @@ export default function Weather({ user, onChangeUser }: Iprops) {
   function onDragEnd() {}
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <div className={style.weatherSection}>
-        {errors && <div className="errors">{errors}</div>}
+    <div className={style.weatherSection}>
+      {errors && <div className="errors">{errors}</div>}
 
-        {user?.favorites.length === 0 && (
-          <div className={style.saveMessage}>
-            Save areas to compare weather forecases side by side
-          </div>
-        )}
-
-        {weather.map((location, index) => (
-          <Draggable draggableId={location.id} index={index}>
-            {(provided, snapshot) => (
-              <div
-                className={style.weatherCard}
-                ref={provided.innerRef}
-                {...provided.draggableProps}
-                {...provided.dragHandleProps}
-              >
-                <div className={style.name}>
-                  <Link className={style.link} to={`/locations/${location.id}`}>
-                    {location.name}
-                  </Link>
-                  <button
-                    className={style.unSaveBtn}
-                    onClick={() => unSave(location.id)}
-                  >
-                    Unsave Area
-                  </button>
-                </div>
-
-                <div className={style.periods}>
-                  {location.weather.properties.periods.map(
-                    (period: Iperiod, index: number, array: Iperiod[]) =>
-                      !period.name.toLowerCase().includes("night") ? (
-                        <div key={period.number} className={style.period}>
-                          <div
-                            className={`${
-                              location.id === modal?.locationID &&
-                              period.number === modal?.periodNumber
-                                ? ""
-                                : "hidden"
-                            } ${style.modal}`}
-                          >
-                            {period.detailedForecast}
-                          </div>
-
-                          <div className={style.periodName}>
-                            {index === 0 ? "Today" : period.name}
-                          </div>
-                          <img
-                            className={style.icon}
-                            src={period.icon}
-                            alt={period.shortForecast}
-                            onMouseEnter={() =>
-                              showModal(location.id, period.number)
-                            }
-                            onMouseLeave={hideModal}
-                          />
-                          <div className={style.temp}>
-                            {period.temperature}&deg; F /{" "}
-                            {index < array.length - 1
-                              ? array[index + 1].temperature
-                              : ""}
-                            &deg; F
-                          </div>
-                          <div className={style.windSpeed}>
-                            {period.windSpeed}
-                          </div>
-                        </div>
-                      ) : (
-                        ""
-                      )
+      {user?.favorites.length === 0 && (
+        <div className={style.saveMessage}>
+          Save areas to compare weather forecases side by side
+        </div>
+      )}
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided, snapshot) => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {weather.map((location, index) => (
+                <Draggable
+                  key={location.name}
+                  draggableId={location.name}
+                  index={index}
+                >
+                  {(provided, snapshot) => (
+                    <div
+                      className={style.weatherCard}
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                    >
+                      <div className={style.name}>
+                        <Link
+                          className={style.link}
+                          to={`/locations/${location.id}`}
+                        >
+                          {location.name}
+                        </Link>
+                        <button
+                          className={style.unSaveBtn}
+                          onClick={() => unSave(location.id)}
+                        >
+                          Unsave Area
+                        </button>
+                      </div>
+                      <div className={style.periods}>
+                        {location.weather.properties.periods.map(
+                          (period: Iperiod, index: number, array: Iperiod[]) =>
+                            !period.name.toLowerCase().includes("night") ? (
+                              <div key={period.number} className={style.period}>
+                                <div
+                                  className={`${
+                                    location.id === modal?.locationID &&
+                                    period.number === modal?.periodNumber
+                                      ? ""
+                                      : "hidden"
+                                  } ${style.modal}`}
+                                >
+                                  {period.detailedForecast}
+                                </div>
+                                <div className={style.periodName}>
+                                  {index === 0 ? "Today" : period.name}
+                                </div>
+                                <img
+                                  className={style.icon}
+                                  src={period.icon}
+                                  alt={period.shortForecast}
+                                  onMouseEnter={() =>
+                                    showModal(location.id, period.number)
+                                  }
+                                  onMouseLeave={hideModal}
+                                />
+                                <div className={style.temp}>
+                                  {period.temperature}&deg; F /{" "}
+                                  {index < array.length - 1
+                                    ? array[index + 1].temperature
+                                    : ""}
+                                  &deg; F
+                                </div>
+                                <div className={style.windSpeed}>
+                                  {period.windSpeed}
+                                </div>
+                              </div>
+                            ) : (
+                              ""
+                            )
+                        )}
+                      </div>
+                    </div>
                   )}
-                </div>
-              </div>
-            )}
-          </Draggable>
-        ))}
-      </div>
-    </DragDropContext>
+                </Draggable>
+              ))}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </div>
   );
 }
