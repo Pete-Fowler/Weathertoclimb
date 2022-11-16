@@ -3,7 +3,7 @@
   height: 350px;
 }
 
-.footer img { 
+.footer img {
   width: 350px;
   position: absolute;
   z-index: 7;
@@ -19,7 +19,21 @@
   list-style-type: none;
 }
 
-.footer li { font-size: .9rem;}
+.footer li {
+  font-size: 0.9rem;
+}
 
-.footer a { font-size:.9rem; }
+.footer a {
+  font-size: 0.9rem;
+}
 
+@media (max-width: 500px) {
+  .footer img {
+    display: none;
+  }
+
+  .footer ul {
+    padding: 10px;
+    left: 0px;
+  }
+}

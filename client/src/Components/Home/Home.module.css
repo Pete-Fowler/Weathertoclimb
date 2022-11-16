@@ -11,12 +11,23 @@
   justify-content: center;
   font-size: 1.8rem;
   color: white;
-  height: 125vh;
-  padding-inline: 25px;
-  padding-bottom: 200px;
+  min-height: calc(100vh - 100px);
+  padding: 25px 25px 200px 25px;
   background: linear-gradient(70deg, #2ebdc5, 40%, #311b6e);
 }
 
 .heroText {
   margin-bottom: 20px;
+}
+
+@media (max-width: 700px) {
+  .heroText {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .heroText {
+    font-size: 0.9rem;
+  }
 }
