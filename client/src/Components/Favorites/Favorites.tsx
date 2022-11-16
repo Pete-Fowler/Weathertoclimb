@@ -29,6 +29,7 @@ interface Iprops {
     username: string;
   } | null;
   onChangeUser: Function;
+  setLoading: Function;
 }
 
 interface Iperiod {
@@ -52,7 +53,7 @@ interface Imodal {
   periodNumber: number;
 }
 
-export default function Weather({ user, onChangeUser }: Iprops) {
+export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
   const [errors, setErrors] = useState<string | null>(null);
   const [locations, setLocations] = useState<any[]>([]);
   const [weather, setWeather] = useState<any[]>([]);
@@ -80,6 +81,7 @@ export default function Weather({ user, onChangeUser }: Iprops) {
   useEffect(() => {
     setWeather([]);
     locations.forEach((location) => {
+      setLoading(true);
       fetch(`${location.forecast_url}`).then((r) => {
         if (r.ok) {
           r.json().then((data) => {
@@ -87,6 +89,7 @@ export default function Weather({ user, onChangeUser }: Iprops) {
               ...weather,
               { name: location.name, id: location.id, weather: data },
             ]);
+            setLoading(false);
           });
         } else {
           r.json().then((err) => console.log(err.errors));
@@ -101,6 +104,7 @@ export default function Weather({ user, onChangeUser }: Iprops) {
                       ...weather,
                       { name: location.name, id: location.id, weather: data },
                     ]);
+                    setLoading(false);
                   });
                 }
               });

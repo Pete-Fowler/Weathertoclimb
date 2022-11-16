@@ -14,7 +14,6 @@ interface Iprops {
   } | null;
   onChangeUser: Function;
   changeModal: Function;
-  loading: boolean;
   setLoading: Function;
 }
 
@@ -58,7 +57,6 @@ export default function Details({
   user,
   onChangeUser,
   changeModal,
-  loading,
   setLoading,
 }: Iprops) {
   const [errors, setErrors] = useState<string | null>(null);

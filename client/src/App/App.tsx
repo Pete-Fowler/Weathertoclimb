@@ -69,7 +69,13 @@ export default function App() {
           <Route path="/" element={<Home user={user} />} />
           <Route
             path="/favorites"
-            element={<Favorites user={user} onChangeUser={onChangeUser} />}
+            element={
+              <Favorites
+                user={user}
+                onChangeUser={onChangeUser}
+                setLoading={setLoading}
+              />
+            }
           />
           <Route
             path="/locations/:id"
@@ -78,7 +84,6 @@ export default function App() {
                 user={user}
                 onChangeUser={onChangeUser}
                 changeModal={changeModal}
-                loading={loading}
                 setLoading={setLoading}
               />
             }
