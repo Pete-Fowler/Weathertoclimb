@@ -92,7 +92,6 @@ export default function Weather({ user, onChangeUser }: Iprops) {
           console.log("fail");
           let i = 0;
           while (i < 10 && weather.some((obj) => obj.id === location.id)) {
-            console.log("loop");
             setTimeout(() => {
               fetch(`${location.forecast_url}`).then((r) => {
                 if (r.ok) {
@@ -144,7 +143,12 @@ export default function Weather({ user, onChangeUser }: Iprops) {
     setModal(null);
   }
 
-  function onDragEnd() {}
+  function onDragEnd(result: any) {
+    const newWeather = [...weather];
+    const [removed] = newWeather.splice(result.source.index, 1);
+    newWeather.splice(result.destination.index, 0, removed);
+    setWeather(newWeather);
+  }
 
   return (
     <div className={style.weatherSection}>
@@ -233,6 +237,7 @@ export default function Weather({ user, onChangeUser }: Iprops) {
                   )}
                 </Draggable>
               ))}
+              {provided.placeholder}
             </div>
           )}
         </Droppable>
