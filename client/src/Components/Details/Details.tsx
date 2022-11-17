@@ -2,6 +2,7 @@ import style from "./Details.module.css";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import useIsSaved from "../../App/Hooks/useSaved";
 
 interface Iprops {
   user: {
@@ -67,7 +68,8 @@ export default function Details({
     hourly: false,
     daily: false,
   });
-  const [saved, setSaved] = useState<boolean>(false);
+
+  const isSaved = useIsSaved(user, location);
 
   const { id } = useParams();
 
@@ -84,19 +86,6 @@ export default function Details({
       }
     });
   }, [id]);
-
-  // Set saved status
-  useEffect(() => {
-    if (
-      user &&
-      location &&
-      !!user.favorites.find((obj: Ifavorite) => obj.location_id === location.id)
-    ) {
-      setSaved(true);
-    } else {
-      setSaved(false);
-    }
-  }, [user, location]);
 
   // Fetch forecasts
   useEffect(() => {
@@ -166,7 +155,7 @@ export default function Details({
   }, [location]);
 
   function handleSaveBtnClick() {
-    if (!saved) {
+    if (!isSaved) {
       fetch(`/favorites`, {
         method: "POST",
         headers: {
@@ -190,7 +179,7 @@ export default function Details({
       const fav = user?.favorites.find(
         (obj: Ifavorite) => obj.location_id === location.id
       );
-      const favID = saved && fav ? `${fav.id}` : "";
+      const favID = isSaved && fav ? `${fav.id}` : "";
 
       fetch(`/favorites/${favID}`, {
         method: "DELETE",
@@ -225,7 +214,7 @@ export default function Details({
       });
   }
 
-  const saveBtnText = saved ? "Unsave Area" : "Save Area";
+  const saveBtnText = isSaved ? "Unsave Area" : "Save Area";
   const isDisabled = user && user.favorites.length > 15 ? true : false;
 
   if (loaded.daily && loaded.hourly) setLoading(false);
