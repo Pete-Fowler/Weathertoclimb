@@ -49,6 +49,7 @@ export default function Home({ user }: Props) {
   const heroText = user
     ? "Save Areas to Compare Forecasts Side by Side"
     : "Log in to Save Areas and Compare Forecasts Side by Side";
+
   return (
     <div className={style.home}>
       <div className={style.hero}>

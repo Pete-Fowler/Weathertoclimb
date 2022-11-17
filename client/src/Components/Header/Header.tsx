@@ -1,7 +1,6 @@
 import style from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
-import useSaved from "../../App/Hooks/useSaved";
 
 interface Iprops {
   user: {
@@ -21,8 +20,6 @@ export default function Header({ user, onChangeUser, changeModal }: Iprops) {
   const [isShown, setIsShown] = useState(false);
 
   const navigate = useNavigate();
-
-  const { saveBtnText, handleSaveBtnClick } = useSaved();
 
   function handleLogout() {
     fetch(`/logout`, {
