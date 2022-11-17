@@ -15,10 +15,10 @@ interface Iuser {
   username: string;
 }
 
-export default function useSaved(user: Iuser | null, location: any) {
+export default function useSaved() {
   const [saved, setSaved] = useState<boolean>(false);
 
-  useEffect(() => {
+  function setSavedStatus(user: Iuser | null, location: any) {
     if (
       user &&
       location &&
@@ -28,7 +28,7 @@ export default function useSaved(user: Iuser | null, location: any) {
     } else {
       setSaved(false);
     }
-  }, [user, location]);
+  }
 
   function handleSaveBtnClick(
     user: Iuser | null,
@@ -82,5 +82,5 @@ export default function useSaved(user: Iuser | null, location: any) {
 
   const saveBtnText = saved ? "Unsave Area" : "Save Area";
 
-  return { saveBtnText, handleSaveBtnClick };
+  return { setSavedStatus, handleSaveBtnClick, saveBtnText };
 }

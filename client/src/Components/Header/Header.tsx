@@ -1,8 +1,9 @@
 import style from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
+import useSaved from "../../App/Hooks/useSaved";
 
-interface Props {
+interface Iprops {
   user: {
     admin: boolean;
     default_location: null | string;
@@ -14,12 +15,14 @@ interface Props {
   changeModal: Function;
 }
 
-export default function Header({ user, onChangeUser, changeModal }: Props) {
+export default function Header({ user, onChangeUser, changeModal }: Iprops) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [locations, setLocations] = useState<any[]>([]);
   const [isShown, setIsShown] = useState(false);
 
   const navigate = useNavigate();
+
+  const { saveBtnText, handleSaveBtnClick } = useSaved();
 
   function handleLogout() {
     fetch(`/logout`, {

@@ -60,7 +60,7 @@ export default function Details({
     daily: false,
   });
 
-  const { saveBtnText, handleSaveBtnClick } = useIsSaved(user, location);
+  const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useIsSaved();
 
   const { id } = useParams();
 
@@ -162,6 +162,10 @@ export default function Details({
   function handleClick() {
     handleSaveBtnClick(user, location, onChangeUser);
   }
+
+  useEffect(() => {
+    setSavedStatus(user, location);
+  }, [user, location, setSavedStatus]);
 
   const isDisabled = user && user.favorites.length > 15 ? true : false;
 
