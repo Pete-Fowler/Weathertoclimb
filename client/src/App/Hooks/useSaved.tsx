@@ -80,7 +80,7 @@ export default function useSaved() {
     }
   }
 
-  const saveBtnText = saved ? "Unsave Area" : "Save Area";
+  const saveBtnText = saved ? "Unsave" : "Save";
 
   return { setSavedStatus, handleSaveBtnClick, saveBtnText };
 }

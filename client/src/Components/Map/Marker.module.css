@@ -1,8 +1,7 @@
-
 .marker {
   position: absolute;
   transform: translate(-50%, -50%);
-  transition: .4s;
+  transition: 0.4s;
   z-index: 5;
 }
 
@@ -17,13 +16,23 @@
   padding: 5px;
   border-radius: 3px;
   color: black;
-  background: rgba(255, 255, 255, .8);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(1px);
   z-index: 250;
+  transform: translateX(-40%);
 }
 
-.modal:hover {
+.toggleSave {
+  color: blue;
+  text-decoration: none;
+  margin-left: 20px;
+  z-index: 260;
+  transition: 0.4s;
+}
+
+.toggleSave:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .marker img {

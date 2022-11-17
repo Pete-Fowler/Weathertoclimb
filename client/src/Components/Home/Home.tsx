@@ -3,15 +3,24 @@ import Map from "../Map/Map";
 import Marker from "../Map/Marker";
 import { useEffect, useState } from "react";
 
+interface Ifavorite {
+  id: number;
+  user_id: number;
+  location_id: number;
+}
+
+interface Iuser {
+  admin: boolean;
+  default_location: null | string;
+  favorites: Ifavorite[] | [];
+  id: number;
+  password_digest: string;
+  username: string;
+}
+
 interface Props {
-  user: {
-    admin: boolean;
-    default_location: null | string;
-    id: number;
-    password_digest: string;
-    username: string;
-  } | null;
-  onChangeUser?: Function;
+  user: Iuser | null;
+  onChangeUser: Function;
 }
 
 interface Ilocation {
@@ -20,7 +29,7 @@ interface Ilocation {
   lat: number;
   lng: number;
 }
-export default function Home({ user }: Props) {
+export default function Home({ user, onChangeUser }: Props) {
   const [markers, setMarkers] = useState<Ilocation[]>([]);
 
   // Fetch locations and save in state as map markers
@@ -32,8 +41,9 @@ export default function Home({ user }: Props) {
             data.map((loc: any) => (
               <Marker
                 key={loc.id}
-                id={loc.id}
-                name={loc.name}
+                user={user}
+                onChangeUser={onChangeUser}
+                location={loc}
                 lat={loc.coordinates.split(",")[0]}
                 lng={loc.coordinates.split(",")[1]}
               />
