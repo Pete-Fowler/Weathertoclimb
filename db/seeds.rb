@@ -12,6 +12,57 @@ puts 'seeding...'
 User.create!(username: "admin", password: ENV['PASSWORD'], password_confirmation: ENV['PASSWORD'], admin: true)
 
 # ===========Locations==============
+#============ARIZONA=============
+Location.create!({
+  name: "Cochise Stronghold",
+  state: "Arizona",
+  coordinates: "31.921,-109.987",
+  forecast_url: "https://api.weather.gov/gridpoints/TWC/125,31/forecast",
+  popular: true
+})
+
+Location.create!({
+  name: "Jacks Canyon",
+  state: "Arizona",
+  coordinates: "34.755,-111.062",
+  forecast_url: "https://api.weather.gov/gridpoints/FGZ/92,66/forecast",
+  popular: true
+})
+
+Location.create!({
+  name: "Mount Lemmon",
+  state: "Arizona",
+  coordinates: "32.415,-110.734",
+  forecast_url: "https://api.weather.gov/gridpoints/TWC/100,55/forecast",
+  popular: true
+})
+
+Location.create!({
+  name: "Paradise Forks",
+  state: "Arizona",
+  coordinates: "35.138,-112.024",
+  forecast_url: "https://api.weather.gov/gridpoints/FGZ/59,87/forecast",
+  popular: true
+})
+
+Location.create!({
+  name: "Priest Draw",
+  state: "Arizona",
+  coordinates: "35.082,-111.601",
+  forecast_url: "https://api.weather.gov/gridpoints/FGZ/74,83/forecast",
+  popular: true
+})
+
+Location.create!({
+  name: "Sedona",
+  state: "Arizona",
+  coordinates: "34.866,-111.764",
+  forecast_url: "https://api.weather.gov/gridpoints/FGZ/67,74/forecast",
+  popular: true
+})
+
+
+# =============Colorado==============
 Location.create!({
   name: "Black Canyon",
   state: "Colorado",
