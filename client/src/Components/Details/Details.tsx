@@ -64,12 +64,13 @@ export default function Details({
   const [location, setLocation] = useState<any>(null);
   const [hourly, setHourly] = useState<any>([]);
   const [daily, setDaily] = useState<any>([]);
+  const [saved, setSaved] = useState(false);
   const [loaded, setLoaded] = useState<Iloaded>({
     hourly: false,
     daily: false,
   });
 
-  const isSaved = useIsSaved(user, location);
+  const { isSaved, handleSaveBtnClick } = useIsSaved();
 
   const { id } = useParams();
 
@@ -85,8 +86,11 @@ export default function Details({
         r.json().then((err) => console.log(err));
       }
     });
-  }, [id]);
+  }, [id, setLoading]);
 
+  useEffect(() => {
+    setSaved(isSaved(user, location));
+  }, [user, location, isSaved]);
   // Fetch forecasts
   useEffect(() => {
     setErrors("");
@@ -154,52 +158,6 @@ export default function Details({
     }
   }, [location]);
 
-  function handleSaveBtnClick() {
-    if (!isSaved) {
-      fetch(`/favorites`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_id: user?.id, location_id: location.id }),
-      }).then((r) => {
-        if (r.ok) {
-          r.json().then((data) => {
-            setSaved(true);
-            onChangeUser((user: Iuser) => ({
-              ...user,
-              favorites: [...user.favorites, data],
-            }));
-          });
-        } else {
-          r.json().then((err) => console.log(err));
-        }
-      });
-    } else {
-      const fav = user?.favorites.find(
-        (obj: Ifavorite) => obj.location_id === location.id
-      );
-      const favID = isSaved && fav ? `${fav.id}` : "";
-
-      fetch(`/favorites/${favID}`, {
-        method: "DELETE",
-      }).then((r) => {
-        if (r.ok) {
-          r.json().then((data) => {
-            onChangeUser((user: Iuser) => ({
-              ...user,
-              favorites: [
-                ...user.favorites.filter((obj) => parseInt(favID) !== obj.id),
-              ],
-            }));
-          });
-        } else {
-          r.json().then((err) => console.log(err));
-        }
-      });
-    }
-  }
-
   function deleteArea() {
     fetch(`/locations/${location.id}`, {
       method: "DELETE",
@@ -214,7 +172,11 @@ export default function Details({
       });
   }
 
-  const saveBtnText = isSaved ? "Unsave Area" : "Save Area";
+  function handleClick() {
+    handleSaveBtnClick(user, location, onChangeUser);
+  }
+
+  const saveBtnText = saved ? "Unsave Area" : "Save Area";
   const isDisabled = user && user.favorites.length > 15 ? true : false;
 
   if (loaded.daily && loaded.hourly) setLoading(false);
@@ -229,9 +191,7 @@ export default function Details({
           <button
             className={style.saveBtn}
             onClick={
-              isDisabled
-                ? () => changeModal("max-favorites")
-                : handleSaveBtnClick
+              isDisabled ? () => changeModal("max-favorites") : handleClick
             }
           >
             {saveBtnText}
