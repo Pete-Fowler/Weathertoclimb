@@ -64,13 +64,12 @@ export default function Details({
   const [location, setLocation] = useState<any>(null);
   const [hourly, setHourly] = useState<any>([]);
   const [daily, setDaily] = useState<any>([]);
-  const [saved, setSaved] = useState(false);
   const [loaded, setLoaded] = useState<Iloaded>({
     hourly: false,
     daily: false,
   });
 
-  const { isSaved, handleSaveBtnClick } = useIsSaved();
+  const { saveBtnText, handleSaveBtnClick } = useIsSaved(user, location);
 
   const { id } = useParams();
 
@@ -88,9 +87,6 @@ export default function Details({
     });
   }, [id, setLoading]);
 
-  useEffect(() => {
-    setSaved(isSaved(user, location));
-  }, [user, location, isSaved]);
   // Fetch forecasts
   useEffect(() => {
     setErrors("");
@@ -176,10 +172,11 @@ export default function Details({
     handleSaveBtnClick(user, location, onChangeUser);
   }
 
-  const saveBtnText = saved ? "Unsave Area" : "Save Area";
   const isDisabled = user && user.favorites.length > 15 ? true : false;
 
-  if (loaded.daily && loaded.hourly) setLoading(false);
+  useEffect(() => {
+    if (loaded.daily && loaded.hourly) setLoading(false);
+  }, [loaded, setLoading]);
 
   return (
     <div className={style.details}>

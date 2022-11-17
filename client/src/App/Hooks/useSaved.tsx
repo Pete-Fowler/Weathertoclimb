@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Ifavorite {
   id: number;
@@ -15,10 +15,10 @@ interface Iuser {
   username: string;
 }
 
-export default function useSaved() {
+export default function useSaved(user: Iuser | null, location: any) {
   const [saved, setSaved] = useState<boolean>(false);
 
-  function isSaved(user: Iuser | null, location: any) {
+  useEffect(() => {
     if (
       user &&
       location &&
@@ -28,8 +28,7 @@ export default function useSaved() {
     } else {
       setSaved(false);
     }
-    return saved;
-  }
+  }, [user, location]);
 
   function handleSaveBtnClick(
     user: Iuser | null,
@@ -81,5 +80,7 @@ export default function useSaved() {
     }
   }
 
-  return { isSaved, handleSaveBtnClick };
+  const saveBtnText = saved ? "Unsave Area" : "Save Area";
+
+  return { saveBtnText, handleSaveBtnClick };
 }
