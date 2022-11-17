@@ -1,6 +1,6 @@
 .footer {
   position: relative;
-  height: 350px;
+  height: 200px;
 }
 
 .footer img {
@@ -8,7 +8,7 @@
   position: absolute;
   z-index: 7;
   right: 5rem;
-  top: -30%;
+  top: -55%;
 }
 
 .footer ul {
