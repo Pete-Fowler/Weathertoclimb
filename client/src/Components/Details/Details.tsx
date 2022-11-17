@@ -18,15 +18,6 @@ interface Iprops {
   setLoading: Function;
 }
 
-interface Iuser {
-  admin: boolean;
-  default_location: null | string;
-  favorites: Ifavorite[] | [];
-  id: number;
-  password_digest: string;
-  username: string;
-}
-
 interface Ifavorite {
   id: number;
   user_id: number;
