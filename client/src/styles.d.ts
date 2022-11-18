@@ -7,3 +7,4 @@ declare module "*.module.css" {
 declare module "*.png";
 declare module "*.svg";
 declare module "react-beautiful-dnd";
+declare module "google-map-react";
