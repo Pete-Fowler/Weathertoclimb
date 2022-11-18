@@ -1,5 +1,4 @@
 import style from "./Favorites.module.css";
-import dragIndicator from "./dragIndicator.svg";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
@@ -166,7 +165,7 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
       )}
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable">
-          {(provided, snapshot) => (
+          {(provided: any, snapshot: any) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {weather.map((location, index) => (
                 <Draggable
@@ -174,7 +173,7 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
                   draggableId={location.name}
                   index={index}
                 >
-                  {(provided, snapshot) => (
+                  {(provided: any, snapshot: any) => (
                     <div
                       className={style.weatherCard}
                       ref={provided.innerRef}
