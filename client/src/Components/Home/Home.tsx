@@ -4,7 +4,7 @@ import Marker from "../Map/Marker";
 import { useEffect, useState } from "react";
 import { Ilocation } from "../../types";
 
-interface Props {
+interface Iprops {
   user: {
     admin: boolean;
     default_location: null | string;
@@ -15,7 +15,7 @@ interface Props {
   onChangeUser?: Function;
 }
 
-export default function Home({ user }: Props) {
+export default function Home({ user }: Iprops) {
   const [markers, setMarkers] = useState<Ilocation[]>([]);
 
   // Fetch locations and save in state as map markers
