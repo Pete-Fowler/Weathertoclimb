@@ -15,11 +15,16 @@
   top: -15px;
   padding: 5px;
   border-radius: 3px;
-  color: black;
   background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(1px);
   z-index: 250;
   transform: translateX(-40%);
+}
+
+.name {
+  font-size: 0.8rem;
+  color: #2ebdc5;
+  font-weight: 700;
 }
 
 .toggleSave {

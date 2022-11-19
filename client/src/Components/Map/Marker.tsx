@@ -4,21 +4,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useSaved from "../../App/Hooks/useSaved";
 
-interface Ifavorite {
-  id: number;
-  user_id: number;
-  location_id: number;
-}
-
-interface Iuser {
-  admin: boolean;
-  default_location: null | string;
-  favorites: Ifavorite[] | [];
-  id: number;
-  password_digest: string;
-  username: string;
-}
-
 interface Iprops {
   user: Iuser | null;
   location: any;
@@ -44,6 +29,10 @@ export default function Marker({ user, onChangeUser, location }: Iprops) {
     setIsShown(false);
   }
 
+  function handleClick() {
+    handleSaveBtnClick(user, location, onChangeUser);
+  }
+
   return (
     <div
       className={style.marker}
@@ -52,11 +41,13 @@ export default function Marker({ user, onChangeUser, location }: Iprops) {
     >
       {isShown ? (
         <div className={style.modal}>
-          <Link to={`/locations/${location.id}`}>{location.name}</Link>
-          <span
-            className={style.toggleSave}
-            onClick={() => handleSaveBtnClick(user, location, onChangeUser)}
+          <Link
+            className={`link ${style.name}`}
+            to={`/locations/${location.id}`}
           >
+            {location.name}
+          </Link>
+          <span className={style.toggleSave} onClick={handleClick}>
             {saveBtnText}
           </span>
         </div>

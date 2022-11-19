@@ -1,19 +1,4 @@
-import { useEffect, useState } from "react";
-
-interface Ifavorite {
-  id: number;
-  user_id: number;
-  location_id: number;
-}
-
-interface Iuser {
-  admin: boolean;
-  default_location: null | string;
-  favorites: Ifavorite[] | [];
-  id: number;
-  password_digest: string;
-  username: string;
-}
+import { useState } from "react";
 
 export default function useSaved() {
   const [saved, setSaved] = useState<boolean>(false);
@@ -45,7 +30,6 @@ export default function useSaved() {
       }).then((r) => {
         if (r.ok) {
           r.json().then((data) => {
-            setSaved(true);
             onChangeUser((user: Iuser) => ({
               ...user,
               favorites: [...user.favorites, data],

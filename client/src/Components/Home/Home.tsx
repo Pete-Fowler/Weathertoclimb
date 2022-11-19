@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 
 interface Iprops {
   user: Iuser | null;
-  onChangeUser?: Function;
+  onChangeUser: Function;
 }
 
-export default function Home({ user }: Iprops) {
+export default function Home({ user, onChangeUser }: Iprops) {
   const [markers, setMarkers] = useState<Ilocation[]>([]);
 
   // Fetch locations and save in state as map markers
@@ -33,7 +33,7 @@ export default function Home({ user }: Iprops) {
         r.json().then((err) => console.log(err));
       }
     });
-  }, []);
+  }, [user, onChangeUser]);
 
   const heroText = user
     ? "Save Areas to Compare Forecasts Side by Side"
