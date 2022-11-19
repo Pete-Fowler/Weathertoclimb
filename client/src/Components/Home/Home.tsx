@@ -2,6 +2,7 @@ import style from "./Home.module.css";
 import Map from "../Map/Map";
 import Marker from "../Map/Marker";
 import { useEffect, useState } from "react";
+import { Ilocation } from "../../types";
 
 interface Props {
   user: {
@@ -14,12 +15,6 @@ interface Props {
   onChangeUser?: Function;
 }
 
-interface Ilocation {
-  id: number;
-  name: string;
-  lat: number;
-  lng: number;
-}
 export default function Home({ user }: Props) {
   const [markers, setMarkers] = useState<Ilocation[]>([]);
 
