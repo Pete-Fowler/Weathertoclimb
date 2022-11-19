@@ -1,10 +1,10 @@
 import style from "./MaxFavorites.module.css";
 
-interface Props {
+interface Iprops {
   modal: string;
 }
 
-export default function Login({ modal }: Props) {
+export default function Login({ modal }: Iprops) {
   const isHidden = modal === "max-favorites" ? "" : "hidden";
 
   return (

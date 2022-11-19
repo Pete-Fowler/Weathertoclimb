@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useState } from "react";
 import style from "./Login.module.css";
 
-interface Props {
-  user: object | null;
+interface Iprops {
+  user: Iuser | null;
   onChangeUser: Function;
   modal: string;
   changeModal: Function;
@@ -13,7 +13,7 @@ export default function Login({
   onChangeUser,
   modal,
   changeModal,
-}: Props) {
+}: Iprops) {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errors, setErrors] = useState([]);
 

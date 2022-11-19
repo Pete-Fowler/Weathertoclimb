@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import style from "../Login/Login.module.css";
 
-interface Props {
+interface Iprops {
   modal: string;
   onChangeUser: Function;
   changeModal: Function;
@@ -11,7 +11,7 @@ export default function CreateAccount({
   onChangeUser,
   modal,
   changeModal,
-}: Props) {
+}: Iprops) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",

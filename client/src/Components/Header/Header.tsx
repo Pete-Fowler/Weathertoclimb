@@ -3,13 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
 
 interface Iprops {
-  user: {
-    admin: boolean;
-    default_location: null | string;
-    id: number;
-    password_digest: string;
-    username: string;
-  } | null;
+  user: Iuser | null;
   onChangeUser: Function;
   changeModal: Function;
 }
