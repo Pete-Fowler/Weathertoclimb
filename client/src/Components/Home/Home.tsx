@@ -9,7 +9,7 @@ interface Iprops {
 }
 
 export default function Home({ user, onChangeUser }: Iprops) {
-  const [markers, setMarkers] = useState<Ilocation[]>([]);
+  const [markers, setMarkers] = useState<ImapLocation[]>([]);
 
   // Fetch locations and save in state as map markers
   useEffect(() => {
