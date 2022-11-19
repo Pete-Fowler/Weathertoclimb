@@ -2,13 +2,7 @@ import style from "./Footer.module.css";
 import mountains from "./mountains.svg";
 
 interface Iprops {
-  user: {
-    admin: boolean;
-    default_location: null | string;
-    id: number;
-    password_digest: string;
-    username: string;
-  } | null;
+  user: Iuser | null;
   changeModal: Function;
 }
 

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from "react";
 import style from "./Login.module.css";
 
 interface Iprops {
-  user: object | null;
+  user: Iuser | null;
   onChangeUser: Function;
   modal: string;
   changeModal: Function;

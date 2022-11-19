@@ -4,14 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 
 interface Iprops {
-  user: {
-    admin: boolean;
-    default_location: null | string;
-    favorites: Ifavorite[] | [];
-    id: number;
-    password_digest: string;
-    username: string;
-  } | null;
+  user: Iuser | null;
   onChangeUser: Function;
   changeModal: Function;
   setLoading: Function;

@@ -4,14 +4,7 @@ import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 interface Iprops {
-  user: {
-    admin: boolean;
-    default_location: null | string;
-    favorites: Ifavorite[] | [];
-    id: number;
-    password_digest: string;
-    username: string;
-  } | null;
+  user: Iuser | null;
   onChangeUser: Function;
   setLoading: Function;
 }
