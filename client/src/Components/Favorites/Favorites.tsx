@@ -2,21 +2,7 @@ import style from "./Favorites.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
-interface Iuser {
-  admin: boolean;
-  default_location: null | string;
-  favorites: Ifavorite[] | [];
-  id: number;
-  password_digest: string;
-  username: string;
-}
-
-interface Ifavorite {
-  id: number;
-  user_id: number;
-  location_id: number;
-}
+import { Iperiod, Iuser, Ifavorite, Imodal } from "../../types";
 
 interface Iprops {
   user: {
@@ -29,27 +15,6 @@ interface Iprops {
   } | null;
   onChangeUser: Function;
   setLoading: Function;
-}
-
-interface Iperiod {
-  number: number;
-  name: string;
-  startTime: string;
-  endTime: string;
-  isDaytime: boolean;
-  temperature: number;
-  temperatureUnit: "F";
-  temperatureTrend: string;
-  windSpeed: string;
-  windDirection: string;
-  icon: string;
-  shortForecast: string;
-  detailedForecast: string;
-}
-
-interface Imodal {
-  locationID: number;
-  periodNumber: number;
 }
 
 export default function Weather({ user, onChangeUser, setLoading }: Iprops) {

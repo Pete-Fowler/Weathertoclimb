@@ -40,3 +40,8 @@ export interface Iloaded {
   hourly: boolean;
   daily: boolean;
 }
+
+export interface Imodal {
+  locationID: number;
+  periodNumber: number;
+}
