@@ -1,11 +1,11 @@
-export interface Ilocation {
+interface Ilocation {
   id: number;
   name: string;
   lat: number;
   lng: number;
 }
 
-export interface Iuser {
+interface Iuser {
   admin: boolean;
   default_location: null | string;
   favorites: Ifavorite[] | [];
@@ -14,13 +14,13 @@ export interface Iuser {
   username: string;
 }
 
-export interface Ifavorite {
+interface Ifavorite {
   id: number;
   user_id: number;
   location_id: number;
 }
 
-export interface Iperiod {
+interface Iperiod {
   number: number;
   name: string;
   startTime: string;
@@ -36,12 +36,12 @@ export interface Iperiod {
   detailedForecast: string;
 }
 
-export interface Iloaded {
+interface Iloaded {
   hourly: boolean;
   daily: boolean;
 }
 
-export interface Imodal {
+interface Imodal {
   locationID: number;
   periodNumber: number;
 }

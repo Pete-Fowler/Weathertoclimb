@@ -2,7 +2,6 @@ import style from "./Home.module.css";
 import Map from "../Map/Map";
 import Marker from "../Map/Marker";
 import { useEffect, useState } from "react";
-import { Ilocation } from "../../types";
 
 interface Iprops {
   user: {

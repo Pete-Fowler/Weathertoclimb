@@ -2,7 +2,6 @@ import style from "./Favorites.module.css";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { Iperiod, Iuser, Ifavorite, Imodal } from "../../types";
 
 interface Iprops {
   user: {
