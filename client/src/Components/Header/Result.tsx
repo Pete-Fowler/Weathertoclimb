@@ -6,8 +6,10 @@ interface Iprops {
 
 export default function Result({ location }: Iprops) {
   return (
-    <Link to={`/locations/${location.id}`} className="link">
-      {location.name}
-    </Link>
+    <div>
+      <Link to={`/locations/${location.id}`} className="link">
+        {location.name}
+      </Link>
+    </div>
   );
 }
