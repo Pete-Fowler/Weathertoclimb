@@ -16,7 +16,7 @@ export default function Result({ user, location, onChangeUser }: Iprops) {
     setSavedStatus(user, location);
   }, [user, location, setSavedStatus]);
 
-  function handleClick() {
+  function handleClick(e: React.MouseEvent<HTMLSpanElement>) {
     handleSaveBtnClick(user, location, onChangeUser);
   }
 
@@ -26,7 +26,11 @@ export default function Result({ user, location, onChangeUser }: Iprops) {
         {location.name}
       </Link>
       {user ? (
-        <span className={style.toggleSave} onClick={handleClick}>
+        <span
+          className={style.toggleSave}
+          onMouseDown={(e) => e.preventDefault()}
+          onClick={handleClick}
+        >
           {saveBtnText}
         </span>
       ) : (
