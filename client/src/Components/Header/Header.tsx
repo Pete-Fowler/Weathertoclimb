@@ -1,7 +1,6 @@
 import style from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
-import useSaved from "../../App/Hooks/useSaved";
 import Result from "./Result";
 
 interface Iprops {
@@ -14,8 +13,6 @@ export default function Header({ user, onChangeUser, changeModal }: Iprops) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [locations, setLocations] = useState<any[]>([]);
   const [isShown, setIsShown] = useState(false);
-
-  const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useSaved();
 
   const navigate = useNavigate();
 
@@ -77,7 +74,12 @@ export default function Header({ user, onChangeUser, changeModal }: Iprops) {
         {isShown ? (
           <div className={style.dropdown}>
             {locations.map((location) => (
-              <Result key={location.name} location={location} />
+              <Result
+                key={location.name}
+                location={location}
+                user={user}
+                onChangeUser={onChangeUser}
+              />
             ))}
           </div>
         ) : (
