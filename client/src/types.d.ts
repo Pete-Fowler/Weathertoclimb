@@ -1,8 +1,17 @@
-interface Ilocation {
+interface ImapLocation {
   id: number;
   name: string;
   lat: number;
   lng: number;
+}
+
+interface Ilocation {
+  id: number;
+  name: string;
+  state: string;
+  coordinates: string;
+  forecast_url: string;
+  popular: boolean;
 }
 
 interface Iuser {

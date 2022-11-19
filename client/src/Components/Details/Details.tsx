@@ -2,6 +2,7 @@ import style from "./Details.module.css";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
+import useIsSaved from "../../App/Hooks/useSaved";
 
 interface Iprops {
   user: Iuser | null;
@@ -24,7 +25,8 @@ export default function Details({
     hourly: false,
     daily: false,
   });
-  const [saved, setSaved] = useState<boolean>(false);
+
+  const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useIsSaved();
 
   const { id } = useParams();
 
@@ -40,20 +42,7 @@ export default function Details({
         r.json().then((err) => console.log(err));
       }
     });
-  }, [id]);
-
-  // Set saved status
-  useEffect(() => {
-    if (
-      user &&
-      location &&
-      !!user.favorites.find((obj: Ifavorite) => obj.location_id === location.id)
-    ) {
-      setSaved(true);
-    } else {
-      setSaved(false);
-    }
-  }, [user, location]);
+  }, [id, setLoading]);
 
   // Fetch forecasts
   useEffect(() => {
@@ -122,52 +111,6 @@ export default function Details({
     }
   }, [location]);
 
-  function handleSaveBtnClick() {
-    if (!saved) {
-      fetch(`/favorites`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_id: user?.id, location_id: location.id }),
-      }).then((r) => {
-        if (r.ok) {
-          r.json().then((data) => {
-            setSaved(true);
-            onChangeUser((user: Iuser) => ({
-              ...user,
-              favorites: [...user.favorites, data],
-            }));
-          });
-        } else {
-          r.json().then((err) => console.log(err));
-        }
-      });
-    } else {
-      const fav = user?.favorites.find(
-        (obj: Ifavorite) => obj.location_id === location.id
-      );
-      const favID = saved && fav ? `${fav.id}` : "";
-
-      fetch(`/favorites/${favID}`, {
-        method: "DELETE",
-      }).then((r) => {
-        if (r.ok) {
-          r.json().then((data) => {
-            onChangeUser((user: Iuser) => ({
-              ...user,
-              favorites: [
-                ...user.favorites.filter((obj) => parseInt(favID) !== obj.id),
-              ],
-            }));
-          });
-        } else {
-          r.json().then((err) => console.log(err));
-        }
-      });
-    }
-  }
-
   function deleteArea() {
     fetch(`/locations/${location.id}`, {
       method: "DELETE",
@@ -182,10 +125,19 @@ export default function Details({
       });
   }
 
-  const saveBtnText = saved ? "Unsave Area" : "Save Area";
+  function handleClick() {
+    handleSaveBtnClick(user, location, onChangeUser);
+  }
+
+  useEffect(() => {
+    setSavedStatus(user, location);
+  }, [user, location, setSavedStatus]);
+
   const isDisabled = user && user.favorites.length > 15 ? true : false;
 
-  if (loaded.daily && loaded.hourly) setLoading(false);
+  useEffect(() => {
+    if (loaded.daily && loaded.hourly) setLoading(false);
+  }, [loaded, setLoading]);
 
   return (
     <div className={style.details}>
@@ -197,9 +149,7 @@ export default function Details({
           <button
             className={style.saveBtn}
             onClick={
-              isDisabled
-                ? () => changeModal("max-favorites")
-                : handleSaveBtnClick
+              isDisabled ? () => changeModal("max-favorites") : handleClick
             }
           >
             {saveBtnText}

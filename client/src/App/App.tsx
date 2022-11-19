@@ -66,7 +66,10 @@ export default function App() {
       />
       <div className={style.content}>
         <Routes>
-          <Route path="/" element={<Home user={user} />} />
+          <Route
+            path="/"
+            element={<Home user={user} onChangeUser={onChangeUser} />}
+          />
           <Route
             path="/favorites"
             element={

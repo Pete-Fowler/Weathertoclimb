@@ -1,9 +1,7 @@
-
 .marker {
   position: absolute;
   transform: translate(-50%, -50%);
-  transition: .4s;
-  z-index: 5;
+  transition: 0.4s;
 }
 
 .marker:hover {
@@ -16,16 +14,34 @@
   top: -15px;
   padding: 5px;
   border-radius: 3px;
-  color: black;
-  background: rgba(255, 255, 255, .8);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 8px gray;
   backdrop-filter: blur(1px);
-  z-index: 250;
+  transform: translateX(-40%);
+  z-index: 10;
 }
 
-.modal:hover {
+.name {
+  font-size: 0.8rem;
+  color: #2ebdc5;
+  font-weight: 700;
+}
+
+.toggleSave {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: darkgray;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: 0.4s;
+}
+
+.toggleSave:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 .marker img {
   width: 20px;
+  z-index: 5;
 }

@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 
 interface Iprops {
   user: Iuser | null;
-  onChangeUser?: Function;
+  onChangeUser: Function;
 }
 
-export default function Home({ user }: Iprops) {
-  const [markers, setMarkers] = useState<Ilocation[]>([]);
+export default function Home({ user, onChangeUser }: Iprops) {
+  const [markers, setMarkers] = useState<ImapLocation[]>([]);
 
   // Fetch locations and save in state as map markers
   useEffect(() => {
@@ -20,8 +20,9 @@ export default function Home({ user }: Iprops) {
             data.map((loc: any) => (
               <Marker
                 key={loc.id}
-                id={loc.id}
-                name={loc.name}
+                user={user}
+                onChangeUser={onChangeUser}
+                location={loc}
                 lat={loc.coordinates.split(",")[0]}
                 lng={loc.coordinates.split(",")[1]}
               />
@@ -32,11 +33,12 @@ export default function Home({ user }: Iprops) {
         r.json().then((err) => console.log(err));
       }
     });
-  }, []);
+  }, [user, onChangeUser]);
 
   const heroText = user
     ? "Save Areas to Compare Forecasts Side by Side"
     : "Log in to Save Areas and Compare Forecasts Side by Side";
+
   return (
     <div className={style.home}>
       <div className={style.hero}>

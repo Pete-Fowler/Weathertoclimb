@@ -1,6 +1,7 @@
 import style from "./Header.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ChangeEvent, useState } from "react";
+import Result from "./Result";
 
 interface Iprops {
   user: Iuser | null;
@@ -73,13 +74,12 @@ export default function Header({ user, onChangeUser, changeModal }: Iprops) {
         {isShown ? (
           <div className={style.dropdown}>
             {locations.map((location) => (
-              <Link
-                to={`/locations/${location.id}`}
+              <Result
                 key={location.name}
-                className="link"
-              >
-                {location.name}
-              </Link>
+                location={location}
+                user={user}
+                onChangeUser={onChangeUser}
+              />
             ))}
           </div>
         ) : (

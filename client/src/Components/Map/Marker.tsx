@@ -1,17 +1,25 @@
 import pin from "./pin.png";
 import style from "./Marker.module.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useSaved from "../../App/Hooks/useSaved";
 
 interface Iprops {
-  name: string;
-  id: number;
-  lat: number;
-  lng: number;
+  user: Iuser | null;
+  location: any;
+  onChangeUser: Function;
+  lat: string;
+  lng: string;
 }
 
-export default function Marker({ name, id }: Iprops) {
+export default function Marker({ user, onChangeUser, location }: Iprops) {
   const [isShown, setIsShown] = useState(false);
+
+  const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useSaved();
+
+  useEffect(() => {
+    setSavedStatus(user, location);
+  }, [user, location, setSavedStatus]);
 
   function showModal() {
     setIsShown(true);
@@ -21,15 +29,32 @@ export default function Marker({ name, id }: Iprops) {
     setIsShown(false);
   }
 
+  function handleClick() {
+    handleSaveBtnClick(user, location, onChangeUser);
+  }
+
   return (
-    <Link
-      to={`/locations/${id}`}
+    <div
       className={style.marker}
       onMouseEnter={showModal}
       onMouseLeave={hideModal}
     >
-      {isShown ? <div className={style.modal}>{name}</div> : ""}
+      {isShown ? (
+        <div className={style.modal}>
+          <Link
+            className={`link ${style.name}`}
+            to={`/locations/${location.id}`}
+          >
+            {location.name}
+          </Link>
+          <span className={style.toggleSave} onClick={handleClick}>
+            {saveBtnText}
+          </span>
+        </div>
+      ) : (
+        ""
+      )}
       <img src={pin} alt="marker" />
-    </Link>
+    </div>
   );
 }
