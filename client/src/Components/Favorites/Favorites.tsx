@@ -49,9 +49,8 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
           });
         } else {
           r.json().then((err) => console.log(err));
-          console.log("fail");
           let i = 0;
-          while (i < 10 && weather.some((obj) => obj.id === location.id)) {
+          while (i < 6 && !weather.some((obj) => obj.id === location.id)) {
             setTimeout(() => {
               fetch(`${location.forecast_url}`).then((r) => {
                 if (r.ok) {
@@ -64,10 +63,10 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
                   });
                 }
               });
-            }, 100);
+            }, 250);
             i++;
           }
-          i > 10 &&
+          i > 5 &&
             setErrors(
               "The National Weather Service did not load all data. Try refreshing the page momentarily."
             );
