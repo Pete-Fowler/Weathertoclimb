@@ -9,10 +9,16 @@ interface Iprops {
   setLoading: Function;
 }
 
+interface Iweather {
+  name: string;
+  id: number;
+  weather: any[];
+}
+
 export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
   const [errors, setErrors] = useState<string | null>(null);
-  const [locations, setLocations] = useState<any[]>([]);
-  const [weather, setWeather] = useState<any[]>([]);
+  const [locations, setLocations] = useState<Ilocation[]>([]);
+  const [weather, setWeather] = useState<Iweather[]>([]);
   const [modal, setModal] = useState<Imodal | null>(null);
 
   // Get user's saved locations from IDs
@@ -49,31 +55,35 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
           });
         } else {
           r.json().then((err) => console.log(err));
-          let i = 0;
-          while (i < 6 && !weather.some((obj) => obj.id === location.id)) {
-            setTimeout(() => {
-              fetch(`${location.forecast_url}`).then((r) => {
-                if (r.ok) {
-                  r.json().then((data) => {
-                    setWeather((weather) => [
-                      ...weather,
-                      { name: location.name, id: location.id, weather: data },
-                    ]);
-                    setLoading(false);
-                  });
-                }
-              });
-            }, 250);
-            i++;
-          }
-          i > 5 &&
-            setErrors(
-              "The National Weather Service did not load all data. Try refreshing the page momentarily."
-            );
+          reFetch(location);
         }
       });
     });
   }, [locations]);
+
+  function reFetch(location: Ilocation) {
+    let i = 0;
+    while (i < 6 && !weather.some((obj) => obj.id === location.id)) {
+      setTimeout(() => {
+        fetch(`${location.forecast_url}`).then((r) => {
+          if (r.ok) {
+            r.json().then((data) => {
+              setWeather((weather) => [
+                ...weather,
+                { name: location.name, id: location.id, weather: data },
+              ]);
+              setLoading(false);
+            });
+          }
+        });
+      }, 250);
+      i++;
+    }
+    i > 5 &&
+      setErrors(
+        "The National Weather Service did not load all data. Try refreshing the page momentarily."
+      );
+  }
 
   function unSave(locationID: number) {
     const fav = user?.favorites.find((obj) => obj.location_id === locationID);
