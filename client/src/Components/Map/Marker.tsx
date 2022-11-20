@@ -9,17 +9,11 @@ interface Iprops {
   user: Iuser | null;
   location: any;
   onChangeUser: Function;
-  setLoading: Function;
   lat: string;
   lng: string;
 }
 
-export default function Marker({
-  user,
-  onChangeUser,
-  location,
-  setLoading,
-}: Iprops) {
+export default function Marker({ user, onChangeUser, location }: Iprops) {
   const [isShown, setIsShown] = useState(false);
 
   const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useSaved();
@@ -36,7 +30,7 @@ export default function Marker({
 
   function showModal() {
     setIsShown(true);
-    getDaily(location, setLoading);
+    getDaily(location);
   }
 
   function hideModal() {

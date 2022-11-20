@@ -23,7 +23,6 @@ export default function Home({ user, onChangeUser, setLoading }: Iprops) {
                 key={loc.id}
                 user={user}
                 onChangeUser={onChangeUser}
-                setLoading={setLoading}
                 location={loc}
                 lat={loc.coordinates.split(",")[0]}
                 lng={loc.coordinates.split(",")[1]}
