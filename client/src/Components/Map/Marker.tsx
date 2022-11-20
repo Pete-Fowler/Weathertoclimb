@@ -9,34 +9,24 @@ interface Iprops {
   user: Iuser | null;
   location: any;
   onChangeUser: Function;
-  setLoading: Function;
   lat: string;
   lng: string;
 }
 
-export default function Marker({
-  user,
-  onChangeUser,
-  location,
-  setLoading,
-}: Iprops) {
+export default function Marker({ user, onChangeUser, location }: Iprops) {
   const [isShown, setIsShown] = useState(false);
 
   const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useSaved();
 
-  const { getDaily, daily, errors, loaded } = useFetch();
+  const { getDaily, daily, loaded } = useFetch();
 
   useEffect(() => {
     setSavedStatus(user, location);
   }, [user, location, setSavedStatus]);
 
-  useEffect(() => {
-    loaded.daily && setLoading(false);
-  }, [loaded, setLoading]);
-
   function showModal() {
     setIsShown(true);
-    getDaily(location, setLoading);
+    getDaily(location);
   }
 
   function hideModal() {
