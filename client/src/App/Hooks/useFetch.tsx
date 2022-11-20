@@ -20,25 +20,7 @@ export default function useFetch() {
           });
         } else {
           r.json().then((err) => console.log(err));
-          let i = 0;
-          while (i < 6 && loaded.daily === false) {
-            setTimeout(() => {
-              fetch(`${location.forecast_url}`).then((r) => {
-                if (r.ok) {
-                  r.json().then((data) => {
-                    setDaily(data);
-                    setLoaded((loaded) => ({ ...loaded, daily: true }));
-                    setErrors("");
-                  });
-                }
-              });
-            }, 250);
-            i++;
-          }
-          i >= 6 &&
-            setErrors(
-              "The National Weather Service did not load all data. Try refreshing the page momentarily."
-            );
+          reFetch(location.forecast_url);
         }
       });
     }
@@ -54,28 +36,32 @@ export default function useFetch() {
           });
         } else {
           r.json().then((err) => console.log(err));
-          let i = 0;
-          while (i < 6 && loaded.hourly === false) {
-            setTimeout(() => {
-              fetch(`${location.forecast_url}/hourly`).then((r) => {
-                if (r.ok) {
-                  r.json().then((data) => {
-                    setHourly(data);
-                    setLoaded((loaded) => ({ ...loaded, hourly: true }));
-                    setErrors("");
-                  });
-                }
-              });
-            }, 250);
-            i++;
-          }
-          i >= 6 &&
-            setErrors(
-              "The National Weather Service did not load all data. Try refreshing the page momentarily."
-            );
+          reFetch(`${location.forecast_url}/hourly`);
         }
       });
     }
+  }
+
+  function reFetch(url: string) {
+    let i = 0;
+    while (i < 6 && loaded.daily === false) {
+      setTimeout(() => {
+        fetch(url).then((r) => {
+          if (r.ok) {
+            r.json().then((data) => {
+              setDaily(data);
+              setLoaded((loaded) => ({ ...loaded, daily: true }));
+              setErrors("");
+            });
+          }
+        });
+      }, 250);
+      i++;
+    }
+    i >= 6 &&
+      setErrors(
+        "The National Weather Service did not load all data. Try refreshing the page momentarily."
+      );
   }
   return { getDaily, daily, getHourly, hourly, errors, loaded };
 }
