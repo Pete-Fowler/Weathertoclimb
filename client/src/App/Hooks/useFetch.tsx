@@ -10,7 +10,7 @@ export default function useFetch() {
 
   function getDaily(location: any, setLoading: Function) {
     setErrors("");
-    setLoading(true);
+    // setLoading(true);
     if (location) {
       fetch(`${location.forecast_url}`).then((r) => {
         if (r.ok) {

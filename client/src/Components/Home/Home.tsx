@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 interface Iprops {
   user: Iuser | null;
   onChangeUser: Function;
+  setLoading: Function;
 }
 
-export default function Home({ user, onChangeUser }: Iprops) {
+export default function Home({ user, onChangeUser, setLoading }: Iprops) {
   const [markers, setMarkers] = useState<ImapLocation[]>([]);
 
   // Fetch locations and save in state as map markers
@@ -22,6 +23,7 @@ export default function Home({ user, onChangeUser }: Iprops) {
                 key={loc.id}
                 user={user}
                 onChangeUser={onChangeUser}
+                setLoading={setLoading}
                 location={loc}
                 lat={loc.coordinates.split(",")[0]}
                 lng={loc.coordinates.split(",")[1]}

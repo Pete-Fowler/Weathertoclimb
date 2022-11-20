@@ -25,7 +25,7 @@ export default function Result({ user, location, onChangeUser }: Iprops) {
       <Link to={`/locations/${location.id}`} className="link">
         {location.name}
       </Link>
-      {user ? (
+      {user && (
         <span
           className={style.toggleSave}
           onMouseDown={(e) => e.preventDefault()}
@@ -33,8 +33,6 @@ export default function Result({ user, location, onChangeUser }: Iprops) {
         >
           {saveBtnText}
         </span>
-      ) : (
-        ""
       )}
     </div>
   );
