@@ -68,7 +68,13 @@ export default function App() {
         <Routes>
           <Route
             path="/"
-            element={<Home user={user} onChangeUser={onChangeUser} />}
+            element={
+              <Home
+                user={user}
+                onChangeUser={onChangeUser}
+                setLoading={setLoading}
+              />
+            }
           />
           <Route
             path="/favorites"
