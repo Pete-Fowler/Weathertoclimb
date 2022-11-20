@@ -8,6 +8,10 @@
   transform: scale(1.1) translate(-50%, -50%);
 }
 
+.linkBox {
+  display: flex;
+}
+
 .modal {
   position: absolute;
   white-space: nowrap;
@@ -28,11 +32,12 @@
 }
 
 .toggleSave {
+  margin-left: auto;
+  right: 5px;
   font-size: 0.8rem;
   font-weight: 500;
   color: darkgray;
   text-decoration: none;
-  margin-left: 20px;
   transition: 0.4s;
 }
 

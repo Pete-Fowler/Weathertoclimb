@@ -55,17 +55,19 @@ export default function Marker({
     >
       {isShown ? (
         <div className={style.modal}>
-          <Link
-            className={`link ${style.name}`}
-            to={`/locations/${location.id}`}
-          >
-            {location.name}
-          </Link>
-          {user && (
-            <span className={style.toggleSave} onClick={handleClick}>
-              {saveBtnText}
-            </span>
-          )}
+          <div className={style.linkBox}>
+            <Link
+              className={`link ${style.name}`}
+              to={`/locations/${location.id}`}
+            >
+              {location.name}
+            </Link>
+            {user && (
+              <span className={style.toggleSave} onClick={handleClick}>
+                {saveBtnText}
+              </span>
+            )}
+          </div>
 
           <div className={style.daily}>
             {loaded.daily
