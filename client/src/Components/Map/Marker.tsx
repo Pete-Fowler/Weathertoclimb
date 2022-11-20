@@ -18,7 +18,7 @@ export default function Marker({ user, onChangeUser, location }: Iprops) {
 
   const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useSaved();
 
-  const { getDaily, daily, errors, loaded } = useFetch();
+  const { getDaily, daily, loaded } = useFetch();
 
   useEffect(() => {
     setSavedStatus(user, location);
