@@ -77,5 +77,5 @@ export default function useFetch() {
       });
     }
   }
-  return { getDaily, errors, daily, loaded };
+  return { getDaily, daily, getHourly, hourly, errors, loaded };
 }
