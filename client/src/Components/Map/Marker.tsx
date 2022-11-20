@@ -24,10 +24,6 @@ export default function Marker({ user, onChangeUser, location }: Iprops) {
     setSavedStatus(user, location);
   }, [user, location, setSavedStatus]);
 
-  useEffect(() => {
-    loaded.daily && setLoading(false);
-  }, [loaded, setLoading]);
-
   function showModal() {
     setIsShown(true);
     getDaily(location);

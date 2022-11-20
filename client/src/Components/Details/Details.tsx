@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import useIsSaved from "../../App/Hooks/useSaved";
+import useFetch from "../../App/Hooks/useFetch";
 
 interface Iprops {
   user: Iuser | null;
@@ -17,16 +18,10 @@ export default function Details({
   changeModal,
   setLoading,
 }: Iprops) {
-  const [errors, setErrors] = useState<string | null>(null);
   const [location, setLocation] = useState<any>(null);
-  const [hourly, setHourly] = useState<any>([]);
-  const [daily, setDaily] = useState<any>([]);
-  const [loaded, setLoaded] = useState<Iloaded>({
-    hourly: false,
-    daily: false,
-  });
 
   const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useIsSaved();
+  const { getDaily, daily, getHourly, hourly, errors, loaded } = useFetch();
 
   const { id } = useParams();
 
@@ -46,70 +41,10 @@ export default function Details({
 
   // Fetch forecasts
   useEffect(() => {
-    setErrors("");
     setLoading(true);
-    if (location) {
-      fetch(`${location.forecast_url}`).then((r) => {
-        if (r.ok) {
-          r.json().then((data) => {
-            setDaily(data);
-            setLoaded((loaded) => ({ ...loaded, daily: true }));
-          });
-        } else {
-          r.json().then((err) => console.log(err));
-          let i = 0;
-          while (i < 6 && loaded.daily === false) {
-            setTimeout(() => {
-              fetch(`${location.forecast_url}`).then((r) => {
-                if (r.ok) {
-                  r.json().then((data) => {
-                    setDaily(data);
-                    setLoaded((loaded) => ({ ...loaded, daily: true }));
-                    setErrors("");
-                  });
-                }
-              });
-            }, 250);
-            i++;
-          }
-          i >= 6 &&
-            setErrors(
-              "The National Weather Service did not load all data. Try refreshing the page momentarily."
-            );
-        }
-      });
-
-      fetch(`${location.forecast_url}/hourly`).then((r) => {
-        if (r.ok) {
-          r.json().then((data) => {
-            setHourly(data);
-            setLoaded((loaded) => ({ ...loaded, hourly: true }));
-          });
-        } else {
-          r.json().then((err) => console.log(err));
-          let i = 0;
-          while (i < 10 && loaded.hourly === false) {
-            setTimeout(() => {
-              fetch(`${location.forecast_url}/hourly`).then((r) => {
-                if (r.ok) {
-                  r.json().then((data) => {
-                    setHourly(data);
-                    setLoaded((loaded) => ({ ...loaded, hourly: true }));
-                    setErrors("");
-                  });
-                }
-              });
-            }, 100);
-            i++;
-          }
-          i > 10 &&
-            setErrors(
-              "The National Weather Service did not load all data. Try refreshing the page momentarily."
-            );
-        }
-      });
-    }
-  }, [location]);
+    getDaily(location);
+    getHourly(location);
+  }, [location, getDaily, getHourly, setLoading]);
 
   function deleteArea() {
     fetch(`/locations/${location.id}`, {
