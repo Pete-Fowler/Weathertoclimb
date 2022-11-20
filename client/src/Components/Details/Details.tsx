@@ -58,7 +58,7 @@ export default function Details({
         } else {
           r.json().then((err) => console.log(err));
           let i = 0;
-          while (i < 10 && loaded.daily === false) {
+          while (i < 6 && loaded.daily === false) {
             setTimeout(() => {
               fetch(`${location.forecast_url}`).then((r) => {
                 if (r.ok) {
@@ -69,10 +69,10 @@ export default function Details({
                   });
                 }
               });
-            }, 100);
+            }, 250);
             i++;
           }
-          i > 10 &&
+          i >= 6 &&
             setErrors(
               "The National Weather Service did not load all data. Try refreshing the page momentarily."
             );
