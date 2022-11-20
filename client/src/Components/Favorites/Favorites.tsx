@@ -9,16 +9,10 @@ interface Iprops {
   setLoading: Function;
 }
 
-interface Iweather {
-  name: string;
-  id: number;
-  weather: any[];
-}
-
 export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
   const [errors, setErrors] = useState<string | null>(null);
   const [locations, setLocations] = useState<Ilocation[]>([]);
-  const [weather, setWeather] = useState<Iweather[]>([]);
+  const [weather, setWeather] = useState<any[]>([]);
   const [modal, setModal] = useState<Imodal | null>(null);
 
   // Get user's saved locations from IDs
@@ -64,6 +58,7 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
   function reFetch(location: Ilocation) {
     let i = 0;
     while (i < 6 && !weather.some((obj) => obj.id === location.id)) {
+      console.log(!weather.some((obj) => obj.id === location.id));
       setTimeout(() => {
         fetch(`${location.forecast_url}`).then((r) => {
           if (r.ok) {
