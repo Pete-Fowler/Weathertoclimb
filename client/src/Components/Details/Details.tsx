@@ -98,11 +98,12 @@ export default function Details({
           ""
         )}
       </div>
-
+      {/* hourly.properties.periods
+              .slice(0, 72) */}
       <div className={style.hourly}>
         {loaded.hourly
           ? hourly.properties.periods
-              .slice(0, 72)
+              .filter((p: Iperiod) => Number(format(new Date(p.startTime), "h")) % 3 === 0)
               .map((hour: Iperiod, index: number, array: Iperiod) => (
                 <div key={hour.number} className={style.hour}>
                   {index === 0 ||
