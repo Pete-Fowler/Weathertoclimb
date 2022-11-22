@@ -19,6 +19,7 @@ export default function Details({
   setLoading,
 }: Iprops) {
   const [location, setLocation] = useState<any>(null);
+  const [is3HourView, setIs3HourView] = useState(true);
 
   const { setSavedStatus, handleSaveBtnClick, saveBtnText } = useIsSaved();
   const { getDaily, daily, getHourly, hourly, errors, loaded } = useFetch();
@@ -74,6 +75,15 @@ export default function Details({
     if (loaded.daily && loaded.hourly) setLoading(false);
   }, [loaded, setLoading]);
 
+  let periodsShown = [];
+  if (loaded.hourly) {
+    periodsShown = is3HourView
+      ? hourly.properties.periods.filter(
+          (p: Iperiod) => Number(format(new Date(p.startTime), "h")) % 3 === 0
+        )
+      : hourly.properties.periods.slice(0, 72);
+  }
+
   return (
     <div className={style.details}>
       {errors && <div>{errors}</div>}
@@ -98,31 +108,29 @@ export default function Details({
           ""
         )}
       </div>
-      {/* hourly.properties.periods
-              .slice(0, 72) */}
+      <div className={style.toggle3HourView} onClick={() => setIs3HourView(!is3HourView)}>
+        {is3HourView ? "View every hour" : "View every 3rd hour"}
+      </div>
+
       <div className={style.hourly}>
         {loaded.hourly
-          ? hourly.properties.periods
-              .filter((p: Iperiod) => Number(format(new Date(p.startTime), "h")) % 3 === 0)
-              .map((hour: Iperiod, index: number, array: Iperiod) => (
-                <div key={hour.number} className={style.hour}>
-                  {index === 0 ||
-                  format(new Date(hour.startTime), "h aa") === "12 AM" ? (
-                    <div className={style.day}>
-                      {format(new Date(hour.startTime), "ccc")}
-                    </div>
-                  ) : (
-                    <div className={style.day}></div>
-                  )}
-                  <div>{format(new Date(hour.startTime), "h aa")}</div>
-                  <img src={hour.icon} alt={hour.shortForecast}></img>
-                  <div>{hour.temperature} F</div>
-                  <div>{hour.windSpeed}</div>
-                  <div className={style.shortForecast}>
-                    {hour.shortForecast}
+          ? periodsShown.map((hour: Iperiod, index: number, array: Iperiod) => (
+              <div key={hour.number} className={style.hour}>
+                {index === 0 ||
+                format(new Date(hour.startTime), "h aa") === "12 AM" ? (
+                  <div className={style.day}>
+                    {format(new Date(hour.startTime), "ccc")}
                   </div>
-                </div>
-              ))
+                ) : (
+                  <div className={style.day}></div>
+                )}
+                <div>{format(new Date(hour.startTime), "h aa")}</div>
+                <img src={hour.icon} alt={hour.shortForecast}></img>
+                <div>{hour.temperature} F</div>
+                <div>{hour.windSpeed}</div>
+                <div className={style.shortForecast}>{hour.shortForecast}</div>
+              </div>
+            ))
           : ""}
       </div>
 

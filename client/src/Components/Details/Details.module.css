@@ -38,6 +38,16 @@
   text-decoration: underline;
 }
 
+.toggle3HourView {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.toggle3HourView:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .maxMessage {
   margin-left: auto;
   margin-right: 250px;
