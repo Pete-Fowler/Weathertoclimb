@@ -17,7 +17,7 @@
   white-space: nowrap;
   top: -15px;
   padding: 5px;
-  border-radius: 3px;
+  border-radius: 5px;
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 0 8px gray;
   backdrop-filter: blur(1px);
@@ -54,6 +54,9 @@
 .daily {
   margin-top: 5px;
   display: flex;
+  gap: 20px;
+  width: 300px;
+  height: 110px;
 }
 
 .period {
@@ -68,8 +71,7 @@
 }
 
 .periodName {
-  /* color: #0681d7; */
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
   width: 25px;
   flex-shrink: 0;
@@ -83,7 +85,6 @@
 
 .windSpeed,
 .temp {
-  width: 86px;
   flex-shrink: 0;
 }
 
