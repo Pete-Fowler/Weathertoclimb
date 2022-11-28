@@ -38,7 +38,7 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
     setLoading(true);
     Promise.allSettled(
       locations.map((location) =>
-        fetch(location.forecast_url).then((r) => {
+        fetch(location.forecast_url, { cache: "no-store" }).then((r) => {
           if (r.ok) {
             r.json().then((data) => {
               setWeather((weather) => [
@@ -54,9 +54,9 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
     ).then((promises) => setLoading(false));
 
     function reFetch(location: Ilocation) {
-      let i = 0;
+      let i = 1;
       setTimeout(() => {
-        fetch(`${location.forecast_url}`).then((r) => {
+        fetch(`${location.forecast_url}`, { cache: "no-store" }).then((r) => {
           if (r.ok) {
             r.json().then((data) => {
               setWeather((weather) => [
@@ -71,7 +71,7 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
                 i++;
                 setTimeout(() => {
                   reFetch(location);
-                }, 250);
+                }, 200 * i);
               }
             });
           }
