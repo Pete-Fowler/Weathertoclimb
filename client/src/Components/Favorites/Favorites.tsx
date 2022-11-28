@@ -35,52 +35,47 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
 
   // fetch forecasts for each location
   useEffect(() => {
+    setLoading(true);
     Promise.allSettled(
-      locations.map((location) => fetch(location.forecast_url))
-    ).then((responses) => responses.forEach((res) => console.log(res)));
-    // setWeather([]);
-    // locations.forEach((location) => {
-    //   setLoading(true);
-    //   fetch(`${location.forecast_url}`).then((r) => {
-    //     if (r.ok) {
-    //       r.json().then((data) => {
-    //         setWeather((weather) => [
-    //           ...weather,
-    //           { name: location.name, id: location.id, weather: data },
-    //         ]);
-    //         setLoading(false);
-    //       });
-    //     } else {
-    //       r.json().then((err) => console.log(err));
-    //       reFetch(location);
-    //     }
-    //   });
-    // });
-  }, [locations]);
-
-  function reFetch(location: Ilocation) {
-    let i = 0;
-    while (i < 6 && !weather.some((obj) => obj.id === location.id)) {
-      setTimeout(() => {
-        fetch(`${location.forecast_url}`).then((r) => {
+      locations.map((location) =>
+        fetch(location.forecast_url).then((r) => {
           if (r.ok) {
             r.json().then((data) => {
               setWeather((weather) => [
                 ...weather,
                 { name: location.name, id: location.id, weather: data },
               ]);
-              setLoading(false);
             });
+          } else {
+            reFetch(location);
           }
-        });
-      }, 250);
-      i++;
+        })
+      )
+    ).then((promises) => setLoading(false));
+
+    function reFetch(location: Ilocation) {
+      let i = 0;
+      while (i < 6 && !weather.some((obj) => obj.id === location.id)) {
+        setTimeout(() => {
+          fetch(`${location.forecast_url}`).then((r) => {
+            if (r.ok) {
+              r.json().then((data) => {
+                setWeather((weather) => [
+                  ...weather,
+                  { name: location.name, id: location.id, weather: data },
+                ]);
+              });
+            }
+          });
+        }, 250);
+        i++;
+      }
+      i > 5 &&
+        setErrors(
+          "The National Weather Service did not load all data. Try refreshing the page momentarily."
+        );
     }
-    i > 5 &&
-      setErrors(
-        "The National Weather Service did not load all data. Try refreshing the page momentarily."
-      );
-  }
+  }, [locations, setLoading]);
 
   function unSave(locationID: number) {
     const fav = user?.favorites.find((obj) => obj.location_id === locationID);
