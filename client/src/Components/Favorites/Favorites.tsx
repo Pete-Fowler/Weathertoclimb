@@ -36,9 +36,10 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
   // fetch forecasts for each location
   useEffect(() => {
     setLoading(true);
+    setWeather([]);
     Promise.allSettled(
       locations.map((location) =>
-        fetch(location.forecast_url, { cache: "no-store" }).then((r) => {
+        fetch(location.forecast_url).then((r) => {
           if (r.ok) {
             r.json().then((data) => {
               setWeather((weather) => [
@@ -47,7 +48,10 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
               ]);
             });
           } else {
-            reFetch(location);
+            r.json().then((err) => {
+              console.log(err);
+              reFetch(location);
+            });
           }
         })
       )
@@ -56,7 +60,7 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
     function reFetch(location: Ilocation) {
       let i = 1;
       setTimeout(() => {
-        fetch(`${location.forecast_url}`, { cache: "no-store" }).then((r) => {
+        fetch(`${location.forecast_url}`).then((r) => {
           if (r.ok) {
             r.json().then((data) => {
               setWeather((weather) => [
@@ -72,15 +76,15 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
                 setTimeout(() => {
                   reFetch(location);
                 }, 200 * i);
+              } else {
+                setErrors(
+                  "The National Weather Service did not load all data. Try refreshing the page momentarily."
+                );
               }
             });
           }
         });
       }, 250);
-
-      setErrors(
-        "The National Weather Service did not load all data. Try refreshing the page momentarily."
-      );
     }
   }, [locations, setLoading]);
 
