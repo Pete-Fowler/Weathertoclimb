@@ -55,25 +55,32 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
 
     function reFetch(location: Ilocation) {
       let i = 0;
-      while (i < 6 && !weather.some((obj) => obj.id === location.id)) {
-        setTimeout(() => {
-          fetch(`${location.forecast_url}`).then((r) => {
-            if (r.ok) {
-              r.json().then((data) => {
-                setWeather((weather) => [
-                  ...weather,
-                  { name: location.name, id: location.id, weather: data },
-                ]);
-              });
-            }
-          });
-        }, 250);
-        i++;
-      }
-      i > 5 &&
-        setErrors(
-          "The National Weather Service did not load all data. Try refreshing the page momentarily."
-        );
+      setTimeout(() => {
+        fetch(`${location.forecast_url}`).then((r) => {
+          if (r.ok) {
+            r.json().then((data) => {
+              setWeather((weather) => [
+                ...weather,
+                { name: location.name, id: location.id, weather: data },
+              ]);
+            });
+          } else {
+            r.json().then((err) => {
+              console.log(err);
+              if (i <= 5) {
+                i++;
+                setTimeout(() => {
+                  reFetch(location);
+                }, 250);
+              }
+            });
+          }
+        });
+      }, 250);
+
+      setErrors(
+        "The National Weather Service did not load all data. Try refreshing the page momentarily."
+      );
     }
   }, [locations, setLoading]);
 
