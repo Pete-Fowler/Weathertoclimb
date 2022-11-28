@@ -35,30 +35,32 @@ export default function Weather({ user, onChangeUser, setLoading }: Iprops) {
 
   // fetch forecasts for each location
   useEffect(() => {
-    setWeather([]);
-    locations.forEach((location) => {
-      setLoading(true);
-      fetch(`${location.forecast_url}`).then((r) => {
-        if (r.ok) {
-          r.json().then((data) => {
-            setWeather((weather) => [
-              ...weather,
-              { name: location.name, id: location.id, weather: data },
-            ]);
-            setLoading(false);
-          });
-        } else {
-          r.json().then((err) => console.log(err));
-          reFetch(location);
-        }
-      });
-    });
+    Promise.allSettled(
+      locations.map((location) => fetch(location.forecast_url))
+    ).then((responses) => responses.forEach((res) => console.log(res)));
+    // setWeather([]);
+    // locations.forEach((location) => {
+    //   setLoading(true);
+    //   fetch(`${location.forecast_url}`).then((r) => {
+    //     if (r.ok) {
+    //       r.json().then((data) => {
+    //         setWeather((weather) => [
+    //           ...weather,
+    //           { name: location.name, id: location.id, weather: data },
+    //         ]);
+    //         setLoading(false);
+    //       });
+    //     } else {
+    //       r.json().then((err) => console.log(err));
+    //       reFetch(location);
+    //     }
+    //   });
+    // });
   }, [locations]);
 
   function reFetch(location: Ilocation) {
     let i = 0;
     while (i < 6 && !weather.some((obj) => obj.id === location.id)) {
-      console.log(!weather.some((obj) => obj.id === location.id));
       setTimeout(() => {
         fetch(`${location.forecast_url}`).then((r) => {
           if (r.ok) {
