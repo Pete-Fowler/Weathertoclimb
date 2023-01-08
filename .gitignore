@@ -30,3 +30,9 @@
 /client/node_modules
 .env
 
+/.vs/ProjectSettings.json
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
+/.vs/Weathertoclimb/FileContentIndex/2f0be37e-7f39-445b-b277-3a63064e7a44.vsidx
+/.vs/Weathertoclimb/FileContentIndex/read.lock
+/.vs/Weathertoclimb/v17/.wsuo
