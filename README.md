@@ -1,4 +1,4 @@
-<a href='https://weathertoclimb.herokuapp.com/'>Live Page</a>
+
 
 # Summary
 
